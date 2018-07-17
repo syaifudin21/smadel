@@ -46,7 +46,8 @@
 
     <form method="POST" action="{{ route('agenda.update') }}">
         @method('PUT')
-        @csrf
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
         <input type="hidden" name="id" value="{{$agenda->id}}">
         <div class="form-group row">
             <label for="agenda" class="col-sm-4 col-form-label text-md-right">Nama Agenda</label>
