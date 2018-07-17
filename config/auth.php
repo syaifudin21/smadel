@@ -45,6 +45,27 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'sekolah' => [
+            'driver' => 'session',
+            'provider' => 'sekolahs',
+        ],
+
+        'pengurus' => [
+            'driver' => 'session',
+            'provider' => 'penguruss',
+        ],
+
+        'pengajar' => [
+            'driver' => 'session',
+            'provider' => 'pengajars',
+        ],
+
+        'siswa' => [
+            'driver' => 'session',
+            'provider' => 'siswas',
+        ],
+
     ],
 
     /*
@@ -67,7 +88,23 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
+        ],
+        'sekolahs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Sekolah::class,
+        ],
+        'penguruss' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pengurus::class,
+        ],
+        'pengajars' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pengajar::class,
+        ],
+        'siswas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Siswa::class,
         ],
 
         // 'users' => [
