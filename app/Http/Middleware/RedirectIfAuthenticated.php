@@ -17,8 +17,32 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+        switch ($guard){
+            case 'sekolah':
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('sekolah');
+                }
+                break;
+            case 'pengurus':
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('pengurus');
+                }
+                break;
+            case 'pengajar':
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('pengajar');
+                }
+                break;
+            case 'siswa':
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('siswa');
+                }
+                break;
+            default:
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('home');
+                }
+                break;
         }
 
         return $next($request);
