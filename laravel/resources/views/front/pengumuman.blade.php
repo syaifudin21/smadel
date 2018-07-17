@@ -18,13 +18,14 @@
   <div class="categories-container">
     <ul class="container categories">
       <li><a href="{{url('')}}">Home</a></li>
+      <li><a href="{{url('prestasi')}}">Prestasi</a></li>
+      <li><a href="{{url('fasilitas')}}">Fasilitas</a></li>
+      <li><a href="{{url('galeri')}}">Galeri</a></li>
       <li><a href="{{url('blog')}}">Artikel</a></li>
       <li class="active"><a href="{{url('pengumuman')}}">Pengumuman</a></li>
       <li><a href="{{url('agenda')}}">Agenda</a></li>
-      <li><a href="{{url('fasilitas')}}">Fasilitas</a></li>
       <li><a href="{{url('ekstrakurikuler')}}">Organisasi</a></li>
-      <li><a href="{{url('prestasi')}}">Prestasi</a></li>
-      <li><a href="{{url('galeri')}}">Galeri</a></li>
+      
     </ul>
   </div>
 </div>
@@ -52,9 +53,8 @@
           <div class="card-panel {{warna($warna)}}">
             
             <span class="white-text">" {{$pengumuman->isi}} "
-              <hr> 
               @if(!empty($pengumuman->lampiran))
-                <b> <a class="white-text" href="{{url('images/pengumuman/'.$pengumuman->lampiran)}}">Unduh Lampiran</a></b>
+                <br><br><b> <a class="white-text" href="{{url('images/pengumuman/'.$pengumuman->lampiran)}}">Unduh Lampiran</a></b>
               @endif
              <br> <small>{{$pengumuman->updated_at->diffForHumans()}} - {{$nama}}</small></span>
               

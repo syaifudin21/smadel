@@ -3,7 +3,7 @@
 @section('title')
 <div class="nav-header center">
   <h1>Selamat Datang </h1>
-  <div class="tagline">Mengutamakan <span class="element"></span> </div>
+  <div class="tagline center">Mengutamakan <span class="element"></span> </div>
 </div>
 @endsection
 
@@ -18,13 +18,14 @@
   <div class="categories-container">
     <ul class="container categories">
       <li class="active"><a href="#home">Home</a></li>
+      <li><a href="{{url('prestasi')}}">Prestasi</a></li>
+      <li><a href="{{url('fasilitas')}}">Fasilitas</a></li>
+      <li><a href="{{url('galeri')}}">Galeri</a></li>
       <li><a href="{{url('blog')}}">Artikel</a></li>
       <li><a href="{{url('pengumuman')}}">Pengumuman</a></li>
       <li><a href="{{url('agenda')}}">Agenda</a></li>
-      <li><a href="{{url('fasilitas')}}">Fasilitas</a></li>
       <li><a href="{{url('ekstrakurikuler')}}">Organisasi</a></li>
-      <li><a href="{{url('prestasi')}}">Prestasi</a></li>
-      <li><a href="{{url('galeri')}}">Galeri</a></li>
+      
     </ul>
   </div>
 </div>

@@ -18,13 +18,14 @@
   <div class="categories-container">
     <ul class="container categories">
       <li><a href="{{url('')}}">Home</a></li>
+      <li class="active"><a href="{{url('prestasi')}}">Prestasi</a></li>
+      <li><a href="{{url('fasilitas')}}">Fasilitas</a></li>
+      <li><a href="{{url('galeri')}}">Galeri</a></li>
       <li><a href="{{url('blog')}}">Artikel</a></li>
       <li><a href="{{url('pengumuman')}}">Pengumuman</a></li>
       <li><a href="{{url('agenda')}}">Agenda</a></li>
-      <li><a href="{{url('fasilitas')}}">Fasilitas</a></li>
       <li><a href="{{url('ekstrakurikuler')}}">Organisasi</a></li>
-      <li class="active"><a href="{{url('prestasi')}}">Prestasi</a></li>
-      <li><a href="{{url('galeri')}}">Galeri</a></li>
+      
     </ul>
   </div>
 </div>
