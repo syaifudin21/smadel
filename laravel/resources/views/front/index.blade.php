@@ -84,7 +84,7 @@
     <div class="gallery row">
       <div class="gallery-item gallery-expand gallery-filter artikel active">
         <div class="col s12 m8">
-        
+        @if(!empty($artikels))
         @foreach($artikels as $artikel)
           <div class="row">
           <div class="col s3">
@@ -97,10 +97,14 @@
           </div>
         </div>
         @endforeach
+        @else
+        Artikel kosong
+        @endif
         
         </div>
         <div class="col s12 m4">
 
+        @if(!empty($agendas))
           @foreach($agendas as $agenda)
           <div class="row">
             <div class="col s4">
@@ -116,6 +120,9 @@
             </div>
           </div>
           @endforeach
+           @else
+        Artikel kosong
+        @endif
 
         </div>
 
