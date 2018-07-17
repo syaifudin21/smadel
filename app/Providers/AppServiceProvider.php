@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('profil', Profil_sekolah::find(1));
+        // View::share('profil', Profil_sekolah::find(1));
     }
 
     /**
