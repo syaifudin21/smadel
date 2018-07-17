@@ -73,7 +73,11 @@
       <div class="container">
         <div class="row center">
           <h4>Visi</h4>
-          <p style="font-size: 20px;">{!!$visi!!}</p>
+          <p style="font-size: 20px;">
+            @if(!empty($visi))
+              {!!$visi->deskripsi!!}
+            @endif
+          </p>
         </div>
       </div>
     <div class="parallax"><img src="{{asset('images/standar/background1.png')}}" alt="Unsplashed background img 2"></div>
@@ -138,7 +142,9 @@
         <div class="row center">
           <h4>Misi</h4>
         </div>
-        {!!$misi!!}
+        @if(!empty($misi))
+        {!!$misi->deskripsi!!}
+        @endif
       </div>
     <div class="parallax"><img src="{{asset('images/standar/background1.png')}}" alt="Unsplashed background img 2"></div>
   </div>

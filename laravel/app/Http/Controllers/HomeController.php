@@ -23,8 +23,8 @@ class HomeController extends Controller
     {
         $artikels = Artikel::where('status', '1')->get();
         $agendas = Agenda::where('status_tampil', 'Tampil')->take(5)->get();
-        $visi = Atribut::where('atribut', 'visi')->select('deskripsi')->first()->deskripsi;
-        $misi = Atribut::where('atribut', 'misi')->select('deskripsi')->first()->deskripsi;
+        $visi = Atribut::where('atribut', 'visi')->select('deskripsi')->first();
+        $misi = Atribut::where('atribut', 'misi')->select('deskripsi')->first();
         return view('front.index', compact('artikels', 'agendas', 'visi', 'misi'));
     }
     public function daftar()
