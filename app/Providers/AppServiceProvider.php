@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+         Schema::defaultStringLength(191);
         // View::share('profil', Profil_sekolah::find(1));
     }
 
