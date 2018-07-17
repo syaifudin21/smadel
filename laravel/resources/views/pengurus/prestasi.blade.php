@@ -68,7 +68,8 @@
                         <td>{{$prestasi->foto}}</td>
                         <form method="POST" action="{{url('pengurus/prestasi/'.$prestasi->id)}}">
                         <td><a href="{{url('pengurus/prestasi/'.$prestasi->id)}}" class="btn btn-outline-success btn-sm">Lihat</a> <a href="{{url('pengurus/prestasi/edit/'.$prestasi->id)}}" class="btn btn-outline-primary btn-sm">Update</a> 
-                            @method('DELETE') {{csrf_field()}}
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i> Delete </button>
                         </td>
                         </form>

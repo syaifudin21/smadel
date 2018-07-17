@@ -15,8 +15,8 @@
 <!-- Basic Validation -->
 <div class="card-body">
     <form method="POST" action="{{ route('sekolah.edit') }}" enctype="multipart/form-data">
-        @csrf
-        @method('put')
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
         <div class="form-group row">
             <label for="nama_sekolah" class="col-md-4 col-form-label text-md-right">{{ __('Nama Sekolah') }}</label>
 

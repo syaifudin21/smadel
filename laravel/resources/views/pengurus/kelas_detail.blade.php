@@ -97,7 +97,8 @@
                 </td>
                 <form method="POST" action="{{url('pengurus/kelas/mapel/delete/'.$kelasmapel->id)}}">
                 <td  class="text-center">
-                    @method('DELETE') {{csrf_field()}}
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
                     
                     <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal"
                     data-id="{{$kelasmapel->id}}" 
@@ -131,7 +132,7 @@
         </button>
       </div>
       <form method="POST" action="{{ route('loadmapel.tambah') }}">
-        @csrf
+        {{ csrf_field() }}
       <input type="hidden" name="id" id="id">
       <input type="hidden" name="kelas" value="{{$id}}">
       <input type="hidden" id="lempar" name="action">
@@ -181,7 +182,8 @@
         </button>
       </div>
       <form method="POST" action="{{ route('kelasmapel.update') }}">
-        @csrf @method('PUT')
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
       <input type="hidden" name="id" id="id">
       <div class="modal-body">
           <div class="form-group">

@@ -68,7 +68,8 @@
                         <td>{{$ekstrakurikuler->pembina}}</td>
                         <form method="POST" action="{{url('sekolah/ekstrakurikuler/delete/'.$ekstrakurikuler->id)}}">
                         <td><a href="{{url('sekolah/ekstrakurikuler/'.$ekstrakurikuler->id)}}" class="btn btn-outline-success btn-sm">Lihat</a> <a href="{{url('sekolah/ekstrakurikuler/update/'.$ekstrakurikuler->id)}}" class="btn btn-outline-primary btn-sm">Update</a> 
-                            @method('DELETE') {{csrf_field()}}
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i> Delete </button>
                         </td>
                         </form>
@@ -81,7 +82,7 @@
 
     <div class="tab-pane fade" id="tambah" role="tabpanel" aria-labelledby="profile-tab">
     <form method="POST" action="{{route('ekstrakurikuler.tambah')}}" enctype="multipart/form-data">
-        @csrf
+        {{ csrf_field() }}
         <div class="form-group row">
             <label for="nama" class="col-sm-4 col-form-label text-md-right">Ekstrakurikuler</label>
             <div class="col-md-6">

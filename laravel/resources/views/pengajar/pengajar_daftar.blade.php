@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('pengajar.daftar') }}" enctype="multipart/form-data">
-                        @csrf
+                        {{ csrf_field() }}
 
                         @if(Session::has('success'))
                             <div class="alert alert-info alert-dismissable">

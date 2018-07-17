@@ -47,7 +47,8 @@
                   <p class="card-text">{{$foto->caption}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <form method="POST" action="{{url('layanan/foto/'.$foto->id)}}">
-                    @method('DELETE') {{csrf_field()}}
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
                       <div class="btn-group">
                         <a href="{{url('images/album/'.$foto->foto)}}" class="btn btn-sm btn-outline-success">View</a>
                         <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModalupdate"
@@ -79,7 +80,7 @@
         </button>
       </div>
       <form method="POST" action="{{ route('foto.tambah') }}" enctype="multipart/form-data">
-        @csrf
+        {{ csrf_field() }}
         <input type="hidden" name="id_album" value="{{$id}}">
         <input type="hidden" name="status_user" value="{{$auth}}">
         <input type="hidden" name="id_user" value="{{$id_auth}}">
@@ -124,8 +125,8 @@
         </button>
       </div>
       <form method="POST" action="{{ url('layanan/album/'.$id) }}">
-        @csrf
-        @method('DELETE')
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
       <input type="hidden" name="id" id="id">
       <div class="modal-body">
         Apakah anda yakin ingin menghapus album ini
@@ -149,7 +150,8 @@
         </button>
       </div>
       <form method="POST" action="{{ route('foto.update') }}">
-        @csrf @method('PUT')
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
       <input type="hidden" name="id" id="id">
       <div class="modal-body">
           <div class="form-group">

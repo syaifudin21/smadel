@@ -83,7 +83,8 @@
                     <form method="POST" action="{{url('layanan/artikel/'.$artikel->id)}}">
                     <td><a href="{{url($auth.'/artikel/'.$artikel->id)}}" class="btn btn-outline-success btn-sm">Lihat</a> 
                         <a href="{{url($auth.'/artikel/edit/'.$artikel->id)}}" class="btn btn-outline-primary btn-sm">Update</a> 
-                            @method('DELETE') {{csrf_field()}}
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i> Delete </button>
                     </td>
                     </form>

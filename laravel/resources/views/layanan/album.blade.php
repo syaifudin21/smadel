@@ -85,7 +85,7 @@
 
     <div class="tab-pane fade" id="tambah" role="tabpanel" aria-labelledby="profile-tab">
     <form method="POST" action="{{route('album.tambah')}}">
-        @csrf
+        {{ csrf_field() }}
         <input type="hidden" name="status_user" value="{{$auth}}">
         <input type="hidden" name="id_user" value="{{$id_auth}}">
         <div class="form-group row">

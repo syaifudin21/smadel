@@ -79,7 +79,8 @@
                     <td>
                         <a href="{{url(strtolower($auth).'/'.$menu.'/pengumuman/'.$pengumuman->id.'/'.$pengumuman->slug_pengumuman)}}" class="btn btn-outline-success btn-sm">Lihat</a>
                         <a href="{{url(strtolower($auth).'/'.$menu.'/pengumuman/update/'.$pengumuman->id.'/'.$pengumuman->id)}}" class="btn btn-outline-primary btn-sm">Update</a>
-                            @method('DELETE') {{csrf_field()}}
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i> Delete </button>
                     </td>
                     </form>
@@ -92,7 +93,7 @@
 
     <div class="tab-pane fade" id="tambah" role="tabpanel" aria-labelledby="profile-tab">
     <form method="POST" action="{{route('pengumuman.tambah')}}"  enctype="multipart/form-data">
-        @csrf
+        {{ csrf_field() }}
         <input type="hidden" name="status_user" value="{{$auth}}">
         <input type="hidden" name="id_user" value="{{$id_auth}}">
         <input type="hidden" name="objek" value="{{$objek}}">

@@ -46,8 +46,8 @@
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="profile-tab">
     <form method="POST" action="{{route('pengurus.update')}}">
-        @csrf
-        @method('put')
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
         <div class="form-group row">
             <label for="nama" class="col-sm-4 col-form-label text-md-right">Nama Pengurus</label>
             <div class="col-md-6">

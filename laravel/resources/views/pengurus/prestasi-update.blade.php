@@ -38,8 +38,8 @@
 </nav>
 
     <form method="POST" action="{{ route('prestasi.update') }}" enctype="multipart/form-data">
-        @method('PUT')
-        @csrf
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
         <input type="hidden" name="id" value="{{$id}}">
         <div class="form-group row">
             <label for="nama" class="col-sm-4 col-form-label text-md-right">Prestasi</label>

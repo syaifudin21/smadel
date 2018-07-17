@@ -56,7 +56,7 @@
 
 <div class="tab-content" id="myTabContent">
     <form method="POST" action="{{ route('kelasmapel.tambah') }}">
-        @csrf
+        {{ csrf_field() }}
         
         <input type="hidden" name="id_kelas" value="{{$id}}">
         <div class="form-group row">
@@ -125,7 +125,8 @@
                 </td>
                 <form method="POST" action="{{url('pengurus/kelas/mapel/delete/'.$kelasmapel->id)}}">
                 <td>
-                    @method('DELETE') {{csrf_field()}}
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
                     
                     <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal"
                     data-id="{{$kelasmapel->id}}" 

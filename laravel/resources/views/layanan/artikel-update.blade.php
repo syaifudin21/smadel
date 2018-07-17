@@ -45,7 +45,8 @@
 @endif
 
     <form method="POST" action="{{route('artikel.update')}}" enctype="multipart/form-data">
-    @csrf @method('put')
+    {{ csrf_field() }}
+    {{ method_field('PUT') }}
     <input type="hidden" name="id" value="{{$id}}">
     <input type="hidden" name="status_user" value="{{$auth}}">
     <input type="hidden" name="id_user" value="{{$id_auth}}">

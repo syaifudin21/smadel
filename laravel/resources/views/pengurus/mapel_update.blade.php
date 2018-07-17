@@ -41,8 +41,8 @@
 
 <div class="card-body">
     <form method="POST" action="{{ route('mapel.update') }}">
-        @method('PUT')
-        @csrf
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
         <input type="hidden" name="id_mapel" value="{{$id}}">
         <div class="form-group row">
             <label for="mapel" class="col-sm-4 col-form-label text-md-right">Mata Pelajaran</label>

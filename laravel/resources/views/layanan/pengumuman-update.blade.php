@@ -49,8 +49,8 @@
 <div class="card-body">
 
     <form method="POST" action="{{ route('pengumuman.update') }}">
-        @method('PUT')
-        @csrf
+        {{ csrf_field() }}
+      {{ method_field('PUT') }}
         <input type="hidden" name="id" value="{{$pengumuman->id}}">
         <div class="form-group row">
             <label for="nama_pengumuman" class="col-sm-4 col-form-label text-md-right">Nama Pengumuman</label>

@@ -39,8 +39,8 @@
 <hr>     
 <div class="table-responsive-sm">
 <form method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('put')
+    {{ csrf_field() }}
+    {{ method_field('PUT') }}
     <input type="hidden" name="id" value="{{$siswa->id}}">
 
     <div class="form-group row">

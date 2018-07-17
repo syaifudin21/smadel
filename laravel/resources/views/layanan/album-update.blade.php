@@ -48,8 +48,8 @@
 
 <div class="card-body">
     <form method="POST" action="{{ route('album.update') }}">
-        @method('PUT')
-        @csrf
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
         <input type="hidden" name="id" value="{{$id}}">
         <div class="form-group row">
             <label for="nama" class="col-sm-4 col-form-label text-md-right">Nama Album</label>
