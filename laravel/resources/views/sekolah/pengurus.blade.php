@@ -139,7 +139,7 @@
         <div class="form-group row">
             <label for="jenis_mapel" class="col-sm-4 col-form-label text-md-right">Jenis Mata Pelajaran</label>
             <div class="col-md-6">
-                <select class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status">
+                <select class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status" required>
                     <option value="" disabled selected>Pilih Outoritas</option>
                     <option value="1">Nilai , Absensi, Setting</option>
                     <option value="2">Administrasi</option>
