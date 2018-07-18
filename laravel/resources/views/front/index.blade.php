@@ -1,9 +1,11 @@
 @extends('front.template')
 
 @section('title')
-<div class="nav-header center">
+<div class="nav-header">
+  <div class=" center">
   <h1>Selamat Datang </h1>
-  <div class="tagline center">Mengutamakan <span class="element"></span> </div>
+  <div class="tagline">Mengutamakan <span class="element"></span> </div>
+  </div>
 </div>
 @endsection
 

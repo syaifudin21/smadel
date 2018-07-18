@@ -25,6 +25,15 @@
         -webkit-animation: typedjsBlink 0.7s infinite;
         animation: typedjsBlink 0.7s infinite;
       }
+      
+      @media only screen and (max-width: 600px) {
+        .tagline{
+          line-height: 20px;
+          position: absolute;
+          width: 100%;
+          top: 210px;
+        }
+      }
       @keyframes typedjsBlink{
         50% { opacity: 0.0; }
       }
