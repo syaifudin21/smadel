@@ -7,6 +7,7 @@
     <meta name="author" content="">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{asset('images/standar/logo.png')}}">
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
