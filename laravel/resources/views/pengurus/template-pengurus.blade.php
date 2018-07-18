@@ -31,8 +31,17 @@
       <div class="navbar-collapse offcanvas-collapse" id="navbarTogglerDemo02">
           <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
           <ul class="navbar-nav px-3">
-            <li class="nav-item d-md-none"><a href="" class="nav-link">{{(auth::user('auth:pengurus'))?auth::user('auth:pengurus')->id: $auth->id}}</a></li>
-            
+            <li class="nav-item d-md-none"><a href="{{url('pengurus')}}" class="nav-link">Dasboard</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/siswabaru')}}" class="nav-link">Siswa Baru</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/profil')}}" class="nav-link">Profil</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/pengajar')}}" class="nav-link">Pengjar</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/mapel')}}" class="nav-link">Mata Pelajaran</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/kelas')}}" class="nav-link">Kelas</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/album')}}" class="nav-link">Album</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/artikel')}}" class="nav-link">Artikel</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/prestasi')}}" class="nav-link">Prestasi</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/pengurus/agenda')}}" class="nav-link">Agenda</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/pengurus/pengumuman')}}" class="nav-link">Pengumuman</a></li>
             <li class="nav-item text-nowrap">
               <a class="nav-link" href="{{ route('logout') }}"
                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -40,7 +49,7 @@
               </a>
             </li>
             <form id="logout-form" action="{{ route('pengurus.logout') }}" method="POST">
-              @csrf
+                    {{ csrf_field() }}
             </form>
           </ul>
       </div>
@@ -80,7 +89,6 @@
                   </div>
                 </div>
               </li>
-
               <li class="nav-item">
                 <a class="nav-link active" href="{{url('pengurus')}}">
                   <span data-feather="home"></span>

@@ -32,7 +32,13 @@
           <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
           <ul class="navbar-nav px-3">
             <li class="nav-item d-md-none"><a href="" class="nav-link">Admin</a></li>
-            
+            <li class="nav-item d-md-none"><a href="{{url('sekolah')}}" class="nav-link">Dasbord</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('sekolah/tahunajaran')}}" class="nav-link">Tahun AJaran</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('sekolah/profil')}}" class="nav-link">Profil Sekolah</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('sekolah/pengurus')}}" class="nav-link">Pengurus</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('sekolah/atribut')}}" class="nav-link">Atribut</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('sekolah/fasilitas')}}" class="nav-link">Fasilitas</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('sekolah/ekstrakurikuler')}}" class="nav-link">Ekstrakurikuler</a></li>
             <li class="nav-item text-nowrap">
               <a class="nav-link" href="{{ route('logout') }}"
                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -40,7 +46,7 @@
               </a>
             </li>
             <form id="logout-form" action="{{ route('sekolah.logout') }}" method="POST">
-              @csrf
+                    {{ csrf_field() }}
             </form>
           </ul>
       </div>
