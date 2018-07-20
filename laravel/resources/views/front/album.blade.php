@@ -30,11 +30,14 @@
     <center>
       <?php 
         if ($album->status_user == 'pengurus') {
-            $nama = App\Models\Pengurus::find($album->id_user)->nama;
+            $dd = App\Models\Pengurus::find($album->id_user);
+                $nama = (!empty($dd))? $dd->nama : 'NN';
         }elseif ($album->status_user == 'guru') {
-            $nama = App\Models\Pengajars::find($album->id_user)->nama;
+            $dd = App\Models\Pengajars::find($album->id_user);
+                $nama = (!empty($dd))? $dd->nama : 'NN';
         }elseif ($album->status_user == 'siswa') {
-            $nama = App\Models\Siswas::find($album->id_user)->nama;
+            $dd = App\Models\Siswas::find($album->id_user);
+                $nama = (!empty($dd))? $dd->nama : 'NN';
         }else{
             $nama = 'NN';
         }
