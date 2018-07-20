@@ -161,7 +161,7 @@
             <h2 class="center light-blue-text">{{$profil->akriditasi}}</h2>
             <h5 class="center">Status Akriditasi</h5>
             @if(!empty($akriditasi))
-            <p class="light">{{$akriditasi}}</p>
+            <p class="light">{!!$akriditasi->deskripsi!!}</p>
             @else
             By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.
             @endif
