@@ -42,10 +42,10 @@
                 $dd = App\Models\Pengurus::find($galeri->id_user);
                 $nama = (!empty($dd))? $dd->nama : 'NN';
             }elseif ($galeri->status_user == 'guru') {
-                $dd = App\Models\Pengajars::find($galeri->id_user)->nama;
+                $dd = App\Models\Pengajars::find($galeri->id_user);
                 $nama = (!empty($dd))? $dd->nama : 'NN';
             }elseif ($galeri->status_user == 'siswa') {
-                $dd = App\Models\Siswas::find($galeri->id_user)->nama;
+                $dd = App\Models\Siswas::find($galeri->id_user);
                 $nama = (!empty($dd))? $dd->nama : 'NN';
             }else{
                 $nama = 'NN';

@@ -30,11 +30,14 @@
     <center>
       <?php 
         if ($artikel->status_user == 'pengurus') {
-            $nama = App\Models\Pengurus::find($artikel->id_user)->nama;
+            $dd = App\Models\Pengurus::find($artikel->id_user);
+                $nama = (!empty($dd))? $dd->nama : 'NN';
         }elseif ($artikel->status_user == 'guru') {
-            $nama = App\Models\Pengajars::find($artikel->id_user)->nama;
+            $dd = App\Models\Pengajars::find($artikel->id_user);
+                $nama = (!empty($dd))? $dd->nama : 'NN';
         }elseif ($artikel->status_user == 'siswa') {
-            $nama = App\Models\Siswas::find($artikel->id_user)->nama;
+            $dd = App\Models\Siswas::find($artikel->id_user);
+                $nama = (!empty($dd))? $dd->nama : 'NN';
         }else{
             $nama = 'NN';
         }
