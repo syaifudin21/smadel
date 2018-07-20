@@ -44,7 +44,7 @@
     </div>
     <div class="row">
       <form class="col s12" accept="{{route('siswa.baru')}}" method="POST" enctype="multipart/form-data">
-      @csrf
+        {{ csrf_field() }}
       <div class="row">
         <div class="input-field col m5 s12">
           <input id="first_name" type="text" class="validate" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required>

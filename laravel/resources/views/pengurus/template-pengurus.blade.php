@@ -33,6 +33,7 @@
           <ul class="navbar-nav px-3">
             <li class="nav-item d-md-none"><a href="{{url('pengurus')}}" class="nav-link">Dasboard</a></li>
             <li class="nav-item d-md-none"><a href="{{url('pengurus/siswabaru')}}" class="nav-link">Siswa Baru</a></li>
+            <li class="nav-item d-md-none"><a href="{{url('pengurus/masukan')}}" class="nav-link">Masukan</a></li>
             <li class="nav-item d-md-none"><a href="{{url('pengurus/profil')}}" class="nav-link">Profil</a></li>
             <li class="nav-item d-md-none"><a href="{{url('pengurus/pengajar')}}" class="nav-link">Pengjar</a></li>
             <li class="nav-item d-md-none"><a href="{{url('pengurus/mapel')}}" class="nav-link">Mata Pelajaran</a></li>
@@ -99,6 +100,12 @@
                 <a class="nav-link" href="{{url('pengurus/siswabaru')}}">
                   <span data-feather="users"></span>
                   Siswa Baru <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('pengurus/masukan')}}">
+                  <span data-feather="users"></span>
+                  Masukan <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item">

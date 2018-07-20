@@ -152,6 +152,60 @@
     <div class="parallax"><img src="{{asset('images/standar/background1.png')}}" alt="Unsplashed background img 2"></div>
   </div>
 
+<div id="portfolio" class="section ">
+  <div class="container">
+  <div class="row">
+      
+      <div class="col m6 s12">
+        <div class="icon-block">
+            <h2 class="center light-blue-text">{{$profil->akriditasi}}</h2>
+            <h5 class="center">Status Akriditasi</h5>
+            @if(!empty($akriditasi))
+            <p class="light">{{$akriditasi}}</p>
+            @else
+            By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.
+            @endif
+        </div>
+      </div>
+      <div class="col m6 s12">
+      <form action="{{route('masukkan.baru')}}" method="post">
+      {{ csrf_field() }}
+        <div class="input-field">
+          <input id="nama" type="text" class="validate" name="nama" value="{{ old('nama') }}" required>
+          <label for="first_name">Nama</label>
+        </div>
+        <div class="input-field">
+          <input id="hp" type="number" class="validate" name="hp" value="{{ old('hp') }}" required>
+          <label for="first_name">Nomor HP</label>
+        </div>
+        <div class="input-field">
+          <input id="email" type="email" class="validate" name="email" value="{{ old('email') }}" required>
+          <label for="first_name">Email</label>
+        </div>
+        <div class="input-field">
+          <textarea class="materialize-textarea" name="pesan">{{old('pesan')}}</textarea>
+          <label for="first_name">Pesan Masukkan saran</label>
+        </div>
+        <div class="input-field">
+          <button class="btn light-blue darken-3 col s12" type="submit">Kirim Saran
+              <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+
+      </div>
+  </div>
+</div>
+<br><br>
+</div>
+
+@if(!empty($maps))
+<div class="row">
+   <iframe class="col m12" src="{{$maps->deskripsi}}" width="800" height="300" frameborder="0" style="border:0"></iframe>
+</div>
+@endif
+
+
 @endsection
 
 @section('script')

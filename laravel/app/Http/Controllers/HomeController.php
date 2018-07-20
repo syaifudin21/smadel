@@ -15,6 +15,7 @@ use App\Models\Prestasi;
 use App\Models\Album;
 use App\Models\Foto;
 use App\Models\Profil_siswa;
+use App\Models\Masukkan;
 use DB;
 
 class HomeController extends Controller
@@ -25,7 +26,9 @@ class HomeController extends Controller
         $agendas = Agenda::where('status_tampil', 'Tampil')->take(5)->get();
         $visi = Atribut::where('atribut', 'visi')->select('deskripsi')->first();
         $misi = Atribut::where('atribut', 'misi')->select('deskripsi')->first();
-        return view('front.index', compact('artikels', 'agendas', 'visi', 'misi'));
+        $maps = Atribut::where('atribut', 'maps')->select('deskripsi')->first();
+        $akriditasi = Atribut::where('atribut', 'akriditasi')->select('deskripsi')->first();
+        return view('front.index', compact('artikels', 'agendas', 'visi', 'misi', 'maps', 'akriditasi'));
     }
     public function daftar()
     {
@@ -122,6 +125,13 @@ class HomeController extends Controller
             $kalimat = 'Anda Diterima, silahkan melakukan pendaftaran ulang di sekertariat';
         }
         return redirect('hasil-seleksi')->with('success', $kalimat);
+    }
+    public function storemasukan(Request $request)
+    {
+        $saran = new Masukkan();
+        $saran->fill($request->all());
+        $saran->save();
+        return  back()->with('success', 'Terimakasi Atas Saran dan Masukan Anda');
     }
 
 }

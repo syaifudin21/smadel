@@ -26,6 +26,9 @@ Route::get('/siswabaru/{id}', 'pengurus\PengurusController@siswaprofil');
 Route::put('/siswabaru', 'pengurus\PengurusController@siswaupdate')->name('pengurus.siswabaru.update');
 Route::put('/siswabaru/terima', 'pengurus\PengurusController@siswaterima')->name('pengurus.siswabaru.terima');
 
+Route::get('/masukan', 'pengurus\PengurusController@masukan');
+Route::delete('/masukan/{id}', 'pengurus\PengurusController@masukanhapus');
+
 Route::get('/kelas', 'pengurus\KelasController@kelas');
 Route::get('/kelas/lihat/{id}', 'pengurus\KelasController@lihat');
 Route::get('/kelas/update/{id}', 'pengurus\KelasController@edit');

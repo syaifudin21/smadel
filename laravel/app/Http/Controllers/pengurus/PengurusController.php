@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Pengurus;
 use App\Models\Profil_siswa;
+use App\Models\Masukkan;
 
 class PengurusController extends Controller
 {
@@ -77,5 +78,15 @@ class PengurusController extends Controller
         $profil->update();
 
         return back()->with('success', 'Berhasil Mengajukan Data');
+    }
+    public function masukan()
+    {
+        $masukans = Masukkan::orderBy('created_at', 'desc')->get();
+        return view('pengurus.masukan', compact('masukans'));
+    }
+    public function masukanhapus($id)
+    {
+        Masukkan::find($id)->delete();
+        return back()->with('success',' Saran / Masukkan Berhasil Dihapus');
     }
 }

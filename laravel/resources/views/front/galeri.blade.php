@@ -47,10 +47,9 @@
             }else{
                 $nama = 'NN';
             }
-
             $foto = App\Models\Foto::where('id_album', $galeri->id)->first();
           ;?>
-      @if(!empty($foto->foto))
+      @if(!empty($foto))
       <div class="col l4 m6 s12 gallery-filter">
         <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
