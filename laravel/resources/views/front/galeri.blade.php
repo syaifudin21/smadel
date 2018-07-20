@@ -39,11 +39,14 @@
       @foreach($galeris as $galeri)
       <?php 
             if ($galeri->status_user == 'pengurus') {
-                $nama = App\Models\Pengurus::find($galeri->id_user)->nama;
+                $dd = App\Models\Pengurus::find($galeri->id_user);
+                $nama = (!empty($dd))? $dd->nama : 'NN';
             }elseif ($galeri->status_user == 'guru') {
-                $nama = App\Models\Pengajars::find($galeri->id_user)->nama;
+                $dd = App\Models\Pengajars::find($galeri->id_user)->nama;
+                $nama = (!empty($dd))? $dd->nama : 'NN';
             }elseif ($galeri->status_user == 'siswa') {
-                $nama = App\Models\Siswas::find($galeri->id_user)->nama;
+                $dd = App\Models\Siswas::find($galeri->id_user)->nama;
+                $nama = (!empty($dd))? $dd->nama : 'NN';
             }else{
                 $nama = 'NN';
             }
