@@ -53,7 +53,6 @@
 		            <tr>
 		                <th>#</th>
 		                <th>Atribut</th>
-		                <th>Deskripsi</th>
                         <th>Action</th>
 		            </tr>
 		        </thead>
@@ -63,7 +62,6 @@
 		            <tr>
 		                <td>{{$n++}}</td>
 		                <td>{{$atribut->atribut}}</td>
-		                <td>{{$atribut->deskripsi}}</td>
 		                <form method="POST" action="{{url('sekolah/atribut/delete/'.$atribut->id)}}">
 		                <td><a href="{{url('sekolah/atribut/'.$atribut->id)}}" class="btn btn-outline-success btn-sm">Lihat</a> <a href="{{url('sekolah/atribut/update/'.$atribut->id)}}" class="btn btn-outline-primary btn-sm">Update</a> 
 		                    {{ csrf_field() }}
