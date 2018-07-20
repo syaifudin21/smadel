@@ -17,6 +17,9 @@
     <link href="{{asset('materialize/css/gallery-materialize.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="">
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style type="text/css">
@@ -126,6 +129,8 @@
     <script src="{{asset('materialize/js/init.js')}}"></script>
     
     @yield('script')
+
+    @include('sweet::alert')
 
   </body>
 </html>

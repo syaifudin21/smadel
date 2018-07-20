@@ -17,6 +17,7 @@ use App\Models\Foto;
 use App\Models\Profil_siswa;
 use App\Models\Masukkan;
 use DB;
+use Alert;
 
 class HomeController extends Controller
 {
@@ -131,7 +132,8 @@ class HomeController extends Controller
         $saran = new Masukkan();
         $saran->fill($request->all());
         $saran->save();
-        return  back()->with('success', 'Terimakasi Atas Saran dan Masukan Anda');
+        Alert::success('Terimakasih Saran dan Masukan Anda Sangat Membantu Kami', 'Berhasil');
+        return  back();
     }
 
 }
