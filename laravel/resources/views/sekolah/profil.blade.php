@@ -12,6 +12,20 @@
 </div>
 
 <br><br>
+@if(Session::has('success'))
+    <div class="alert alert-info alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ Session::get('success') }}
+    </div>
+@endif
+@if(!empty($errors->all()))
+    <div class="alert alert-danger alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @foreach ($errors->all() as $message)
+            {{$message}}
+        @endforeach
+    </div>
+@endif
 <!-- Basic Validation -->
 <div class="card-body">
     <form method="POST" action="{{ route('sekolah.edit') }}" enctype="multipart/form-data">
