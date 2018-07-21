@@ -39,11 +39,14 @@
       @foreach($pengumumans as $pengumuman)
       <?php 
         if ($pengumuman->status_user == 'Pengurus') {
-            $nama = App\Models\Pengurus::find($pengumuman->id_user)->nama;
+            $dd = App\Models\Pengurus::find($pengumuman->id_user)->nama;
+            $nama = (!empty($dd))? $dd->nama : 'NN';
         }elseif ($pengumuman->status_user == 'Guru') {
-            $nama = App\Models\Pengajars::find($pengumuman->id_user)->nama;
+            $dd = App\Models\Pengajars::find($pengumuman->id_user)->nama;
+            $nama = (!empty($dd))? $dd->nama : 'NN';
         }elseif ($pengumuman->status_user == 'Siswa') {
-            $nama = App\Models\Siswas::find($pengumuman->id_user)->nama;
+            $dd = App\Models\Siswas::find($pengumuman->id_user)->nama;
+            $nama = (!empty($dd))? $dd->nama : 'NN';
         }else{
             $nama = 'NN';
         }
