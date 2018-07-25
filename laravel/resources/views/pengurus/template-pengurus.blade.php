@@ -96,24 +96,33 @@
                   Dashboard <span class="sr-only">(current)</span>
                 </a>
               </li>
+              
+              @if(preg_match("/827980/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/siswabaru')}}">
                   <span data-feather="users"></span>
                   Siswa Baru <span class="sr-only">(current)</span>
                 </a>
               </li>
+              @endif
+
+              @if(preg_match("/912879/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/masukan')}}">
                   <span data-feather="users"></span>
                   Masukan <span class="sr-only">(current)</span>
                 </a>
               </li>
+              @endif
+
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/profil')}}">
                   <span data-feather="users"></span>
                   Profil <span class="sr-only">(current)</span>
                 </a>
               </li>
+              
+              @if(preg_match("/827980/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/pengajar')}}">
                   <span data-feather="users"></span>
@@ -132,36 +141,52 @@
                   Kelas <span class="sr-only">(current)</span>
                 </a>
               </li>
+              @endif
+              
+              @if(preg_match("/981729/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/album')}}">
                   <span data-feather="users"></span>
                   Album <span class="sr-only">(current)</span>
                 </a>
               </li>
+              @endif
+
+              @if(preg_match("/123456/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/artikel')}}">
                   <span data-feather="users"></span>
                   Artikel <span class="sr-only">(current)</span>
                 </a>
               </li>
+              @endif
+
+              @if(preg_match("/657842/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/prestasi')}}">
                   <span data-feather="users"></span>
                   Prestasi <span class="sr-only">(current)</span>
                 </a>
               </li>
+              @endif
+              
+              @if(preg_match("/981987/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/pengurus/agenda')}}">
                   <span data-feather="users"></span>
                   Agenda <span class="sr-only">(current)</span>
                 </a>
               </li>
+              @endif
+              
+              @if(preg_match("/211233/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/pengurus/pengumuman')}}">
                   <span data-feather="users"></span>
                   Pengumuman <span class="sr-only">(current)</span>
                 </a>
               </li>
+              @endif
 
             </ul>
 

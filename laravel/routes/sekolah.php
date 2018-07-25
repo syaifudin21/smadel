@@ -14,6 +14,9 @@ Route::get('/profil', 'sekolah\SekolahController@profil');
 Route::put('/profil', 'sekolah\SekolahController@edit')->name('sekolah.edit');
 Route::get('/pengurus', 'sekolah\SekolahController@pengurus');
 Route::post('/pengurus', 'sekolah\SekolahController@storepengurus')->name('sekolah.pengurus.tambah');
+Route::get('/pengurus/{id}', 'sekolah\SekolahController@pengurusid');
+Route::get('/pengurus/update/{id}', 'sekolah\SekolahController@pengurusedit');
+Route::put('/pengurus/update', 'sekolah\SekolahController@pengurusupdate')->name('sekolah.pengurus.update');
 Route::delete('/pengurus/delete/{id}', 'sekolah\SekolahController@deletepengurus');
 
 Route::get('/atribut', 'sekolah\AtributController@index');

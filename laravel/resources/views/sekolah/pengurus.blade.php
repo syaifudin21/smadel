@@ -65,22 +65,26 @@
 		                <td>{{$n++}}</td>
 		                <td>{{$pengurus->nama}}</td>
 		                <td>{{$pengurus->email}}</td>
-		                <?php 
-		                	if ($pengurus->status == 1) {
-		                		$status = 'Nilai , Absensi, Setting';
-		                	} elseif ($pengurus->status == 2) {
-		                		$status = 'Administrasi';
-		                	} elseif ($pengurus->status == 3) {
-		                		$status = 'Perpustakaan';
-		                	} elseif ($pengurus->status == 4) {
-		                		$status = 'Organisasi';
-		                	} else {
-		                		$status = 'Kosong';
-		                	}
-		                ?>
-		                <td>{{$status}}</td>
+                    <td>
+                    <?php
+                      $arr = $pengurus->status;
+                      $status = explode(",",$arr);
+
+                      $jumlah = count($status);
+                      for ($i=0; $i < $jumlah ; $i++) {
+                          if ($status[$i] == '123456') {echo "Artikel ";}
+                          elseif ($status[$i] == '211233') {echo "Pengumuman ";}
+                          elseif ($status[$i] == '981729') {echo "Album ";}
+                          elseif ($status[$i] == '827980') {echo "Kelas ";}
+                          elseif ($status[$i] == '981987') {echo "Agenda ";}
+                          elseif ($status[$i] == '657842') {echo "Prestasi ";}
+                          elseif ($status[$i] == '912879') {echo "Masukkan ";}
+                          else{echo "";}
+                      }
+                    ?>
+		                </td>
 		                <form method="POST" action="{{url('sekolah/pengurus/delete/'.$pengurus->id)}}">
-		                <td><a href="{{url('sekolah/mapel/lihat/'.$pengurus->id)}}" class="btn btn-outline-success btn-sm">Lihat</a> <a href="{{url('sekolah/mapel/update/'.$pengurus->id)}}" class="btn btn-outline-primary btn-sm">Update</a> 
+		                <td><a href="{{url('sekolah/pengurus/'.$pengurus->id)}}" class="btn btn-outline-success btn-sm">Lihat</a> <a href="{{url('sekolah/pengurus/update/'.$pengurus->id)}}" class="btn btn-outline-primary btn-sm">Update</a> 
 		                    {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 		                    <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i> Delete </button>
@@ -137,15 +141,58 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="jenis_mapel" class="col-sm-4 col-form-label text-md-right">Jenis Mata Pelajaran</label>
+            <label for="jenis_mapel" class="col-sm-4 col-form-label text-md-right">Authentication</label>
             <div class="col-md-6">
-                <select class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status" required>
-                    <option value="" disabled selected>Pilih Outoritas</option>
-                    <option value="1">Nilai , Absensi, Setting</option>
-                    <option value="2">Administrasi</option>
-                    <option value="3">Perpustakaan</option>
-                    <option value="4">Organisasi</option>
-                </select>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="artikel" value="123456">
+                          <label class="form-check-label" for="artikel">
+                            Artikel
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="pengumuman" value="211233">
+                          <label class="form-check-label" for="pengumuman">
+                            Pengumuman
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="album" value="981729">
+                          <label class="form-check-label" for="album">
+                            Album
+                          </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="kelas" value="827980">
+                          <label class="form-check-label" for="kelas">
+                            Kelas
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="agenda" value="981987">
+                          <label class="form-check-label" for="agenda">
+                            Agenda
+                          </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="prestasi" value="657842">
+                          <label class="form-check-label" for="prestasi">
+                            Prestasi
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="masukan" value="912879">
+                          <label class="form-check-label" for="masukan">
+                            Masukkan
+                          </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
             <div class="form-group row">

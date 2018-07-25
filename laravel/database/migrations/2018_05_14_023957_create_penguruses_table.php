@@ -18,7 +18,7 @@ class CreatePengurusesTable extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('status')->default('1');
+            $table->text('status');
             $table->rememberToken();
             $table->timestamps();
         });

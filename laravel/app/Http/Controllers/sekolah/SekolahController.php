@@ -93,12 +93,40 @@ class SekolahController extends Controller
         $penguruses = Pengurus::all();
         return view('sekolah.pengurus', compact('penguruses'));
     }
+    public function pengurusid($id)
+    {
+        $pengurus = Pengurus::find($id);
+        return view('sekolah.pengurus-id', compact('pengurus', 'id'));
+    }
+    public function pengurusedit($id)
+    {
+        $pengurus = Pengurus::find($id);
+        return view('sekolah.pengurus-update', compact('pengurus', 'id'));
+    }
+    public function pengurusupdate(Request $request)
+    {
+        $this->validate($request, [
+            'nama' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        $pengurus = Pengurus::find($request->id);
+        $pengurus->fill($request->all());
+        $pengurus['status'] = (!empty($request->status))?implode(',', $request['status']):'';
+        $pengurus->update();
+        return redirect('sekolah/pengurus')->with('success', 'Berhasil Mengubah Data Pengurus');
+    }
     public function storepengurus(Request $request)
     {
+        $this->validate($request, [
+            'nama' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:penguruses',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
         $user = Pengurus::create([
             'nama' => $request['nama'],
             'email' => $request['email'],
-            'status' => $request['status'],
+            'status' => (!empty($request->status))?implode(',', $request['status']):'',
             'password' => Hash::make($request['password']),
         ]);
         return  back()->with('success', 'Berhasil Menambahkan Pengurus');
