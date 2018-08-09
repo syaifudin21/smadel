@@ -52,6 +52,8 @@ class CreateProfilSiswasTable extends Migration
             $table->string('sekolah_asal');
             $table->string('sekolah_alamat');
             $table->integer('sekolah_angkatan');
+            $table->integer('nilai_test')->nullable();
+            $table->integer('diterima_dikelas')->nullable();
             $table->enum('status', ['Diterima','Gagal', 'Daftar'])->default('Daftar');
             $table->timestamps();
         });

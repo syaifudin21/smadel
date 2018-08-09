@@ -82,7 +82,7 @@
 
     <div class="tab-pane fade" id="tambah" role="tabpanel" aria-labelledby="profile-tab">
     <form method="POST" action="{{route('prestasi.tambah')}}" enctype="multipart/form-data">
-        @csrf
+        {{ csrf_field() }}
         <div class="form-group row">
             <label for="nama" class="col-sm-4 col-form-label text-md-right">Prestasi</label>
             <div class="col-md-6">

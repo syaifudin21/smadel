@@ -31,8 +31,10 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th>No Pndf</th>
                 <th>Nama</th>
-                <th>Alamat</th>
+                <th>Nilai</th>
+                <th>Kelas</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -41,8 +43,10 @@
             @foreach($siswas as $siswa)
             <tr>
                 <td>{{$n++}}</td>
+                <td>{{$siswa->id}}</td>
                 <td>{{$siswa->nama_lengkap}}</td>
-                <td>{{$siswa->alamat}}</td>
+                <td>{{$siswa->nilai_test}}</td>
+                <td>{{$siswa->diterima_dikelas}}</td>
                 <td><a href="{{url('pengurus/siswabaru/'.$siswa->id)}}" class="btn btn-outline-success btn-sm">Lihat</a>
                 </td>
             </tr>
