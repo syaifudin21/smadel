@@ -4,6 +4,7 @@ namespace App\Http\Controllers\layanan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Artikel;
 use File;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,7 @@ class ArtikelController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('lampiran')->getClientOriginalExtension();
             $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            $request->file('lampiran')->move('images/artikel',$filenametostorefoto);
+            Storage::disk('ftp-artikel')->put($filenametostorefoto, fopen($request->file('lampiran'), 'r+'));
             $artikel['lampiran'] = $filenametostorefoto;
         }
         $artikel['slug_judul'] = str_slug($request->judul, '-');
@@ -56,8 +57,8 @@ class ArtikelController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('lampiran')->getClientOriginalExtension();
             $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            File::delete('images/artikel/'.$artikelh->lampiran);
-            $request->file('lampiran')->move('images/artikel',$filenametostorefoto);
+            Storage::disk('ftp-artikel')->put($filenametostorefoto, fopen($request->file('lampiran'), 'r+'));
+            Storage::disk('ftp-artikel')->delete($artikelh->lampiran);
             $artikel['lampiran'] = $filenametostorefoto;
         }
         $artikel['slug_judul'] = str_slug($request->judul, '-');
@@ -88,7 +89,7 @@ class ArtikelController extends Controller
     public function delete($id)
     {
         $artikel = Artikel::find($id);
-        File::delete('images/artikel/'.$artikel->lampiran);
+        Storage::disk('ftp-artikel')->delete($artikel->lampiran);
         $artikel->delete();
         return back()->with('success',' Artikel Berhasil Dihapus');
     }

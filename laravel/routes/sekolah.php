@@ -7,8 +7,46 @@ Route::get('/daftar', 'sekolah\SekolahDaftarController@daftar')->name('sekolah.d
 Route::post('/daftar', 'sekolah\SekolahDaftarController@create')->name('sekolah.daftar');
 Route::post('/logout', 'sekolah\SekolahLoginController@logout')->name('sekolah.logout');
 
-Route::get('/tahunajaran', 'sekolah\SekolahController@tahunajaran');
-Route::post('/tahunajaran', 'sekolah\SekolahController@tatambah')->name('tahunajaran.tambah');
+Route::get('/tahunajaran', 'sekolah\TahunAjaranController@tahunajaran');
+Route::post('/tahunajaran', 'sekolah\TahunAjaranController@tatambah')->name('tahunajaran.tambah');
+Route::get('/tahunajaran/id/{id}', 'sekolah\TahunAjaranController@taid');
+Route::put('/tahunajaran', 'sekolah\TahunAjaranController@taupdate')->name('tahunajaran.update');
+Route::get('/tahunajaran/siswadaftar/{id_ta}', 'sekolah\TahunAjaranController@siswadaftar');
+Route::get('/tahunajaran/siswadaftar/profil/{id}', 'sekolah\TahunAjaranController@profilsiswadaftar');
+Route::get('/tahunajaran/siswadaftar/verifikasi/{id}', 'sekolah\TahunAjaranController@verifikasisiswa');
+
+Route::get('/kelas/{id_ta}', 'sekolah\KelasController@kelas');
+Route::post('/kelas', 'sekolah\KelasController@kelasstore')->name('kelas.tambah');
+Route::get('/kelas/id/{id}', 'sekolah\KelasController@kelasid');
+Route::get('/kelas/siswa/{id}', 'sekolah\KelasController@siswakelas');
+Route::get('/kelas/update/{id}', 'sekolah\KelasController@kelasupdateid');
+Route::put('/kelas', 'sekolah\KelasController@kelasupdate')->name('kelas.update');
+
+Route::get('/kurikulum', 'sekolah\TahunAjaranController@kurikulum');
+Route::post('/kurikulum', 'sekolah\TahunAjaranController@kurikulumstore')->name('kurikulum.tambah');
+Route::get('/kurikulum/id/{id}', 'sekolah\TahunAjaranController@kurikulumid');
+Route::put('/kurikulum', 'sekolah\TahunAjaranController@kurikulumupdate')->name('kurikulum.update');
+
+Route::get('/jurusan/{id_kurikulum}', 'sekolah\TahunAjaranController@jurusan');
+Route::post('/jurusan', 'sekolah\TahunAjaranController@jurusanstore')->name('jurusan.tambah');
+Route::get('/jurusan/{id_kurikulum}/id/{id}', 'sekolah\TahunAjaranController@jurusanid');
+Route::put('/jurusan', 'sekolah\TahunAjaranController@jurusanupdate')->name('jurusan.update');
+
+Route::get('/tk/{id_jurusan}', 'sekolah\TahunAjaranController@tk');
+Route::post('/tk', 'sekolah\TahunAjaranController@tkstore')->name('tk.tambah');
+Route::get('/tk/{id_jurusan}/id/{id}', 'sekolah\TahunAjaranController@tkid');
+Route::put('/tk', 'sekolah\TahunAjaranController@tkupdate')->name('tk.update');
+Route::get('/tk/status/{value}/{id}', 'sekolah\TahunAjaranController@tkStatus');
+
+Route::post('/jenismapel', 'sekolah\TahunAjaranController@jenismapelstore')->name('jenismapel.tambah');
+Route::get('/jenismapel/id/{id}', 'sekolah\TahunAjaranController@jenismapelid');
+Route::put('/jenismapel', 'sekolah\TahunAjaranController@jenismapelupdate')->name('jenismapel.update');
+
+Route::get('/mapel/{id_tk}', 'sekolah\TahunAjaranController@mapel');
+Route::post('/mapel', 'sekolah\TahunAjaranController@mapelstore')->name('mapel.tambah');
+Route::get('/mapel/{id_tk}/id/{id}', 'sekolah\TahunAjaranController@mapelid');
+Route::put('/mapel', 'sekolah\TahunAjaranController@mapelupdate')->name('mapel.update');
+Route::delete('/mapel/delete/{id}', 'sekolah\TahunAjaranController@mapeldelete');
 
 Route::get('/profil', 'sekolah\SekolahController@profil');
 Route::put('/profil', 'sekolah\SekolahController@edit')->name('sekolah.edit');

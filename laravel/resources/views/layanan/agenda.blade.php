@@ -19,7 +19,7 @@
 
 <br><br>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
 <h1 class="h2">Agenda {{$auth}} </h1>
 <div class="btn-toolbar mb-2 mb-md-0">
   <div class="btn-group mr-2">
@@ -32,13 +32,6 @@
   </button>
 </div>
 </div>
-
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb bg-white" style="padding: 0px">
-    <li class="breadcrumb-item active" aria-current="page">Album</li>
-  </ol>
-</nav>
-
 
 @if(Session::has('success'))
     <div class="alert alert-info alert-dismissable">
@@ -67,13 +60,27 @@
             <tbody>
                 @foreach($agendas as $agenda)
                 <tr>
+                    <?php 
+                        if ($agenda->status_user == 'pengurus') {
+                            $dd = App\Models\Pengurus::find($agenda->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($agenda->status_user == 'guru') {
+                            $dd = App\Models\Pengajars::find($agenda->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($agenda->status_user == 'siswa') {
+                            $dd = App\Models\Siswas::find($agenda->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }else{
+                            $nama = 'NN';
+                        }
+                    ?>
                     <td>{{$n++}}</td>
                     <td><b>{{$agenda->agenda}}</b> <br> {{$agenda->keterangan}}</td>
                     <td>{{tanggal(date('Y-m-d-G-i-s', strtotime($agenda->waktu)), true)}}</td>
                     <td>{{$agenda->status_tampil}}</td>
                     <td>{{$agenda->status}}</td>
                     <td>{{$agenda->status_public}}</td>
-                    <td>{{$agenda->status_user}} - {{$agenda->id_user}}</td>
+                    <td>{{$agenda->status_user}} - {{$nama}}</td>
                     <form method="POST" action="{{url('layanan/agenda/'.$agenda->id)}}">
                     <td>
                         <a href="{{url(strtolower($auth).'/'.$menu.'/agenda/update/'.$agenda->id)}}" class="btn btn-outline-primary btn-sm">Update</a>

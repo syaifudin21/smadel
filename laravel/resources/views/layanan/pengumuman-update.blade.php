@@ -48,7 +48,7 @@
 
 <div class="card-body">
 
-    <form method="POST" action="{{ route('pengumuman.update') }}">
+    <form method="POST" action="{{ route('pengumuman.update') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
       {{ method_field('PUT') }}
         <input type="hidden" name="id" value="{{$pengumuman->id}}">
@@ -92,6 +92,20 @@
                 @if ($errors->has('waktu_selesai'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('waktu_selesai') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lampiran" class="col-sm-4 col-form-label text-md-right">Lampiran</label>
+            <div class="col-md-6">
+                @if(!empty($pengumuman->lampiran))
+                  <a class="white-text" href="{{url('http://file.smawahasmodel.sch.id/pengumuman/'.$pengumuman->lampiran)}}">{{$pengumuman->lampiran}}</a></b>
+                @endif
+                <input id="lampiran" type="file" class="form-control{{ $errors->has('lampiran') ? ' is-invalid' : '' }}" name="lampiran" value="{{ old('lampiran') }}" autofocus>
+                @if ($errors->has('lampiran'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('lampiran') }}</strong>
                     </span>
                 @endif
             </div>

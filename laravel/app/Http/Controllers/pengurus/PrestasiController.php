@@ -4,9 +4,9 @@ namespace App\Http\Controllers\pengurus;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Prestasi;
-use File;
 
 class PrestasiController extends Controller
 {
@@ -29,7 +29,7 @@ class PrestasiController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('foto')->getClientOriginalExtension();
             $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            $request->file('foto')->move('images/prestasi',$filenametostorefoto);
+            Storage::disk('ftp-prestasi')->put($filenametostorefoto, fopen($request->file('foto'), 'r+'));
             $prestasi['foto'] = $filenametostorefoto;
         }
         $prestasi->save();
@@ -55,8 +55,8 @@ class PrestasiController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('foto')->getClientOriginalExtension();
             $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            File::delete('images/prestasi/'.$prestasih->foto);
-            $request->file('foto')->move('images/prestasi',$filenametostorefoto);
+            Storage::disk('ftp-prestasi')->put($filenametostorefoto, fopen($request->file('foto'), 'r+'));
+            Storage::disk('ftp-prestasi')->delete($prestasih->foto);
             $prestasi['foto'] = $filenametostorefoto;
         }
         $prestasi->update();
@@ -65,7 +65,7 @@ class PrestasiController extends Controller
     public function delete($id)
     {
         $prestasi = Prestasi::find($id);
-        File::delete('images/prestasi/'.$prestasi->foto);
+        Storage::disk('ftp-prestasi')->delete($prestasi->foto);
         $prestasi->delete();
         return back()->with('success',' Mata Pelajaran Berhasil Dihapus');
     }

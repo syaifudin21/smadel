@@ -41,7 +41,7 @@
         <div class="gallery-curve-wrapper">
           @if(!empty($prestasi->foto))
           <a class="gallery-cover gray">
-            <img class="responsive-img" src="{{asset('images/prestasi/'.$prestasi->foto)}}" alt="placeholder">
+            <img class="responsive-img" src="{{asset('http://file.smawahasmodel.sch.id/prestasi/'.$prestasi->foto)}}" alt="placeholder">
           </a>
           @endif
           <div class="gallery-header">

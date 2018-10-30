@@ -70,10 +70,13 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/siswa.php'));
-         Route::prefix('layanan')
+        Route::prefix('layanan')
              ->middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/layanan.php'));
+        Route::prefix('data')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/data.php'));
     }
 
     /**

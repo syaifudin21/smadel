@@ -15,11 +15,12 @@ class CreateProfilSiswasTable extends Migration
     {
         Schema::create('profil_siswas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ta');
+            $table->string('id_ta');
+            $table->Integer('no_induk')->nullable();
+            $table->bigInteger('nisn');
             $table->string('nama_lengkap');
             $table->string('tgl');
             $table->enum('jk', ['Laki-laki', 'Perempuan']);
-            $table->bigInteger('nim');
             $table->enum('agama', ['Islam', 'Protestan', 'Katolik', 'Hindu', 'Budha', 'Kong Hu Cu']);
             $table->string('alamat');
             $table->enum('tinggal', ['Orang Tua', 'Kost', 'Asrama', 'Lainnya']);
@@ -53,8 +54,9 @@ class CreateProfilSiswasTable extends Migration
             $table->string('sekolah_alamat');
             $table->integer('sekolah_angkatan');
             $table->integer('nilai_test')->nullable();
-            $table->integer('diterima_dikelas')->nullable();
-            $table->enum('status', ['Diterima','Gagal', 'Daftar'])->default('Daftar');
+            $table->string('minat_jurusan')->nullable();
+            $table->string('diterima_kelas')->nullable();
+            $table->enum('status', ['Diterima','Gagal', 'Daftar', 'Verifikasi Siswa', 'Verifikasi Admin'])->default('Daftar');
             $table->timestamps();
         });
     }

@@ -79,6 +79,8 @@
                           elseif ($status[$i] == '981987') {echo "Agenda ";}
                           elseif ($status[$i] == '657842') {echo "Prestasi ";}
                           elseif ($status[$i] == '912879') {echo "Masukkan ";}
+                          elseif ($status[$i] == '915879') {echo "Bantuan ";}
+                          elseif ($status[$i] == '962879') {echo "Forum ";}
                           else{echo "";}
                       }
                     ?>
@@ -177,6 +179,12 @@
                             Agenda
                           </label>
                         </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="bantuan" value="915879">
+                          <label class="form-check-label" for="bantuan">
+                            Bantuan
+                          </label>
+                        </div>
                     </div>
                     <div class="col-md-4 col-xs-12">
                         <div class="form-check">
@@ -189,6 +197,12 @@
                           <input class="form-check-input" type="checkbox" name="status[]" id="masukan" value="912879">
                           <label class="form-check-label" for="masukan">
                             Masukkan
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="forum" value="962879">
+                          <label class="form-check-label" for="forum">
+                            Forum
                           </label>
                         </div>
                     </div>

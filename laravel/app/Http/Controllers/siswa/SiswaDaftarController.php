@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Tahun_ajaran;
@@ -56,7 +57,7 @@ class SiswaDaftarController extends Controller
         $this->validate($req, [
             "nama_lengkap" => 'required',
             "tgl" =>  'required',
-            'nim' => 'required|string|max:255|unique:profil_siswas',
+            'nisn' => 'required|string|max:255|unique:profil_siswas',
             "jk" =>  'required',
             "agama" =>  'required',
             "tinggi" =>  'required',
@@ -96,18 +97,32 @@ class SiswaDaftarController extends Controller
             "sekolah_angkatan" => 'required',
         ]);
         // date("Y-m-d", strtotime(Carbon::now()));
-        $ta = Tahun_ajaran::where('status', 'Aktif')->first();
+        $ta = Tahun_ajaran::where('status', 'Show')->first();
         // dd($ta);
 
-        $foto    = time().$req->file('foto')->getClientOriginalName();
-        $ijazah  = time().$req->file('ijazah')->getClientOriginalName();
+        if ($req->hasFile('foto')){
+            $filenamewithextension = $req->file('foto')->getClientOriginalName();
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            $extension = $req->file('foto')->getClientOriginalExtension();
+            $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
+            Storage::disk('ftp-siswa')->put($filenametostorefoto, fopen($req->file('foto'), 'r+'));
+            $foto    = $filenametostorefoto;
+        }
+        if ($req->hasFile('ijazah')){
+            $filenamewithextension = $req->file('ijazah')->getClientOriginalName();
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            $extension = $req->file('ijazah')->getClientOriginalExtension();
+            $filenametostoreijazah = $filename.'_'.uniqid().'.'.$extension;
+            Storage::disk('ftp-siswa')->put($filenametostoreijazah, fopen($req->file('ijazah'), 'r+'));
+            $ijazah  = $filenametostoreijazah;
+        }
 
         Profil_siswa::create([
-            'ta' => $ta->tahun_ajaran ,  
+            'id_ta' => $ta->id ,  
             'nama_lengkap' => $req->nama_lengkap ,  
             'tgl' => $req->tgl ,  
             'jk' => $req->jk ,  
-            'nim' => $req->nim ,  
+            'nisn' => $req->nisn ,  
             'agama' => $req->agama ,
             'alamat' => 'RT/RW ('.$req->rt.'/'. $req->rw. ') jln. '. $req->jln .' Dsn. '. $req->Dusun.' Ds. '. $req->Desa.' Kec. '. $req->Kecamatan.' Kab. '. $req->Kabupaten , 
             'tinggal' => $req->tinggal ,  
@@ -135,17 +150,15 @@ class SiswaDaftarController extends Controller
             'foto' => $foto ,  
             'ijazah' => $ijazah,
         ]);
-        $req->file('foto')->move('images/siswa/', $foto);
-        $req->file('ijazah')->move('images/siswa/', $ijazah);
 
         Siswa::create([
-            'nisn' => $req['nim'],
-            'password' => Hash::make($req['nim']),
+            'nisn' => $req['nisn'],
+            'password' => Hash::make($req['nisn']),
         ]);
 
         $credential = [
-            'nisn' => $req->nim,
-            'password' => $req->nim
+            'nisn' => $req->nisn,
+            'password' => $req->nisn
         ];
 
         if (Auth::guard('siswa')->attempt($credential, false)){

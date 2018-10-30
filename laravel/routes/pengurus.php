@@ -22,33 +22,42 @@ Route::get('/pengurus/pengumuman/{id}/{slug}', 'layanan\PengumumanController@pen
 Route::get('/pengurus/pengumuman/update/{id}/{slug}', 'layanan\PengumumanController@pengurus_pengurus_update');
 
 Route::get('/siswabaru', 'pengurus\PengurusController@baru');
+Route::get('/siswabaru/konfirmasipendaftaran', 'pengurus\PengurusController@konfirmasipendaftaran');
 Route::get('/siswabaru/{id}', 'pengurus\PengurusController@siswaprofil');
+
+Route::get('/siswabaru/pilihkelas/{id_siswa}/{id_kelas}/{id_tk}', 'pengurus\PengurusController@daftarkelas');
+Route::get('/siswabaru/gugur/{id_siswa}/{id_ta}', 'pengurus\PengurusController@siswagugur');
+Route::get('/siswabaru/batalgugur/{id_siswa}', 'pengurus\PengurusController@batalgugur');
+
 Route::put('/siswabaru', 'pengurus\PengurusController@siswaupdate')->name('pengurus.siswabaru.update');
+Route::put('/siswabaru/nilaitest', 'pengurus\PengurusController@siswanilaitest')->name('pengurus.siswabaru.siswanilaitest');
 Route::put('/siswabaru/terima', 'pengurus\PengurusController@siswaterima')->name('pengurus.siswabaru.terima');
 
 Route::get('/masukan', 'pengurus\PengurusController@masukan');
 Route::delete('/masukan/{id}', 'pengurus\PengurusController@masukanhapus');
 
-Route::get('/kelas', 'pengurus\KelasController@kelas');
-Route::get('/kelas/lihat/{id}', 'pengurus\KelasController@lihat');
-Route::get('/kelas/update/{id}', 'pengurus\KelasController@edit');
-Route::post('/kelas/tambah', 'pengurus\KelasController@tambah')->name('kelas.tambah');
-Route::put('/kelas/update', 'pengurus\KelasController@update')->name('kelas.update');
-Route::delete('/kelas/delete/{id}', 'pengurus\KelasController@delete');
-Route::get('/kelas/mapel/{id}', 'pengurus\KelasController@mapel');
-Route::post('/kelas/mapel/tambah', 'pengurus\KelasController@mapeltambah')->name('kelasmapel.tambah');
-Route::put('/kelas/mapel/update', 'pengurus\KelasController@mapelupdate')->name('kelasmapel.update');
-Route::delete('kelas/mapel/delete/{id}', 'pengurus\KelasController@mapeldelete');
-Route::get('/kelas/load/{id}', 'pengurus\KelasController@datamapel');
-Route::get('/ta/load/{id}', 'pengurus\KelasController@datata');
-Route::post('/kelas/mapel/load', 'pengurus\KelasController@mapelload')->name('loadmapel.tambah');
+Route::get('/kelas', 'pengurus\KelasController@index');
+Route::get('/kelas/id/{id}', 'pengurus\KelasController@kelasid');
+Route::get('/kelas/siswa/{id}', 'pengurus\KelasController@siswakelas');
+// Route::get('/kelas/lihat/{id}', 'pengurus\KelasController@lihat');
+// Route::get('/kelas/update/{id}', 'pengurus\KelasController@edit');
+// Route::post('/kelas/tambah', 'pengurus\KelasController@tambah')->name('kelas.tambah');
+// Route::put('/kelas/update', 'pengurus\KelasController@update')->name('kelas.update');
+// Route::delete('/kelas/delete/{id}', 'pengurus\KelasController@delete');
+// Route::get('/kelas/mapel/{id}', 'pengurus\KelasController@mapel');
+// Route::post('/kelas/mapel/tambah', 'pengurus\KelasController@mapeltambah')->name('kelasmapel.tambah');
+// Route::put('/kelas/mapel/update', 'pengurus\KelasController@mapelupdate')->name('kelasmapel.update');
+// Route::delete('kelas/mapel/delete/{id}', 'pengurus\KelasController@mapeldelete');
+// Route::get('/kelas/load/{id}', 'pengurus\KelasController@datamapel');
+// Route::get('/ta/load/{id}', 'pengurus\KelasController@datata');
+// Route::post('/kelas/mapel/load', 'pengurus\KelasController@mapelload')->name('loadmapel.tambah');
 
-Route::get('/mapel', 'pengurus\MapelController@mapel');
-Route::get('/mapel/lihat/{id}', 'pengurus\MapelController@lihat');
-Route::get('/mapel/update/{id}', 'pengurus\MapelController@edit');
-Route::post('/mapel/tambah', 'pengurus\MapelController@tambah')->name('mapel.tambah');
-Route::put('/mapel/update', 'pengurus\MapelController@update')->name('mapel.update');
-Route::delete('/mapel/delete/{id}', 'pengurus\MapelController@delete');
+// Route::get('/mapel', 'pengurus\MapelController@mapel');
+// Route::get('/mapel/lihat/{id}', 'pengurus\MapelController@lihat');
+// Route::get('/mapel/update/{id}', 'pengurus\MapelController@edit');
+// Route::post('/mapel/tambah', 'pengurus\MapelController@tambah')->name('mapel.tambah');
+// Route::put('/mapel/update', 'pengurus\MapelController@update')->name('mapel.update');
+// Route::delete('/mapel/delete/{id}', 'pengurus\MapelController@delete');
 
 Route::get('/data/pengajar', 'pengurus\PengajarController@datapengajar');
 
@@ -62,6 +71,24 @@ Route::get('/foto/edit/{id}', 'layanan\FotoController@edit');
 Route::get('/artikel', 'layanan\ArtikelController@pengurus');
 Route::get('/artikel/{id}', 'layanan\ArtikelController@pengurus_artikelid');
 Route::get('/artikel/edit/{id}', 'layanan\ArtikelController@pengurus_edit');
+
+Route::get('/bantuan', 'pengurus\BantuanController@index');
+Route::post('/bantuan', 'pengurus\BantuanController@store')->name('bantuan.tambah');
+Route::get('/bantuan/{id}', 'pengurus\BantuanController@bantuanid');
+Route::get('/bantuan/edit/{id}', 'pengurus\BantuanController@edit');
+Route::put('/bantuan/update', 'pengurus\BantuanController@update')->name('bantuan.update');
+Route::delete('/bantuan/{id}', 'pengurus\BantuanController@delete');
+Route::get('/bantuan/tampilkan/{id}', 'pengurus\BantuanController@tampilkan');
+Route::get('/bantuan/sembunyikan/{id}', 'pengurus\BantuanController@sembunyikan');
+
+Route::get('/forum', 'pengurus\ForumController@index');
+Route::post('/forum', 'pengurus\ForumController@store')->name('forum.tambah');
+Route::get('/forum/{id}', 'pengurus\ForumController@forumid');
+Route::post('/forum/id', 'pengurus\ForumController@chatstore')->name('chatstore.tambah');
+Route::get('/forum/edit/{id}', 'pengurus\ForumController@edit');
+Route::put('/forum/update', 'pengurus\ForumController@update')->name('forum.update');
+Route::delete('/forum/{id}', 'pengurus\ForumController@delete');
+
 
 Route::get('/prestasi', 'pengurus\PrestasiController@index');
 Route::post('/prestasi', 'pengurus\PrestasiController@store')->name('prestasi.tambah');

@@ -10,6 +10,7 @@ use File;
 use App\Models\Profil_sekolah;
 use App\Models\Pengurus;
 use App\Models\Tahun_ajaran;
+use Illuminate\Support\Facades\Storage;
 
 class SekolahController extends Controller
 {
@@ -70,7 +71,8 @@ class SekolahController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('logo')->getClientOriginalExtension();
             $filenametostorelogo = $filename.'_'.uniqid().'.'.$extension;
-            File::delete('images/setting/'.$sekolahh->logo);
+            Storage::disk('ftp-setting')->put($filenametostorelogo, fopen($request->file('logo'), 'r+'));
+            Storage::disk('ftp-setting')->delete($sekolahh->logo);
             $request->file('logo')->move('images/setting',$filenametostorelogo);
             $sekolah['logo'] = $filenametostorelogo;
         }
@@ -79,7 +81,8 @@ class SekolahController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('sk')->getClientOriginalExtension();
             $filenametostoresk = $filename.'_'.uniqid().'.'.$extension;
-            File::delete('images/setting/'.$sekolahh->sk);
+            Storage::disk('ftp-setting')->put($filenametostoresk, fopen($request->file('sk'), 'r+'));
+            Storage::disk('ftp-setting')->delete($sekolahh->sk);
             $request->file('sk')->move('images/setting',$filenametostoresk);
             $sekolah['sk'] = $filenametostoresk;
         }
@@ -136,16 +139,5 @@ class SekolahController extends Controller
         Pengurus::findOrFail($id)->delete();
         return  back()->with('success', 'Berhasil Menghapus Pengurus');
     }
-    public function tahunajaran()
-    {
-        $ta = Tahun_ajaran::all();
-        return view('sekolah.tahun_ajaran', compact('ta'));
-    }
-    public function tatambah(Request $req)
-    {
-        Tahun_ajaran::create([
-            'tahun_ajaran' => $req->tahunajaran
-        ]);
-        return back()->with('success','Penambahan Tahun Ajaran Berhasil');
-    }
+    
 }

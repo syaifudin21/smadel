@@ -5,6 +5,7 @@ namespace App\Http\Controllers\layanan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Album;
 use App\Models\Foto;
 use App\Models\Pengurus;
@@ -69,12 +70,12 @@ class AlbumController extends Controller
     }
     public function delete($id)
     {
-        $album = Album::find($id)->delete();
         $fotos = Foto::where('id_album',$id)->get();
         foreach ($fotos as $foto) {
-            File::delete('images/album/'.$foto->foto);
+            Storage::disk('ftp-album')->delete($foto->foto);
             Foto::find($foto->id)->delete();
         }
+        $album = Album::find($id)->delete();
         return back()->with('success',' Album Berhasil Dihapus');
     }
 }

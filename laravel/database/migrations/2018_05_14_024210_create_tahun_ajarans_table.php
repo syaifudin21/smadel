@@ -16,7 +16,13 @@ class CreateTahunAjaransTable extends Migration
         Schema::create('tahun_ajarans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tahun_ajaran');
-            $table->enum('status', ['Aktif','Non Aktif', 'Close'])->default('Non Aktif');
+            $table->string('tgl_pendaftaran')->nullabel();
+            $table->string('tgl_test')->nullabel();
+            $table->string('tgl_pengumuman')->nullabel();
+            $table->string('tgl_daftar_ulang')->nullabel();
+            $table->text('jadwal')->nullabel();
+            $table->text('brosur')->nullabel();
+            $table->enum('status', ['Show','Hidden'])->default('Hidden');
             $table->timestamps();
         });
     }

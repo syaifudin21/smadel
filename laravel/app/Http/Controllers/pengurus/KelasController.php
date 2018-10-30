@@ -10,6 +10,8 @@ use App\Models\Pengajar;
 use App\Models\Profil_pengajar;
 use App\Models\Kelas_mapel;
 use App\Models\Mapel;
+use App\Models\Kurikulum;
+use App\Models\Kelas_siswa;
 
 class KelasController extends Controller
 {
@@ -17,31 +19,34 @@ class KelasController extends Controller
     {
         $this->middleware('auth:pengurus');
     }
-    public function kelas()
+    public function index()
     {
-    	$ta = Tahun_ajaran::all();
-    	$kelas = Kelas::Join('profil_pengajars','kelas.id_guru', '=', 'profil_pengajars.id')
-                ->Join('tahun_ajarans','kelas.id_ta', '=', 'tahun_ajarans.id')
-                ->select('kelas.*', 'tahun_ajarans.tahun_ajaran', 'profil_pengajars.nama_lengkap')
-                ->get();
-    	$guru = Pengajar::all();
-    	return view('pengurus.kelas', compact('ta', 'kelas', 'guru'));
+        $ta = Tahun_ajaran::where('status', 'Show')->first();
+        $kelass = Kelas::where('id_ta',$ta->id)->get();
+        return view('pengurus.kelas-all', compact('kelass','ta'));
     }
-    public function tambah(Request $req)
+    public function kelasid($id)
     {
-    	$this->validate($req, [
-    		'id_ta' => 'required|string|max:3',
-            'nama_kelas' => 'required|string|max:191',
-            'id_guru' => 'required'
-    	]);
+    	$kelas = Kelas::where('kelas.id',$id)
+                    ->join('kurikulums', 'kelas.id_ta', '=', 'kurikulums.id')
+                    ->join('jurusans', 'kelas.id_jurusan', '=', 'jurusans.id')
+                    ->join('tingkat_kelas', 'kelas.id_tingkatan_kelas', '=', 'tingkat_kelas.id')
+                    ->join('tahun_ajarans', 'kelas.id_ta', '=', 'tahun_ajarans.id')
+                    ->select('kelas.*', 'jurusans.jurusan', 'tingkat_kelas.tingkat_kelas', 'kurikulums.kurikulum', 'tahun_ajarans.tahun_ajaran')
+                    ->first();
+        $mapels = Mapel::where('id_tingkat_kelas', $kelas->id_tingkatan_kelas)->get();
+    	return view('pengurus.kelas', compact('ta', 'kelas', 'mapels'));
+    }
 
-    	Kelas::create([
-    		'id_ta' => $req->id_ta,
-    		'nama_kelas' => $req->nama_kelas,
-    		'id_guru' => $req->id_guru
-    	]);
+    public function siswakelas($id)
+    {
+        $kelas = Kelas::find($id);
 
-    	return back()->with('success','Kelas '. $req->nama_kelas. ' Berhasil Ditambahkan');
+        $siswakelass = Kelas_siswa::where('id_kelas', $id)
+                    ->join('profil_siswas', 'kelas_siswas.id_siswa', '=', 'profil_siswas.id')
+                    ->select('profil_siswas.nama_lengkap', 'profil_siswas.alamat', 'profil_siswas.nisn')
+                    ->get();
+        return view('pengurus.kelas-siswa', compact('kelas','siswakelass'));
     }
     public function lihat($id)
     {
@@ -59,26 +64,16 @@ class KelasController extends Controller
         $guru =  Pengajar::all();
     return view('pengurus.kelas_detail', compact('kelasid', 'id', 'kelasmapel', 'mapels','tahun_ajarans', 'guru', 'kelas', 'ta'));
     }
-    public function edit($id)
-    {
-        $ta = Tahun_ajaran::all();
-        $guru = Pengajar::all();
-        $kelasid = Kelas::where('kelas.id', $id)
-                    ->Join('pengajars','kelas.id_guru', '=', 'pengajars.id')
-                    ->Join('tahun_ajarans','kelas.id_ta', '=', 'tahun_ajarans.id')
-                    ->first();
-        return view('pengurus.kelas_update', compact('kelasid', 'tahun_ajarans', 'guru', 'id', 'ta'));
-    }
-    public function update(Request $req)
-    {
-        Kelas::where('id', $req->id_kelas)
-        ->update([
-            'id_ta' => $req->id_ta,
-            'nama_kelas' => $req->nama_kelas,
-            'id_guru' => $req->id_guru
-        ]);
-        return redirect('/pengurus/kelas/lihat/'. $req->id_kelas)->with('success','Kelas '. $req->nama_kelas. ' Berhasil diupdate');
-    }
+    // public function update(Request $req)
+    // {
+    //     Kelas::where('id', $req->id_kelas)
+    //     ->update([
+    //         'id_ta' => $req->id_ta,
+    //         'nama_kelas' => $req->nama_kelas,
+    //         'id_guru' => $req->id_guru
+    //     ]);
+    //     return redirect('/pengurus/kelas/lihat/'. $req->id_kelas)->with('success','Kelas '. $req->nama_kelas. ' Berhasil diupdate');
+    // }
     public function delete($id)
     {
         Kelas::where('id', $id)->delete();

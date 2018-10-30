@@ -18,7 +18,7 @@
 
 <br><br>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
 <h1 class="h2">Album</h1>
 <div class="btn-toolbar mb-2 mb-md-0">
   <div class="btn-group mr-2">
@@ -31,13 +31,6 @@
   </button>
 </div>
 </div>
-
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb bg-white" style="padding: 0px">
-    <li class="breadcrumb-item active" aria-current="page">Album</li>
-  </ol>
-</nav>
-
 
 @if(Session::has('success'))
     <div class="alert alert-info alert-dismissable">
@@ -58,7 +51,6 @@
                     <th>Tgl Kegiatan</th>
                     <th>P / D</th>
                     <th>Auth - id</th>
-                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -66,13 +58,26 @@
             <tbody>
                 @foreach($albums as $album)
                 <tr>
+                    <?php 
+                        if ($album->status_user == 'pengurus') {
+                            $dd = App\Models\Pengurus::find($album->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($album->status_user == 'guru') {
+                            $dd = App\Models\Pengajars::find($album->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($album->status_user == 'siswa') {
+                            $dd = App\Models\Siswas::find($album->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }else{
+                            $nama = 'NN';
+                        }
+                    ?>
                     <td>{{$n++}}</td>
                     <td>{{$album->nama}}</td>
                     <td>{{$album->deskripsi}}</td>
                     <td>{{$album->tgl_kegiatan}}</td>
                     <td>{{$album->id_prestasi}}</td>
-                    <td>{{$album->status_user}} - {{$album->id_user}}</td>
-                    <td>{{$album->status}}</td>
+                    <td>{{$album->status_user}} - {{$nama}}</td>
                     <td>
                         <a href="{{url($auth.'/album',$album->id)}}" class="btn btn-outline-success btn-sm">Lihat</a>
                     </td>

@@ -76,6 +76,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{url('sekolah/kurikulum')}}">
+                  <span data-feather="home"></span>
+                  Kurikulum <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{url('sekolah/tahunajaran')}}">
                   <span data-feather="home"></span>
                   Tahun Ajaran <span class="sr-only">(current)</span>

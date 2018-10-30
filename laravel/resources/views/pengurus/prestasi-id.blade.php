@@ -45,16 +45,16 @@
 
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-<div class="table-responsive-sm">
-<table id="example" class="table table-hover table-sm" style="width:100%">
-    <tr><td width="30%"><b>Prestasi</b></td><td><b>{{$prestasi->nama}}</b></td></tr>
-    <tr><td>Deskripsi</td><td>{!!$prestasi->deskripsi!!}</td></tr>
-    <tr><td>Instalasi</td><td>{!!$prestasi->instalasi!!}</td></tr>
-    <tr><td>Tanggal Juara</td><td>{!!$prestasi->tanggal!!}</td></tr>
-</table>
-</div>
+        <div class="table-responsive-sm">
+        <table id="example" class="table table-hover table-sm" style="width:100%">
+            <tr><td width="30%"><b>Prestasi</b></td><td><b>{{$prestasi->nama}}</b></td></tr>
+            <tr><td>Deskripsi</td><td>{!!$prestasi->deskripsi!!}</td></tr>
+            <tr><td>Instalasi</td><td>{!!$prestasi->instalasi!!}</td></tr>
+            <tr><td>Tanggal Juara</td><td>{!!$prestasi->tanggal!!}</td></tr>
+        </table>
+        </div>
     </div>
-
+    <img src="{{url('http://file.smawahasmodel.sch.id/prestasi/'.$prestasi->foto)}}" width="100%">
 </div>
 @endsection
 

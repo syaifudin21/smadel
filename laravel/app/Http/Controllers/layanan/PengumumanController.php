@@ -4,6 +4,7 @@ namespace App\Http\Controllers\layanan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Pengumuman;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -89,7 +90,7 @@ class PengumumanController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('lampiran')->getClientOriginalExtension();
             $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            $request->file('lampiran')->move('images/pengumuman',$filenametostorefoto);
+            Storage::disk('ftp-pengumuman')->put($filenametostorefoto, fopen($request->file('lampiran'), 'r+'));
             $pengumuman['lampiran'] = $filenametostorefoto;
         }
         $pengumuman['slug_pengumuman'] = str_slug($request->nama_pengumuman, '-');
@@ -106,8 +107,8 @@ class PengumumanController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('lampiran')->getClientOriginalExtension();
             $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            File::delete('images/pengumuman/'.$pengumumanh->lampiran);
-            $request->file('lampiran')->move('images/pengumuman',$filenametostorefoto);
+            Storage::disk('ftp-pengumuman')->put($filenametostorefoto, fopen($request->file('lampiran'), 'r+'));
+            Storage::disk('ftp-pengumuman')->delete($pengumumanh->lampiran);
             $pengumuman['lampiran'] = $filenametostorefoto;
         }
         $pengumuman['slug_pengumuman'] = str_slug($request->nama_pengumuman, '-');
@@ -117,7 +118,7 @@ class PengumumanController extends Controller
     public function delete($id)
     {
         $pengumuman = Pengumuman::find($id);
-        File::delete('images/pengumuman/'.$pengumuman->lampiran);
+        Storage::disk('ftp-pengumuman')->delete($pengumuman->lampiran);
         $pengumuman->delete();
         return back()->with('success',' Pengumuman Berhasil Dihapus');
     }

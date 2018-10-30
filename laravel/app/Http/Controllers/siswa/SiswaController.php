@@ -3,10 +3,20 @@
 namespace App\Http\Controllers\siswa;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\Profil_siswa;
 use App\Models\Pengumuman;
+use App\Models\Siswa;
+use App\Models\Bantuan;
+use App\Models\Forum;
+use App\Models\ForumChat;
+use App\Models\PrestasiSiswa;
+use App\Models\Kelas;
+use App\Models\Tahun_ajaran;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class SiswaController extends Controller
 {
@@ -17,16 +27,177 @@ class SiswaController extends Controller
 
     public function index()
     {
-    	$siswa = Profil_siswa::where('nim',Auth::user('siswa')->nisn)->first();
-    	if ($siswa->status == 'Daftar') {
+    	$siswa = Profil_siswa::where('nisn',Auth::user('siswa')->nisn)->first();
+    	if ($siswa->status != 'Diterima') {
     		return redirect('siswa/baru');
     	}
         return view('siswa.dasbord', compact('siswa'));
     }
     public function baru()
     {
-    	$siswa = Profil_siswa::where('nim',Auth::user('siswa')->nisn)->first();
+    	$siswa = Profil_siswa::where('nisn',Auth::user('siswa')->nisn)->first();
     	$pengumumans = Pengumuman::where('objek', 'Siswa Baru')->get();
-        return view('siswa.baru', compact('siswa', 'pengumumans'));
+        $prestasis = PrestasiSiswa::where('id_profil_siswa', $siswa->id)->get();
+        $ta = Tahun_ajaran::where('status', 'Show')->first();
+        $jurusans = Kelas::where('id_ta', $ta->id)
+                ->select('kelas.id_jurusan')
+                ->groupBy('id_jurusan')
+                ->join('tingkat_kelas', function ($join) {
+                    $join->on('kelas.id_tingkatan_kelas', '=', 'tingkat_kelas.id')
+                         ->where('tingkat_kelas.status', '=', 'Pertama');
+                    })
+                ->get();
+        // dd($jurusans);
+        return view('siswa.baru', compact('siswa', 'pengumumans', 'prestasis', 'jurusans','ta'));
+    }
+    public function verifikasisiswa($nisn)
+    {
+        $siswa = Profil_siswa::where('nisn',Auth::user('siswa')->nisn)->first();
+        if ($siswa->nisn == $nisn) {
+            $siswa['status'] = 'Verifikasi Siswa';
+            $siswa->update();
+            return back()->with('suwccess', 'Anda telah berhasil mengkonfirmasi data anda silahkan melakukan proses selanjunya');
+        }else{
+            return back()->with('gagal', 'Ada Kesalahan Sistem yang terjadi silahkan laporkan pada sekertariat tentang BUG ini');
+        }
+    }
+    public function profil()
+    {
+        $siswa = Profil_siswa::where('nisn', Auth::user('siswa')->nisn)->first();
+        return view('siswa.profil', compact('siswa'));
+    }
+    public function akun()
+    {
+        return view('siswa.akun');
+    }
+    public function akunupdate(Request $request)
+    {
+        $user = Siswa::find(Auth::user('siswa')->id);
+        // dd(Auth::user('siswa')->password);
+        if (Hash::check($request->passwordlama,  $user->password)){
+            if ($request->passwordbaru == $request->cpasswordbaru){
+                $passwordbaru = Hash::make($request->passwordbaru);
+                $user->update(['password' => $passwordbaru]);
+                return back()->with('success','Password berhasil diupdate');
+            }else{
+                return back()->with('gagal', 'Konfirmasi password baru tidak sesuai.');
+            }
+        }else{
+            return back()->with('gagal', 'Password lama tidak sesuai');
+        }
+    }
+    public function profilupdate(Request $request)
+    {
+        $siswa = Profil_siswa::where('nisn', Auth::user('siswa')->nisn)->first();
+        $siswad = Profil_siswa::where('nisn', Auth::user('siswa')->nisn)->first();
+        $siswa->fill($request->all());
+        if ($request->hasFile('foto')){
+            $filenamewithextension = $request->file('foto')->getClientOriginalName();
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
+            Storage::disk('ftp-siswa')->put($filenametostorefoto, fopen($request->file('foto'), 'r+'));
+            Storage::disk('ftp-siswa')->delete($siswad->foto);
+            $siswa['foto'] = $filenametostorefoto;
+        }
+        if ($request->hasFile('ijazah')){
+            $filenamewithextension = $request->file('ijazah')->getClientOriginalName();
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            $extension = $request->file('ijazah')->getClientOriginalExtension();
+            $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
+            Storage::disk('ftp-siswa')->put($filenametostorefoto, fopen($request->file('ijazah'), 'r+'));
+            Storage::disk('ftp-siswa')->delete($siswad->ijazah);
+            $siswa['ijazah'] = $filenametostorefoto; }
+        $siswa->update();
+
+        return back()->with('success','Penambahan Tahun Ajaran Berhasil');
+    }
+    public function bantuan()
+    {
+        $bantuans = Bantuan::where('status', 'Show')->get();
+        return view('siswa.bantuan', compact('bantuans'));        
+    }
+    public function bantuanid($id)
+    {
+        $bantuan = Bantuan::find($id);
+        return view('siswa.bantuan-id', compact('bantuan'));
+    }
+    public function forummenu()
+    {
+        $forums = Forum::where('menu', 'Siswa Baru')->get();
+        return view('siswa.forum', compact('forums'));
+    }
+    public function forumid($id)
+    {
+        $forum = Forum::find($id);
+        $chats = ForumChat::where('id_forum', $id)->whereNull('id_chat')->get();
+        return view('siswa.forum-id', compact('forum', 'chats'));
+    }
+    public function chatstore(Request $request)
+    {
+        $chat = new ForumChat();
+        $chat['id_forum'] = $request->id_forum;
+        $chat['id_siswa'] = Auth::user('siswa')->nisn;
+        $chat['id_chat'] = $request->id_chat;
+        $chat['chat'] = $request->chat;
+        $chat->save();
+
+        return back()->with('success', 'Berhasil menambahkan chat');
+
+    }
+    public function prestasistore(Request $request)
+    {
+        $prestasi = new PrestasiSiswa();
+        $prestasi->fill($request->all());
+         if ($request->hasFile('lampiran')){
+            $filenamewithextension = $request->file('lampiran')->getClientOriginalName();
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            $extension = $request->file('lampiran')->getClientOriginalExtension();
+            $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
+            Storage::disk('ftp-prestasi')->put($filenametostorefoto, fopen($request->file('lampiran'), 'r+'));
+            $prestasi['lampiran'] = $filenametostorefoto;
+        }
+        $prestasi->save();
+
+        return back()->with('success', 'Berhasil menambahkan Prestasi Anda');
+    }
+    public function prestasiupdate(Request $request)
+    {
+        $prestasi = PrestasiSiswa::find($request->id);
+        $prestasid = PrestasiSiswa::find($request->id);
+        $prestasi->fill($request->all());
+        if ($request->hasFile('lampiran')){
+            $filenamewithextension = $request->file('lampiran')->getClientOriginalName();
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            $extension = $request->file('lampiran')->getClientOriginalExtension();
+            $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
+            Storage::disk('ftp-prestasi')->put($filenametostorefoto, fopen($request->file('lampiran'), 'r+'));
+            Storage::disk('ftp-prestasi')->delete($prestasid->lampiran);
+            $prestasi['lampiran'] = $filenametostorefoto;
+        }
+        $prestasi->update();
+        return back()->with('success', 'Berhasil mengupdate Prestasi Anda');
+    }
+    public function prestasidelete($id)
+    {
+        $prestasi = PrestasiSiswa::find($id);
+        if (!empty($prestasi->lampiran)) {
+            Storage::disk('ftp-standar')->delete($prestasi->lampiran);
+        }
+        $prestasi->delete();
+        return back()->with('success', 'Berhasil Hapus Prestasi Anda');
+    }
+    public function prestasikonfirmasi($id)
+    {
+        // dd($id_profil);
+        $prestasis = PrestasiSiswa::find($id)->update(['status'=>'Konfirmasi']);
+        return back()->with('success', 'Berhasil Mengkonfirmasi Prestasi');
+    }
+    public function jurusankonfirmasi(Request $request)
+    {
+        $siswa = Profil_siswa::where('nisn', Auth::user('siswa')->nisn)->first();
+        $siswa['minat_jurusan'] = (!empty($request->jurusan))?implode(',', $request['jurusan']):'';
+        $siswa->update();
+        return back()->with('success', 'Berhasil menyimpan Minat Jurusan Anda');
     }
 }

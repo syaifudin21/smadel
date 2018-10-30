@@ -19,7 +19,7 @@
 
 <br><br>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
 <h1 class="h2">Artikel</h1>
 <div class="btn-toolbar mb-2 mb-md-0">
   <div class="btn-group mr-2">
@@ -32,13 +32,6 @@
   </button>
 </div>
 </div>
-
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb bg-white" style="padding: 0px">
-    <li class="breadcrumb-item active" aria-current="page">Artikel</li>
-  </ol>
-</nav>
-
 
 @if(Session::has('success'))
     <div class="alert alert-info alert-dismissable">
@@ -58,15 +51,14 @@
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade {{(empty($errors->all()))?'show active':''}}" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="table-responsive-sm">
-        <table id="example" class="table table-hover table-sm" style="width:100%">
+        <table id="example" class="table table-hover table-sm table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Judul Artikel</th>
-                    <th>Teks Pembuka</th>
+                    <th style="width: 400px">Teks Pembuka</th>
                     <th>Tag</th>
                     <th>Auth - id</th>
-                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -74,12 +66,25 @@
             <tbody>
                 @foreach($artikels as $artikel)
                 <tr>
+                    <?php 
+                        if ($artikel->status_user == 'pengurus') {
+                            $dd = App\Models\Pengurus::find($artikel->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($artikel->status_user == 'guru') {
+                            $dd = App\Models\Pengajars::find($artikel->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($artikel->status_user == 'siswa') {
+                            $dd = App\Models\Siswas::find($artikel->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }else{
+                            $nama = 'NN';
+                        }
+                    ?>
                     <td>{{$n++}}</td>
-                    <td>{{limit_words($artikel->judul, 10)}}</td>
+                    <td><b>{{limit_words($artikel->judul, 10)}}</b></td>
                     <td>{{limit_words($artikel->text_pembuka, 15)}}</td>
                     <td>{{$artikel->tag}}</td>
-                    <td>{{$artikel->status_user}} - {{$artikel->id_user}}</td>
-                    <td>{{$artikel->status}}</td>
+                    <td>{{$artikel->status_user}} - {{$nama}}</td>
                     <form method="POST" action="{{url('layanan/artikel/'.$artikel->id)}}">
                     <td><a href="{{url($auth.'/artikel/'.$artikel->id)}}" class="btn btn-outline-success btn-sm">Lihat</a> 
                         <a href="{{url($auth.'/artikel/edit/'.$artikel->id)}}" class="btn btn-outline-primary btn-sm">Update</a> 

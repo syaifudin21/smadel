@@ -12,27 +12,41 @@
                     {{ csrf_field() }}
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="nama_sekolah" class="col-md-4 col-form-label text-md-right">{{ __('Nama Sekolah') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nama" type="text" class="form-control{{ $errors->has('nama') ? ' is-invalid' : '' }}" name="nama" value="{{ old('nama') }}" required autofocus>
+                                <input type="text" class="form-control" name="nama_sekolah" required value="{{old('nama_sekolah')}}">
 
-                                @if ($errors->has('nama'))
+                                @if ($errors->has('nama_sekolah'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('nama') }}</strong>
+                                        <strong>{{ $errors->first('nama_sekolah') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Singkat Sekolah') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nama_singkat_sekolah" type="text" class="form-control{{ $errors->has('nama_singkat_sekolah') ? ' is-invalid' : '' }}" name="nama_singkat_sekolah" value="{{ old('nama_singkat_sekolah') }}" required autofocus>
+
+                                @if ($errors->has('nama_singkat_sekolah'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('nama_singkat_sekolah') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('nama_singkat_sekolah') }}</label>
+                            <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nama_singkat_sekolah" type="text" class="form-control{{ $errors->has('nama_singkat_sekolah') ? ' is-invalid' : '' }}" name="nama" value="{{ old('nama_singkat_sekolah') }}" required autofocus>
-
-                                @if ($errors->has('nama_singkat_sekolah'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('nama_singkat_sekolah') }}</strong>
+                                <input type="text" class="form-control" name="alamat" required value="{{old('alamat')}}">
+                                
+                                @if ($errors->has('alamat'))
+                                    <span class="wak-feedback">
+                                        <strong>{{ $errors->first('alamat') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -53,39 +67,19 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="email_sekolah" class="col-md-4 col-form-label text-md-right">{{ __('Email Sekolah') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" value="121212" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                <input type="email" class="form-control" name="email_sekolah" required value="{{old('email_sekolah')}}">
+                                
+                                @if ($errors->has('email_sekolah'))
+                                    <span class="wak-feedback">
+                                        <strong>{{ $errors->first('email_sekolah') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="121212" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="nama_sekolah" class="col-md-4 col-form-label text-md-right">{{ __('Nama Sekolah') }}</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="nama_sekolah" required value="{{old('nama_sekolah')}}">
-
-                                @if ($errors->has('nama_sekolah'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('nama_sekolah') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo') }}</label>
 
@@ -211,19 +205,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
-
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" required value="{{old('email')}}">
-                                
-                                @if ($errors->has('email'))
-                                    <span class="wak-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                        
                         <div class="form-group row">
                             <label for="no_fax" class="col-md-4 col-form-label text-md-right">{{ __('Nomor Fax') }}</label>
 
@@ -319,19 +301,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="alamat" required value="{{old('alamat')}}">
-                                
-                                @if ($errors->has('alamat'))
-                                    <span class="wak-feedback">
-                                        <strong>{{ $errors->first('alamat') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                        
                         <div class="form-group row">
                             <label for="maps" class="col-md-4 col-form-label text-md-right">{{ __('Script MAPS') }}</label>
 
@@ -483,6 +453,27 @@
                                         <strong>{{ $errors->first('daya_listrik') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" value="121212" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="121212" required>
                             </div>
                         </div>
 

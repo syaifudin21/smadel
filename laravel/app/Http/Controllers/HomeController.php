@@ -16,6 +16,7 @@ use App\Models\Album;
 use App\Models\Foto;
 use App\Models\Profil_siswa;
 use App\Models\Masukkan;
+use App\Models\Tahun_ajaran;
 use DB;
 use Alert;
 
@@ -33,9 +34,20 @@ class HomeController extends Controller
     }
     public function daftar()
     {
+        $ta = Tahun_ajaran::where('status', 'show')->first();
+        // $masapendaftaran = Tahun_ajaran::where('status', 'show')
+        //         ->whereDate('tgl_pendaftaran','<=', Carbon::now()->format('Y-m-d'))
+        //         ->whereDate('tgl_test','>', Carbon::now()->format('Y-m-d'))
+        //         ->first();
+        // $data = [
+        //     'tgl daftar' => $ta->tgl_pendaftaran,
+        //     'tgl sekerang ' => Carbon::now()->format('Y-m-d')
+        // ];
+        // dd($data, $masapendaftaran);
+
     	$tahun = Carbon::now()->format('Y');
-    	$tampil = [$tahun, $tahun-1, $tahun-2, $tahun-3, $tahun-5];
-        return view('front.daftar', compact('tampil'));
+    	$tampiltahun = [$tahun, $tahun-1, $tahun-2, $tahun-3, $tahun-5];
+        return view('front.daftar', compact('tampiltahun','ta'));
     }
     public function pengajar()
     {

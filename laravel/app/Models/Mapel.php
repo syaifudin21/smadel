@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mapel extends Model
 {
-    protected $fillable = ['mapel', 'deskripsi', 'jenis_mapel'];
+    protected $fillable = [
+        'mapel','deskripsi','status', 'id_tingkat_kelas', 'id_jenis_mapel', 'urutan'
+    ];
     public $timestamps = false;
 }

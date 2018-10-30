@@ -19,6 +19,7 @@
 <h1 class="h2"> Artikel {{$artikel->judul}}</h1>
 <div class="btn-toolbar mb-2 mb-md-0">
   <div class="btn-group mr-2">
+    <a href="{{url($auth.'/artikel/edit/'.$artikel->id)}}" class="btn btn-outline-primary btn-sm">Update</a> 
     <button class="btn btn-sm btn-outline-secondary">Share</button>
     <button class="btn btn-sm btn-outline-secondary">Export</button>
   </div>
@@ -43,6 +44,21 @@
   </div>
 @endif
 
+<?php 
+    if ($artikel->status_user == 'pengurus') {
+        $dd = App\Models\Pengurus::find($artikel->id_user);
+            $nama = (!empty($dd))? $dd->nama : 'NN';
+    }elseif ($artikel->status_user == 'guru') {
+        $dd = App\Models\Pengajars::find($artikel->id_user);
+            $nama = (!empty($dd))? $dd->nama : 'NN';
+    }elseif ($artikel->status_user == 'siswa') {
+        $dd = App\Models\Siswas::find($artikel->id_user);
+            $nama = (!empty($dd))? $dd->nama : 'NN';
+    }else{
+        $nama = 'NN';
+    }
+?>
+
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <div class="row">
@@ -50,6 +66,8 @@
           <div class="table-responsive-sm">
           <table id="example" class="table table-hover table-sm" style="width:100%">
               <tr><td width="30%"><b>Judul</b></td><td>{{$artikel->judul}}</td></tr>
+              <tr><th>Status User</th><td>{{$artikel->status_user}}</td></tr>
+              <tr><th>Nama</th><td>{{$nama}}</td></tr>
               <tr><td><b>Tag</b></td><td>{{$artikel->tag}}</td></tr>
               <tr><td><b>Teks Pembuka</b></td><td>{{$artikel->text_pembuka}}</td></tr>
           </table>
@@ -57,7 +75,7 @@
         </div>
         @if(!empty($artikel->lampiran))
         <div class="col-md-3 col-xs-12">
-              <img src="{{asset('images/artikel/'.$artikel->lampiran)}}" width="100%">
+              <img src="{{url('http://file.smawahasmodel.sch.id/artikel/'.$artikel->lampiran)}}" width="100%">
         </div>
         @endif
       </div>

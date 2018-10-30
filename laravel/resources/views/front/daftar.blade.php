@@ -30,7 +30,8 @@
 <div id="portfolio" class="section white">
   <div class="container ">
 
-    <h3>Syarat Dan Ketentuan</h3>
+    <h3>Pendftaran Online</h3>
+    @if(!empty($ta))
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -45,6 +46,7 @@
     <div class="row">
       <form class="col s12" accept="{{route('siswa.baru')}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
+        <input type="hidden" name="id_ta" value="{{$ta->id}}">
       <div class="row">
         <div class="input-field col m5 s12">
           <input id="first_name" type="text" class="validate" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required>
@@ -60,8 +62,8 @@
           <label for="tgl">Tempat, Tanggal Lahir</label>
         </div>
         <div class="input-field col m3 s12">
-          <input id="nim" type="number" class="validate" name="nim" value="{{ old('nim') }}">
-          <label for="nim">Nomor Induk Siswa Nasiona</label>
+          <input id="nim" type="number" class="validate" name="nisn" value="{{ old('nisn') }}">
+          <label for="nim">Nomor Induk Siswa Nasional</label>
         </div>
       </div>
       <div class="row">
@@ -264,7 +266,7 @@
           </div>
           <div class="input-field col m3 s12">
               <select name="sekolah_angkatan">
-                @foreach($tampil as $th)
+                @foreach($tampiltahun as $th)
                 <option value="{{$th}}">{{$th}}</option>
                 @endforeach
               </select>
@@ -321,6 +323,9 @@
       </div>
     </form>
     </div>
+    @else
+    <p>Pendaftaran sementara ditutup</p>
+    @endif
   </div>  
 </div>
 @endsection

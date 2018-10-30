@@ -20,7 +20,7 @@
 
 <br><br>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
 <h1 class="h2">Pengumuman {{$objek}} </h1>
 <div class="btn-toolbar mb-2 mb-md-0">
   <div class="btn-group mr-2">
@@ -33,13 +33,6 @@
   </button>
 </div>
 </div>
-
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb bg-white" style="padding: 0px">
-    <li class="breadcrumb-item active" aria-current="page">Album</li>
-  </ol>
-</nav>
-
 
 @if(Session::has('success'))
     <div class="alert alert-info alert-dismissable">
@@ -68,11 +61,25 @@
             <tbody>
                 @foreach($pengumumans as $pengumuman)
                 <tr>
+                    <?php 
+                        if ($pengumuman->status_user == 'pengurus') {
+                            $dd = App\Models\Pengurus::find($pengumuman->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($pengumuman->status_user == 'guru') {
+                            $dd = App\Models\Pengajars::find($pengumuman->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($pengumuman->status_user == 'siswa') {
+                            $dd = App\Models\Siswas::find($pengumuman->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }else{
+                            $nama = 'NN';
+                        }
+                    ?>
                     <td>{{$n++}}</td>
                     <td>{{$pengumuman->nama_pengumuman}}</td>
                     <td>{{tanggal_indo(date('Y-m-d-G-i-s', strtotime($pengumuman->waktu_mulai)), true)}}</td>
                     <td>{{tanggal_indo(date('Y-m-d-G-i-s', strtotime($pengumuman->waktu_selesai)), true)}}</td>
-                    <td>{{$pengumuman->status_user}} - {{$pengumuman->id_user}}</td>
+                    <td>{{$pengumuman->status_user}} - {{$nama}}</td>
                     <td>{{$pengumuman->objek}} - {{$pengumuman->id_objek}}</td>
                     <td>{{$pengumuman->status}}</td>
                     <form method="POST" action="{{url('layanan/pengumuman/'.$pengumuman->id)}}">

@@ -66,7 +66,8 @@
                 <div class="media nav-link">
                   <img class="mr-3" src="{{asset('images/guru/profil/foto.jpg')}}" alt="Generic placeholder image" width="64px">
                   <div class="media-body">
-                    <h5 style="margin-bottom: 2px;">{{auth::user('pengurus')->nama}}</h5>
+                    <a href="{{url('pengurus/profil')}}"><h5 style="margin-bottom: 2px;">{{auth::user('pengurus')->nama}}</h5></a>
+                    
                     <?php 
                       if (auth::user('pengurus')) {
                         $pengurus = auth::user('pengurus')->status;
@@ -114,13 +115,6 @@
                 </a>
               </li>
               @endif
-
-              <li class="nav-item">
-                <a class="nav-link" href="{{url('pengurus/profil')}}">
-                  <span data-feather="users"></span>
-                  Profil <span class="sr-only">(current)</span>
-                </a>
-              </li>
               
               @if(preg_match("/827980/i", Auth::user('pengurus')->status))
               <li class="nav-item">
@@ -184,6 +178,24 @@
                 <a class="nav-link" href="{{url('pengurus/pengurus/pengumuman')}}">
                   <span data-feather="users"></span>
                   Pengumuman <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              @endif
+
+              @if(preg_match("/915879/i", Auth::user('pengurus')->status))
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('pengurus/bantuan')}}">
+                  <span data-feather="users"></span>
+                  Bantuan <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              @endif
+
+              @if(preg_match("/962879/i", Auth::user('pengurus')->status))
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('pengurus/forum')}}">
+                  <span data-feather="users"></span>
+                  Forum <span class="sr-only">(current)</span>
                 </a>
               </li>
               @endif

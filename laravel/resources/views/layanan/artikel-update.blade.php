@@ -77,7 +77,7 @@
                 <div class="form-group row">
                     @if(!empty($artikel->lampiran))
                     <div class="col-md-12">
-                        <img src="{{asset('images/artikel/'.$artikel->lampiran)}}" width="100%">
+                        <img src="{{url('http://file.smawahasmodel.sch.id/artikel/'.$artikel->lampiran)}}" width="100%">
                     </div>
                     @endif
                     <div class="col-md-12">

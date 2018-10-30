@@ -42,7 +42,7 @@
             @foreach($fotos as $foto)
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{asset('images/album/'.$foto->foto)}}" alt="Card image cap">
+                <img class="card-img-top" src="{{url('http://file.smawahasmodel.sch.id/album/'.$foto->foto)}}" alt="Card image cap">
                 <div class="card-body">
                   <p class="card-text">{{$foto->caption}}</p>
                   <div class="d-flex justify-content-between align-items-center">
@@ -149,11 +149,16 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="{{ route('foto.update') }}">
+      <form method="POST" action="{{ route('foto.update') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
       <input type="hidden" name="id" id="id">
       <div class="modal-body">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Foto</label>
+             <input id="nama" type="file" class="form-control{{ $errors->has('foto') ? ' is-invalid' : '' }}" name="foto" required autofocus>
+          </div>
+
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Keterangan / Caption</label>
             <input type="text" class="form-control" name="caption" id="caption">

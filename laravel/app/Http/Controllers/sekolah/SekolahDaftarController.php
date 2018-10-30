@@ -36,12 +36,13 @@ class SekolahDaftarController extends Controller
     public function create(Request $data)
     {
         Validator::make($data->all(), [
-            'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:sekolahs',
             'password' => 'required|string|min:6|confirmed',
             'nama_sekolah'=> 'required',
             'npsn' => 'required', 
+            'nama_singkat_sekolah' => 'required',
             'jenjang' => 'required',
+            'email_sekolah' => 'required',
             'status' => 'required', 
             'alamat' => 'required', 
             'kode_pos' => 'required', 
@@ -71,7 +72,7 @@ class SekolahDaftarController extends Controller
         ])->validate();
 
         $user = Sekolah::create([
-            'nama' => $data['nama'],
+            'nama' => $data['nama_sekolah'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
@@ -85,7 +86,7 @@ class SekolahDaftarController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $data->file('logo')->getClientOriginalExtension();
             $filenametostorelogo = $filename.'_'.uniqid().'.'.$extension;
-            $data->file('logo')->move('images/setting',$filenametostorelogo);
+            Storage::disk('ftp-setting')->put($filenametostorelogo, fopen($data->file('logo'), 'r+'));
             $profil['logo'] = $filenametostorelogo;
         }
         if ($data->hasFile('sk')){
@@ -93,11 +94,16 @@ class SekolahDaftarController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $data->file('sk')->getClientOriginalExtension();
             $filenametostoresk = $filename.'_'.uniqid().'.'.$extension;
-            $data->file('sk')->move('images/setting',$filenametostoresk);
+            Storage::disk('ftp-setting')->put($filenametostoresk, fopen($data->file('sk'), 'r+'));
             $profil['sk'] = $filenametostoresk;
         }
+        $profil['email']= $data['email_sekolah'];
 
         $profil->save();
+
+        if (!$profil) {
+            Sekolah::find($user->id)->delete();
+        }
 
         $credential = [
             'email' => $data->email,

@@ -41,6 +41,12 @@
         {{ Session::get('success') }}
     </div>
 @endif
+@if(Session::has('gagal'))
+    <div class="alert alert-danger alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ Session::get('gagal') }}
+    </div>
+@endif
 
 <br>
 <div class="tab-content" id="myTabContent">
@@ -71,21 +77,32 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="password" class="col-sm-4 col-form-label text-md-right">Password</label>
+            <label for="passwordlama" class="col-sm-4 col-form-label text-md-right">Password  <small>(Wajib)</small></label>
             <div class="col-md-6">
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required autofocus>
-                @if ($errors->has('password'))
+                <input id="passwordlama" type="password" class="form-control{{ $errors->has('passwordlama') ? ' is-invalid' : '' }}" name="passwordlama" required autofocus>
+                @if ($errors->has('passwordlama'))
                     <span class="invalid-feedback">
-                        <strong>{{ $errors->first('password') }}</strong>
+                        <strong>{{ $errors->first('passwordlama') }}</strong>
                     </span>
                 @endif
             </div>
         </div>
         <div class="form-group row">
-            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+            <label for="passwordbaru" class="col-sm-4 col-form-label text-md-right">Password Baru  <small>(Opsional)</small></label>
+            <div class="col-md-6">
+                <input id="passwordbaru" type="password" class="form-control{{ $errors->has('passwordbaru') ? ' is-invalid' : '' }}" name="passwordbaru" autofocus>
+                @if ($errors->has('passwordbaru'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('passwordbaru') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="cpasswordbaru" class="col-md-4 col-form-label text-md-right">Confirm Password Baru  <small>(Opsional)</small></label>
 
             <div class="col-md-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                <input id="cpasswordbaru" type="password" class="form-control" name="cpasswordbaru">
             </div>
         </div>
         
