@@ -1,9 +1,9 @@
 @extends('front.template')
 
 @section('title')
-<div class="nav-header center">
-  <h1>Selamat Datang </h1>
-  <div class="tagline">Mengutamakan <span class="element"></span> </div>
+<div class="nav-header hide-on-small-only">
+  <h1 class="text-shadow">Selamat Datang </h1>
+  <div class="tagline text-shadow">Mengutamakan <span class="element"></span> </div>
 </div>
 @endsection
 
@@ -33,7 +33,8 @@
     <center><h5>Cek Hasil Seleksi</h5>
       <p>Silahkan Masukan NISN Siswa</p></center><br>
       <form action="{{route('cek.lolos')}}" method="POST">
-      @csrf
+      {{ csrf_field() }}
+      
       <div class="row">
         <div class="input-field col m4 offset-m4 s12">
           <input id="first_name" type="text" class="validate" name="nisn" value="{{ old('nisn') }}" required>

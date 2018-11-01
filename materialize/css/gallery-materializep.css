@@ -3999,7 +3999,7 @@ nav ul a span.badge {
 
 nav {
   color: #fff;
-  background-color: #ba68c8;
+  background-color: black;
   width: 100%;
   height: 56px;
   line-height: 56px;
@@ -4010,7 +4010,7 @@ nav.nav-extended {
 }
 
 nav.nav-extended .nav-wrapper {
-  min-height: 56px;
+  min-height: 72px;
   height: auto;
 }
 

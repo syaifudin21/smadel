@@ -1,9 +1,9 @@
 @extends('front.template')
 
 @section('title')
-<div class="nav-header center">
-  <h1>Selamat Datang </h1>
-  <div class="tagline">Mengutamakan <span class="element"></span> </div>
+<div class="nav-header hide-on-small-only">
+  <h1 class="text-shadow">Selamat Datang </h1>
+  <div class="tagline text-shadow">Mengutamakan <span class="element"></span> </div>
 </div>
 @endsection
 
@@ -41,7 +41,7 @@
         <div class="gallery-curve-wrapper">
           @if(!empty($prestasi->foto))
           <a class="gallery-cover gray">
-            <img class="responsive-img" src="{{asset('http://file.smawahasmodel.sch.id/prestasi/'.$prestasi->foto)}}" alt="placeholder">
+            <img class="responsive-img" src="{{url('http://file.smawahasmodel.sch.id/prestasi/'.$prestasi->foto)}}" alt="placeholder">
           </a>
           @endif
           <div class="gallery-header">
@@ -49,9 +49,9 @@
           </div>
           <div class="gallery-body">
             <div class="title-wrapper">
-              <h3>{{$prestasi->nama}}</h3>
-              <span class="price">{{$prestasi->tanggal}} - {{$prestasi->instalasi}}</span>
+              <h4>{{$prestasi->nama}}</h4>
             </div>
+              <span class="price">{{$prestasi->tanggal}} - {{$prestasi->instalasi}}</span>
             <p class="description">{{$prestasi->deskripsi}}</p>
 
           </div>

@@ -1,12 +1,6 @@
 @extends('siswa.template-siswabaru')
 @section('css')
     <link rel="stylesheet" href="{{asset('learn/css/summernote.css')}}">
-    <!-- Include Editor style. -->
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.5/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.5/css/froala_style.min.css' rel='stylesheet' type='text/css' />
-     
-    <!-- Include JS file. -->
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.5/js/froala_editor.min.js'></script>
 @endsection
 @section('content')
         
@@ -157,9 +151,6 @@
 
 @section('script')
 <script type="text/javascript">
-  $(function() {
-    $('#myEditor').froalaEditor({toolbarInline: false})
-  });
   $('#balaschat').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var id = button.data('id');

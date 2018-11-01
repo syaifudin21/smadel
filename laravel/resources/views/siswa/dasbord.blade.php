@@ -138,27 +138,15 @@
           </tr>
         </thead>
         <tbody>
+          @foreach($mapels as $mapel)
           <tr>
             <td>1</td>
-            <td>Matematika</td>
+            <td>{{$mapel->mapel}}</td>
             <td>Nama Pengajar</td>
             <td>87 , 80, 70, 70</td>
             <td>87 , 80, 70, 70</td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>Bhs Indonesia</td>
-            <td>Nama Pengajar</td>
-            <td>87 , 80, 70, 70</td>
-            <td>87 , 70, 70</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Biologi</td>
-            <td>Nama Pengajar</td>
-            <td>87 , 80, 70, 70</td>
-            <td>87 , 70, 70</td>
-          </tr>
+          @endforeach
         </tbody>
       </table>
       </div>

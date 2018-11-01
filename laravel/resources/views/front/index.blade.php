@@ -1,10 +1,10 @@
 @extends('front.template')
 
 @section('title')
-<div class="nav-header">
-  <div class=" center">
-  <h1>Selamat Datang </h1>
-  <div class="tagline">Mengutamakan <span class="element"></span> </div>
+<div class="nav-header hide-on-small-only" style="height: 335px">
+  <div class="row">
+  <h1 class="text-shadow">Selamat Datang </h1>
+  <div class="tagline text-shadow">Mengutamakan <span class="element"></span> </div>
   </div>
 </div>
 @endsection
@@ -33,8 +33,16 @@
 </div>
 @endsection
 
-@section('content')
+@section('slide')
+<div class="carousel carousel-slider">
+    <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/800/400/food/1"></a>
+    <a class="carousel-item" href="#two!"><img src="https://lorempixel.com/800/400/food/2"></a>
+    <a class="carousel-item" href="#three!"><img src="https://lorempixel.com/800/400/food/3"></a>
+    <a class="carousel-item" href="#four!"><img src="https://lorempixel.com/800/400/food/4"></a>
+  </div>
+@endsection
 
+@section('content')
   <div class="container">
     <div class="section">
 
@@ -88,14 +96,14 @@
   
 <div id="portfolio" class="section gray">
   <div class="container">
-    <div class="gallery row">
-      <div class="gallery-item gallery-expand gallery-filter artikel active">
+    <div class="row">
+      <div class="artikel active">
         <div class="col s12 m8">
         @if(!empty($artikels))
         @foreach($artikels as $artikel)
           <div class="row">
           <div class="col s3">
-            <img src="{{asset('images/siswa/Desert.jpg')}}" width="100%" style="margin: 6px auto;">
+            <img src="{{url('http://file.smawahasmodel.sch.id/artikel/'.$artikel->lampiran)}}" width="100%" style="margin: 6px auto;">
           </div>
           <div class="col s9">
             <a href="{{url('artikel/'.$artikel->id.'/'.$artikel->slug_judul)}}" style="color: black"><h5>{{$artikel->judul}}</h5></a>
@@ -200,8 +208,8 @@
 </div>
 
 @if(!empty($maps))
-<div class="row">
-   <iframe class="col m12" src="{{$maps->deskripsi}}" width="800" height="300" frameborder="0" style="border:0"></iframe>
+ <div class="video-container">
+   <iframe src="{{$maps->deskripsi}}" width="800" height="300" frameborder="0" style="border:0"></iframe>
 </div>
 @endif
 
@@ -211,6 +219,17 @@
 @section('script')
 <script type="text/javascript" src="{{asset('js/typed.min.js')}}"></script>
 <script type="text/javascript">
+    $('.carousel.carousel-slider').carousel({
+      fullWidth: true
+    });
+    
+    autoplay();
+    function autoplay() {
+        $('.carousel').carousel('next');
+        $('.carousel').carousel('next');
+        setTimeout(autoplay, 9000);
+    }
+
     $(document).ready(function(){
       $('.parallax').parallax();
     });

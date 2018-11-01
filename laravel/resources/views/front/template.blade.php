@@ -14,8 +14,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
     <!-- Stylesheet -->
-    <link href="{{asset('materialize/css/gallery-materialize.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="">
+    <link href="{{asset('materialize/css/gallery-materializep.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -28,6 +27,12 @@
         animation: typedjsBlink 0.7s infinite;
         -webkit-animation: typedjsBlink 0.7s infinite;
         animation: typedjsBlink 0.7s infinite;
+      }
+      .text-shadow{
+        text-shadow: 2px 2px gray;
+      }
+      .text-shadow-menu{
+        text-shadow: 1px 1px gray;
       }
       
       @media only screen and (max-width: 600px) {
@@ -50,20 +55,22 @@
 
     <!-- Navbar and Header -->
     <nav class="nav-extended @yield('warna')">
-      <div class="nav-background">
+      <div class="nav-background carousel carousel-slider hide-on-small-only">
         {{-- <img class="pattern active" src="{{asset('images/standar/banner1.jpg')}}" style="width: 100%"> --}}
         {{-- background-repeat: no-repeat; background-size: 100% --}}
-        <div class="pattern active" style="background-image: url('@yield('background')'); "></div>
+        <img class="carousel-item pattern active" style="background-image: url('{{asset('images/standar/scsc.jpg')}}');">
+        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/ssss.jpg')}}'); "></div>
+        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/s.jpg')}}');"></div>
       </div>
       <div class="nav-wrapper container">
         <a href="{{url('')}}" class="brand-logo"><img src="{{asset('images/standar/logo-text.png')}}" style="width: 180px; margin-top: 10px" ></a>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li class="active"><a href="{{url('/')}}">Beranda</a></li>
-          <li><a href="{{url('/daftar')}}">Daftar Online</a></li>
-          <li><a href="{{url('/profil')}}">Profil</a></li>
-          <li><a href="{{url('/tenaga-pengajar')}}">Tenaga Pengajar</a></li>
-          <li><a class='dropdown-button' href='#' data-activates='feature-dropdown' data-belowOrigin="true" data-constrainWidth="false">Login<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li class="active"><a href="{{url('/')}}" class="text-shadow-menu" >Beranda</a></li>
+          <li><a href="{{url('/daftar')}}" class="text-shadow-menu" >Daftar Online</a></li>
+          <li><a href="{{url('/profil')}}" class="text-shadow-menu" >Profil</a></li>
+          <li><a href="{{url('/tenaga-pengajar')}}" class="text-shadow-menu" >Tenaga Pengajar</a></li>
+          <li><a class='dropdown-button text-shadow-menu' href='#' data-activates='feature-dropdown' data-belowOrigin="true" data-constrainWidth="false" >Login<i class="material-icons right">arrow_drop_down</i></a></li>
         </ul>
         <!-- Dropdown Structure -->
         <ul id='feature-dropdown' class='dropdown-content'>
@@ -111,7 +118,7 @@
       </div>
       <div class="footer-copyright">
         <div class="container">
-        © 2018 Copyright Ownner21
+        Â© 2018 Copyright Ownner21
         <a class="grey-text text-lighten-4 right" href="{{url('/daftar')}}">PMB {{$profil->nama_singkat_sekolah}}</a>
         </div>
       </div>

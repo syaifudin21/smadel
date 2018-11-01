@@ -1,9 +1,9 @@
 @extends('front.template')
 
 @section('title')
-<div class="nav-header center">
-  <h1>Selamat Datang </h1>
-  <div class="tagline">Mengutamakan <span class="element"></span> </div>
+<div class="nav-header hide-on-small-only">
+  <h1 class="text-shadow">Selamat Datang </h1>
+  <div class="tagline text-shadow">Mengutamakan <span class="element"></span> </div>
 </div>
 @endsection
 
@@ -53,7 +53,7 @@
     <div class="row">
         @foreach($fotos as $foto)
           <div class="gallery-curve-wrapper">
-            <img class="materialboxed col l4 m6 s12" data-caption="{{$foto->caption}}" src="{{asset('images/album/'.$foto->foto)}}" style="padding-bottom: 20px">
+            <img class="materialboxed col l4 m6 s12" data-caption="{{$foto->caption}}" src="{{url('http://file.smawahasmodel.sch.id/album/'.$foto->foto)}}" style="padding-bottom: 20px">
           </div>
         @endforeach
     </div>

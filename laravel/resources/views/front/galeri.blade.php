@@ -1,9 +1,9 @@
 @extends('front.template')
 
 @section('title')
-<div class="nav-header center">
-  <h1>Selamat Datang </h1>
-  <div class="tagline">Mengutamakan <span class="element"></span> </div>
+<div class="nav-header hide-on-small-only">
+  <h1 class="text-shadow">Selamat Datang </h1>
+  <div class="tagline text-shadow">Mengutamakan <span class="element"></span> </div>
 </div>
 @endsection
 
@@ -56,7 +56,7 @@
       <div class="col l4 m6 s12 gallery-filter">
         <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="{{asset('images/album/'.$foto->foto)}}">
+      <img class="activator" src="{{url('http://file.smawahasmodel.sch.id/album/'.$foto->foto)}}">
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">{{$galeri->nama}}<i class="material-icons right">more_vert</i></span>

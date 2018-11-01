@@ -1,9 +1,9 @@
 @extends('front.template')
 
 @section('title')
-<div class="nav-header center">
-  <h1>Selamat Datang </h1>
-  <div class="tagline">Mengutamakan <span class="element"></span> </div>
+<div class="nav-header hide-on-small-only">
+  <h1 class="text-shadow">Selamat Datang </h1>
+  <div class="tagline text-shadow">Mengutamakan <span class="element"></span> </div>
 </div>
 @endsection
 
@@ -43,6 +43,8 @@
         }
       ;?>
       <h4>{{$artikel->judul}}</h4>
+      <img src="{{url('http://file.smawahasmodel.sch.id/artikel/'.$artikel->lampiran)}}" width="100%" style="margin: 6px auto;">
+
       <span>Tag: <b>{{$artikel->tag}}</b> - Author: <b>{{$nama}}</b></span><br><span>{{$artikel->updated_at->diffForHumans()}}</span>
     </center>
     <br>

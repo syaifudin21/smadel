@@ -17,6 +17,8 @@ use App\Models\Tahun_ajaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Models\Kelas_siswa;
+use App\Models\Mapel;
 
 class SiswaController extends Controller
 {
@@ -31,7 +33,24 @@ class SiswaController extends Controller
     	if ($siswa->status != 'Diterima') {
     		return redirect('siswa/baru');
     	}
-        return view('siswa.dasbord', compact('siswa'));
+        $siswakelas = Kelas_siswa::where(['id_siswa'=> $siswa->id, 'kelas_siswas.status' => 'Diterima'])->first();
+        
+        $kelas = Kelas::where('kelas.id',$siswakelas->id_kelas)
+                    ->join('kurikulums', 'kelas.id_ta', '=', 'kurikulums.id')
+                    ->join('jurusans', 'kelas.id_jurusan', '=', 'jurusans.id')
+                    ->join('tingkat_kelas', 'kelas.id_tingkatan_kelas', '=', 'tingkat_kelas.id')
+                    ->join('tahun_ajarans', 'kelas.id_ta', '=', 'tahun_ajarans.id')
+                    ->select('kelas.*', 'jurusans.jurusan', 'tingkat_kelas.tingkat_kelas', 'kurikulums.kurikulum', 'tahun_ajarans.tahun_ajaran')
+                    ->first();
+        $mapels = Mapel::join('tingkat_kelas', 'mapels.id_tingkat_kelas','=', 'tingkat_kelas.id')
+                    ->join('jurusans', 'tingkat_kelas.id_jurusan', '=', 'jurusans.id')
+                    ->join('kurikulums', 'jurusans.id_kurikulum', '=', 'kurikulums.id')
+                    ->join('jenis_mapels', 'mapels.id_jenis_mapel', '=', 'jenis_mapels.id')
+                    ->where(['mapels.id_tingkat_kelas'=> $kelas->id_tingkatan_kelas])
+                    ->select('mapels.mapel', 'mapels.deskripsi','jurusans.jurusan', 'kurikulums.kurikulum', 'jenis_mapels.jenis_mapel', 'tingkat_kelas.status as status_tingkatan')
+                    ->get();
+
+        return view('siswa.dasbord', compact('siswa','siswakelas', 'kelas', 'mapels'));
     }
     public function baru()
     {

@@ -54,7 +54,8 @@
                     <tr>
                         <th>#</th>
                         <th>Jurusan</th>
-                        <th>Kelas</th>
+                        <th>Jumlah Tingkat Kelas</th>
+                        <th>Jumlah Jenis Mapel</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -63,11 +64,13 @@
                     @foreach($jurusans as $jurusan)
                     <tr>
                         <?php
-                            $kelas = App\Models\Tingkat_kelas::where('id_jurusan', $jurusan->id)->get(); 
+                            $tk = App\Models\Tingkat_kelas::where('id_jurusan', $jurusan->id)->get(); 
+                            $jm = App\Models\Jenis_mapel::where('id_jurusan', $jurusan->id)->get(); 
                         ?>
                         <td>{{$n++}}</td>
                         <td><b>{{$jurusan->jurusan}}</b></td>
-                        <td>{{count($kelas)}}</td>
+                        <td>{{count($tk)}}</td>
+                        <td>{{count($jm)}}</td>
                         <form method="POST" action="{{url('sekolah/tk/delete/'.$jurusan->id)}}">
                         <td>
                             <a href="{{url('sekolah/tk/'.$jurusan->id)}}" class="btn btn-outline-success btn-sm">Lihat</a> 
