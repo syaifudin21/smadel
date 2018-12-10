@@ -62,13 +62,13 @@
                 @foreach($pengumumans as $pengumuman)
                 <tr>
                     <?php 
-                        if ($pengumuman->status_user == 'pengurus') {
+                        if ($pengumuman->status_user == 'Pengurus') {
                             $dd = App\Models\Pengurus::find($pengumuman->id_user);
                                 $nama = (!empty($dd))? $dd->nama : 'NN';
-                        }elseif ($pengumuman->status_user == 'guru') {
+                        }elseif ($pengumuman->status_user == 'Guru') {
                             $dd = App\Models\Pengajars::find($pengumuman->id_user);
                                 $nama = (!empty($dd))? $dd->nama : 'NN';
-                        }elseif ($pengumuman->status_user == 'siswa') {
+                        }elseif ($pengumuman->status_user == 'Siswa') {
                             $dd = App\Models\Siswas::find($pengumuman->id_user);
                                 $nama = (!empty($dd))? $dd->nama : 'NN';
                         }else{
@@ -77,8 +77,8 @@
                     ?>
                     <td>{{$n++}}</td>
                     <td>{{$pengumuman->nama_pengumuman}}</td>
-                    <td>{{tanggal_indo(date('Y-m-d-G-i-s', strtotime($pengumuman->waktu_mulai)), true)}}</td>
-                    <td>{{tanggal_indo(date('Y-m-d-G-i-s', strtotime($pengumuman->waktu_selesai)), true)}}</td>
+                    <td>{{hari_tanggal_indo_waktu(date('Y-m-d-G-i-s', strtotime($pengumuman->waktu_mulai)), true)}}</td>
+                    <td>{{hari_tanggal_indo_waktu(date('Y-m-d-G-i-s', strtotime($pengumuman->waktu_selesai)), true)}}</td>
                     <td>{{$pengumuman->status_user}} - {{$nama}}</td>
                     <td>{{$pengumuman->objek}} - {{$pengumuman->id_objek}}</td>
                     <td>{{$pengumuman->status}}</td>

@@ -77,6 +77,9 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('data')
              ->namespace($this->namespace)
              ->group(base_path('routes/data.php'));
+        Route::prefix('v1')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/v1.php'));
     }
 
     /**

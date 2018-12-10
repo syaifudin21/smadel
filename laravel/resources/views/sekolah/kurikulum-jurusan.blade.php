@@ -33,7 +33,7 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-white" style="padding: 0px">
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{url('sekolah/kurikulum')}}">{{$kurikulum->kurikulum}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="{{url('sekolah/kurikulum')}}">Tahun Ajaran</a></li>
     <li class="breadcrumb-item active" aria-current="page">Jurusan</li>
   </ol>
 </nav>

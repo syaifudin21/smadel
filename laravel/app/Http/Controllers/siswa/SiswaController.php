@@ -13,12 +13,14 @@ use App\Models\Forum;
 use App\Models\ForumChat;
 use App\Models\PrestasiSiswa;
 use App\Models\Kelas;
+use App\Models\Artikel;
 use App\Models\Tahun_ajaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kelas_siswa;
 use App\Models\Mapel;
+use Alert;
 
 class SiswaController extends Controller
 {
@@ -31,7 +33,7 @@ class SiswaController extends Controller
     {
     	$siswa = Profil_siswa::where('nisn',Auth::user('siswa')->nisn)->first();
     	if ($siswa->status != 'Diterima') {
-    		return redirect('siswa/baru');
+    		return redirect('siswa/daftar');
     	}
         $siswakelas = Kelas_siswa::where(['id_siswa'=> $siswa->id, 'kelas_siswas.status' => 'Diterima'])->first();
         
@@ -49,13 +51,18 @@ class SiswaController extends Controller
                     ->where(['mapels.id_tingkat_kelas'=> $kelas->id_tingkatan_kelas])
                     ->select('mapels.mapel', 'mapels.deskripsi','jurusans.jurusan', 'kurikulums.kurikulum', 'jenis_mapels.jenis_mapel', 'tingkat_kelas.status as status_tingkatan')
                     ->get();
+        $artikels = Artikel::where(['status_user' => 'Siswa' ,'id_user'=> $siswa->id])->paginate(10);
+        $pengumumans = Pengumuman::where('objek', 'Siswa')->get();
 
-        return view('siswa.dasbord', compact('siswa','siswakelas', 'kelas', 'mapels'));
+        return view('siswa.home', compact('pengumumans','siswa','siswakelas', 'kelas', 'mapels', 'artikels'));
     }
     public function baru()
     {
     	$siswa = Profil_siswa::where('nisn',Auth::user('siswa')->nisn)->first();
-    	$pengumumans = Pengumuman::where('objek', 'Siswa Baru')->get();
+    	if ($siswa->status == 'Diterima') {
+            return redirect('siswa');
+        }
+        $pengumumans = Pengumuman::where('objek', 'Siswa Baru')->get();
         $prestasis = PrestasiSiswa::where('id_profil_siswa', $siswa->id)->get();
         $ta = Tahun_ajaran::where('status', 'Show')->first();
         $jurusans = Kelas::where('id_ta', $ta->id)
@@ -68,6 +75,24 @@ class SiswaController extends Controller
                 ->get();
         // dd($jurusans);
         return view('siswa.baru', compact('siswa', 'pengumumans', 'prestasis', 'jurusans','ta'));
+    }
+    public function daftar()
+    {
+        $siswa = Profil_siswa::where('nisn',Auth::user('siswa')->nisn)->first();
+        
+        $pengumumans = Pengumuman::where('objek', 'Siswa Baru')->get();
+        $prestasis = PrestasiSiswa::where('id_profil_siswa', $siswa->id)->get();
+        $ta = Tahun_ajaran::where('status', 'Show')->first();
+        $jurusans = Kelas::where('id_ta', $ta->id)
+                ->select('kelas.id_jurusan')
+                ->groupBy('id_jurusan')
+                ->join('tingkat_kelas', function ($join) {
+                    $join->on('kelas.id_tingkatan_kelas', '=', 'tingkat_kelas.id')
+                         ->where('tingkat_kelas.status', '=', 'Pertama');
+                    })
+                ->get();
+        // dd($jurusans);
+        return view('siswa.siswa-daftar', compact('siswa', 'pengumumans', 'prestasis', 'jurusans','ta'));
     }
     public function verifikasisiswa($nisn)
     {
@@ -177,8 +202,8 @@ class SiswaController extends Controller
             $prestasi['lampiran'] = $filenametostorefoto;
         }
         $prestasi->save();
-
-        return back()->with('success', 'Berhasil menambahkan Prestasi Anda');
+        Alert::success('Prestasi sudah disimpan', 'Berhasil');
+        return back();
     }
     public function prestasiupdate(Request $request)
     {
@@ -204,6 +229,7 @@ class SiswaController extends Controller
             Storage::disk('ftp-standar')->delete($prestasi->lampiran);
         }
         $prestasi->delete();
+        Alert::success('Berhasil Hapus Prestasi', 'Berhasil');
         return back()->with('success', 'Berhasil Hapus Prestasi Anda');
     }
     public function prestasikonfirmasi($id)
@@ -217,6 +243,7 @@ class SiswaController extends Controller
         $siswa = Profil_siswa::where('nisn', Auth::user('siswa')->nisn)->first();
         $siswa['minat_jurusan'] = (!empty($request->jurusan))?implode(',', $request['jurusan']):'';
         $siswa->update();
-        return back()->with('success', 'Berhasil menyimpan Minat Jurusan Anda');
+        Alert::success('Pemilihan jurusan telah disimpan', 'Berhasil');
+        return back();
     }
 }

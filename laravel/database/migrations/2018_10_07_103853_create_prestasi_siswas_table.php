@@ -16,9 +16,9 @@ class CreatePrestasiSiswasTable extends Migration
         Schema::create('prestasi_siswas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_profil_siswa');
-            $table->string('prestasi');
-            $table->string('instansi');
-            $table->date('tanggal');
+            $table->string('prestasi')->nullable();
+            $table->string('instansi')->nullable();
+            $table->date('tanggal')->nullable();
             $table->text('lampiran');
             $table->enum('status', ['Konfirmasi', 'Belum'])->default('Belum');
             $table->timestamps();

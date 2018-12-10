@@ -1,30 +1,22 @@
-@extends('siswa.template-siswabaru')
+@extends('siswa.template')
+@section('warna','blue')
 
+@section('css')
+@endsection
 @section('content')
         
-
+    <div class="container">
+        <div class="row">
         <h4 class="m-0">Pusat Bantuan</h4>
         <p class="text-muted mb-heading">Kami menyediakan solusi semoga dapat membantu</p>
-        <hr>
 
-        @if(Session::has('success'))
-            <div class="alert alert-info alert-dismissable">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{ Session::get('success') }}
-            </div>
-        @endif
-        @if(Session::has('gagal'))
-            <div class="alert alert-danger alert-dismissable">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{ Session::get('gagal') }}
-            </div>
-        @endif
-
-        <ol>
+        <div class="collection">
             @foreach($forums as $forum)
-            <a href="{{url('siswa/forum/id/'.$forum->id)}}"><li>{{$forum->forum}}</li></a>
+            <a href="{{url('siswa/forum/id/'.$forum->id)}}"  class="collection-item">{{$forum->forum}}</a>
             @endforeach
-        </ol>
+        </div>
+    </div>
+    </div>
 
         {{-- <ol class="breadcrumb">
             <li class="breadcrumb-item">Daftar</li>
@@ -42,5 +34,4 @@
 @endsection
 
 @section('script')
-
 @endsection

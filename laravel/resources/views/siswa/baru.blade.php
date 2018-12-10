@@ -5,7 +5,7 @@
 
         @if($siswa->status == 'Daftar')
         <h4 class="m-0">Progress Pendaftaran Anda</h4>
-        <p class="text-muted mb-heading">Silahkan Melengkapi Pendaftaran Anda. Lakukan Step by step diabwah ini</p>
+        <p class="text-mutexd mb-heading">Silahkan Melengkapi Pendaftaran Anda. Lakukan Step by step diabwah ini</p>
 
         <?php 
           if ($siswa->status== 'Verifikasi Siswa') {

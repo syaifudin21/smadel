@@ -27,46 +27,34 @@
     <div class="row">
 
       <div class="col s12 m8">
+        @foreach($artikels as $artikel)
+        <?php 
+            if ($artikel->status_user == 'pengurus') {
+                $dd = App\Models\Pengurus::find($artikel->id_user);
+                    $nama = (!empty($dd))? $dd->nama : 'NN';
+            }elseif ($artikel->status_user == 'guru') {
+                $dd = App\Models\Pengajars::find($artikel->id_user);
+                    $nama = (!empty($dd))? $dd->nama : 'NN';
+            }elseif ($artikel->status_user == 'siswa') {
+                $dd = App\Models\Siswas::find($artikel->id_user);
+                    $nama = (!empty($dd))? $dd->nama : 'NN';
+            }else{
+                $nama = 'NN';
+            }
+        ?>
         <div class="row">
           <div class="col s3">
-            <img src="{{asset('images/siswa/Desert.jpg')}}" width="100%" style="margin: 6px auto;">
+            <img src="{{url('http://file.smawahasmodel.sch.id/artikel/'.$artikel->lampiran)}}" width="100%" style="margin: 6px auto;">
           </div>
           <div class="col s9">
-            <h5>Ini adalah Judul</h5>
-            <span>5 Maeret 2018 - 20:40 - Author : Syaifudin</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderi..... <a href="">Lihat Selengkapnya</a> </p>
+            <h5>{{$artikel->judul}}</h5>
+            <span>{{hari_tanggal_indo_waktu(date('Y-m-d-G-i-s', strtotime($artikel->updated_at)), true)}} - Author : {{$nama}}</span>
+            <p>{{$artikel->text_pembuka}} <a href="{{url('artikel/'.$artikel->id.'/'.$artikel->slug_judul)}}">Lihat Selengkapnya</a> </p>
           </div>
         </div>
-        <div class="row">
-          <div class="col s3">
-            <img src="{{asset('images/siswa/Desert.jpg')}}" width="100%" style="margin: 6px auto;">
-          </div>
-          <div class="col s9">
-            <h5>Ini adalah Judul</h5>
-            <span>5 Maeret 2018 - 20:40 - Author : Syaifudin</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderi..... <a href="">Lihat Selengkapnya</a> </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s3">
-            <img src="{{asset('images/siswa/Desert.jpg')}}" width="100%" style="margin: 6px auto;">
-          </div>
-          <div class="col s9">
-            <h5>Ini adalah Judul</h5>
-            <span>5 Maeret 2018 - 20:40 - Author : Syaifudin</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderi..... <a href="">Lihat Selengkapnya</a> </p>
-          </div>
-        </div>
+        @endforeach
         
+        {{ $artikels->links() }}
       </div>
 
       <div class="col s12 m4">
@@ -280,51 +268,30 @@
   <div id="pengumuman" class="col s12">
 
     <div class="row">
-        <table class="bordered highlight">
-          <tr><td>
-            <h5>Ujian Tengah Semester</h5>
-             <span><i class="material-icons left">date_range</i>23 Maret 2018 - 22.00 | Author Admin</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <a href="">Download Lampiran</a></td>
+         <table class="bordered highlight">
+           @foreach($pengumumans as $pengumuman)
+                <tr>
+                    <?php 
+                        if ($pengumuman->status_user == 'Pengurus') {
+                            $dd = App\Models\Pengurus::find($pengumuman->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($pengumuman->status_user == 'Guru') {
+                            $dd = App\Models\Pengajars::find($pengumuman->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }elseif ($pengumuman->status_user == 'Siswa') {
+                            $dd = App\Models\Siswas::find($pengumuman->id_user);
+                                $nama = (!empty($dd))? $dd->nama : 'NN';
+                        }else{
+                            $nama = 'NN';
+                        }
+                    ?>
+            <td>
+              <h5>{{$pengumuman->nama_pengumuman}}</h5>
+               <span><i class="material-icons left">date_range</i>{{hari_tanggal_indo_waktu(date('Y-m-d-G-i-s', strtotime($pengumuman->updated_at)), true)}} | {{$pengumuman->status_user}} - {{$nama}}</span>
+              <p>{{$pengumuman->isi}}</a>
+            </td>
           </tr>
-          <tr><td>
-            <h5>Ujian Tengah Semester</h5>
-             <span><i class="material-icons left">date_range</i>23 Maret 2018 - 22.00 | Author Admin</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <a href="">Download Lampiran</a></td>
-          </tr>
-          <tr><td>
-            <h5>Ujian Tengah Semester</h5>
-             <span><i class="material-icons left">date_range</i>23 Maret 2018 - 22.00 | Author Admin</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <a href="">Download Lampiran</a></td>
-          </tr>
-          <tr><td>
-            <h5>Ujian Tengah Semester</h5>
-             <span><i class="material-icons left">date_range</i>23 Maret 2018 - 22.00 | Author Admin</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <a href="">Download Lampiran</a></td>
-          </tr>
+          @endforeach
         </table>
       </div>
 

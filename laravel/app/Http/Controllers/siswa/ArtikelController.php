@@ -1,37 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\layanan;
+namespace App\Http\Controllers\siswa;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Artikel;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Artikel;
+use App\Models\Profil_siswa;
 
 class ArtikelController extends Controller
 {
-	public function __construct()
+    public function __construct()
     {
-        $this->middleware('auth:pengurus')->only('pengurus', 'pengurus_artikelid', 'pengurus_edit', 'delete');
-        $this->middleware('auth:sekolah')->only('sekolah');
+        $this->middleware('auth:siswa');
     }
-    public function pengurus()
+    public function index()
     {
-    	$template = 'pengurus.template-pengurus';
-    	$auth = 'pengurus';
-    	$id_auth = auth::user('auth:pengurus')->id;
-    	$artikels = Artikel::all();
-    	return view('layanan.artikel', compact('template', 'artikels', 'auth', 'id_auth'));
+        $siswa = Profil_siswa::where('nisn', Auth::user('siswa')->nisn)->first();
+        $artikels = Artikel::where(['status_user' => 'Siswa' ,'id_user'=> $siswa->id])->paginate(10);
+        return view('siswa.artikel', compact('artikels'));
     }
-    public function sekolah()
+    public function tambah()
     {
-        dd(auth::user('auth:sekolah'));
+        return view('siswa.artikel-tambah');
+    }
+    public function edit($id_artikel)
+    {
+        $artikel = Artikel::find($id_artikel);
+        return view('siswa.artikel-edit', compact('artikel'));
     }
     public function store(Request $request)
     {
-        $this->validate($request, [
-            "text_pembuka" => 'required|max:255',
-        ]);
         $artikel = new Artikel();
         $artikel->fill($request->all());
         if ($request->hasFile('lampiran')){
@@ -42,11 +42,19 @@ class ArtikelController extends Controller
             Storage::disk('ftp-artikel')->put($filenametostorefoto, fopen($request->file('lampiran'), 'r+'));
             $artikel['lampiran'] = $filenametostorefoto;
         }
+        $artikel['status_user'] = 'Siswa';
+        $artikel['id_user'] = Profil_siswa::where('nisn', Auth::user('siswa')->nisn)->first()->id;
         $artikel['slug_judul'] = str_slug($request->judul, '-');
         $artikel->save();
-        return  back()->with('success', 'Berhasil Menambahkan Artikel');
+        return  redirect('siswa/artikel/view/'.$artikel->slug_judul)->with('success', 'Berhasil Menambahkan Artikel');
     }
-    public function update(Request $request)
+    public function artikelid($slug)
+    {
+        $artikel = Artikel::where('slug_judul',$slug)->first();
+        $articles = Artikel::where('status','Tampil')->get();
+        return view('siswa.artikel-id', compact('artikel', 'articles'));
+    }
+     public function update(Request $request)
     {
         $artikel = Artikel::find($request->id);
         $artikelh = Artikel::find($request->id);
@@ -60,35 +68,16 @@ class ArtikelController extends Controller
             Storage::disk('ftp-artikel')->delete($artikelh->lampiran);
             $artikel['lampiran'] = $filenametostorefoto;
         }
+        $artikel['id_user'] = Profil_siswa::where('nisn', Auth::user('siswa')->nisn)->first()->id;
         $artikel['slug_judul'] = str_slug($request->judul, '-');
         $artikel->update();
-        return back()->with('success', 'Berhasil Mengubah Keterangan Artikel');
+
+        return  redirect('siswa/artikel/view/'.$artikel->slug_judul)->with('success', 'Berhasil Mengupdate Artikel');
     }
-    public function pengurus_artikelid($id)
+    public function delete($id_artikel)
     {
-        $template = 'pengurus.template-pengurus';
-        $auth = 'pengurus';
-        $id_auth = auth::user('auth:pengurus')->id;
-        $artikel = Artikel::find($id);
-        if (!empty($artikel)) {
-            return view('layanan.artikel-id', compact('template', 'artikel', 'auth', 'id_auth', 'id'));
-        } else {
-            return redirect($auth.'/artikel');
-        }
-        
-    }
-    public function pengurus_edit($id)
-    {
-        $template = 'pengurus.template-pengurus';
-        $auth = 'pengurus';
-        $id_auth = auth::user('auth:pengurus')->id;
-        $artikel = Artikel::find($id);
-        return view('layanan.artikel-update', compact('template', 'artikel', 'auth', 'id_auth', 'id'));
-    }
-    public function delete($id)
-    {
-        $artikel = Artikel::find($id);
-        Storage::disk('ftp-artikel')->delete($artikel->lampiran);
+        $artikel = Artikel::find($id_artikel);
+        if (!empty($artikel->lampiran)) {Storage::disk('ftp-artikel')->delete($artikel->lampiran);}
         $artikel->delete();
         return back()->with('success',' Artikel Berhasil Dihapus');
     }

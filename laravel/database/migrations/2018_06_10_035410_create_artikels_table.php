@@ -17,13 +17,15 @@ class CreateArtikelsTable extends Migration
             $table->increments('id');
             $table->string('judul');
             $table->string('slug_judul');
-            $table->string('text_pembuka');
-            $table->string('tag');
+            $table->text('text_pembuka');
+            $table->string('tag')->nullable();
             $table->text('artikel');
             $table->text('lampiran')->nullable();
-            $table->enum('status_user', ['pengurus', 'pengajar', 'siswa']);
+            $table->enum('status_user', ['Pengurus', 'Pengajar', 'Siswa']);
             $table->integer('id_user');
-            $table->integer('status')->default('1');
+            $table->enum('status', ['Tampil', 'Sembunyi', 'Blok', 'Pengajuan'])->default('Pengajuan');
+            $table->enum('user_acc', ['Pengurus', 'Pengajar'])->nullable();
+            $table->integer('id_user_acc')->nullable();
             $table->timestamps();
         });
     }

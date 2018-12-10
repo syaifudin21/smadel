@@ -31,9 +31,9 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-white" style="padding: 0px">
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{url('sekolah/kurikulum')}}">{{$tk->kurikulum}}</a></li>
-    <li class="breadcrumb-item" aria-current="page"><a href="{{url('sekolah/jurusan/'.$tk->id_kurikulum)}}">{{$tk->jurusan}}</a></li>
-    <li class="breadcrumb-item" aria-current="page"><a href="{{url('sekolah/tk/'.$tk->id_jurusan)}}">{{$tk->tingkat_kelas}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="{{url('sekolah/kurikulum')}}">Kurikulum</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="{{url('sekolah/jurusan/'.$tk->id_kurikulum)}}">Jurusan</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="{{url('sekolah/tk/'.$tk->id_jurusan)}}">Tingkat Kelas {{$tk->tingkat_kelas}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Mata Pelajaran</li>
   </ol>
 </nav>
@@ -109,7 +109,7 @@
         <div class="form-group row">
             <label for="deskripsi" class="col-sm-4 col-form-label text-md-right">Deskripsi</label>
             <div class="col-md-6">
-                <input id="deskripsi" type="text" class="form-control{{ $errors->has('deskripsi') ? ' is-invalid' : '' }}" name="deskripsi" value="{{ old('deskripsi') }}" required autofocus>
+                <input id="deskripsi" type="text" class="form-control{{ $errors->has('deskripsi') ? ' is-invalid' : '' }}" name="deskripsi" value="{{ old('deskripsi') }}" autofocus>
                 @if ($errors->has('deskripsi'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('deskripsi') }}</strong>

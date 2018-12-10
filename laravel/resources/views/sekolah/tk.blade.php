@@ -37,7 +37,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-white" style="padding: 0px">
     <li class="breadcrumb-item active" aria-current="page"><a href="{{url('sekolah/kurikulum')}}">{{$jurusan->kurikulum}}</a></li>
-    <li class="breadcrumb-item" aria-current="page"><a href="{{url('sekolah/jurusan/'.$jurusan->id_kurikulum)}}">{{$jurusan->jurusan}}</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="{{url('sekolah/jurusan/'.$jurusan->id_kurikulum)}}">Jurusan</a></li>
     <li class="breadcrumb-item active" aria-current="page">Tingkatan Kelas</li>
   </ol>
 </nav>

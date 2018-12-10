@@ -21,6 +21,9 @@ Route::get('/pengurus/pengumuman', 'layanan\PengumumanController@pengurus_pengur
 Route::get('/pengurus/pengumuman/{id}/{slug}', 'layanan\PengumumanController@pengurus_pengurus_id');
 Route::get('/pengurus/pengumuman/update/{id}/{slug}', 'layanan\PengumumanController@pengurus_pengurus_update');
 
+Route::get('/siswabaru/daftar', 'pengurus\PengurusController@siswadaftar');
+Route::get('/siswabaru/daftar/verifikasi/{id}', 'pengurus\PengurusController@verifikasisiswa');
+
 Route::get('/siswabaru', 'pengurus\PengurusController@baru');
 Route::get('/siswabaru/konfirmasipendaftaran', 'pengurus\PengurusController@konfirmasipendaftaran');
 Route::get('/siswabaru/{id}', 'pengurus\PengurusController@siswaprofil');

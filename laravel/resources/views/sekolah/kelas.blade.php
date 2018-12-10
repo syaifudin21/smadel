@@ -179,7 +179,7 @@
         <div class="form-group row">
             <label for="deskripsi" class="col-sm-4 col-form-label text-md-right">{{ __('Deskripsi Kelas') }}</label>
             <div class="col-md-6">
-                <textarea id="deskripsi" class="form-control{{ $errors->has('deskripsi') ? ' is-invalid' : '' }}" name="deskripsi" value="" required autofocus>{{ old('deskripsi') }}</textarea>
+                <textarea id="deskripsi" class="form-control{{ $errors->has('deskripsi') ? ' is-invalid' : '' }}" name="deskripsi" value="" required autofocus>{{(empty(old('deskripsi')))? 'Kelas ini belum ada deskripsi karena pengurus kelas belum disusun': old('deskripsi')}}</textarea>
                 @if ($errors->has('deskripsi'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('deskripsi') }}</strong>

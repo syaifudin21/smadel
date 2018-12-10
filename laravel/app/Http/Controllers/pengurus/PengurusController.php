@@ -227,4 +227,15 @@ class PengurusController extends Controller
         }
         return back()->with('success', 'Berhasil memberitahukan siswa');
     }
+    public function siswadaftar()
+    {
+        $ta = Tahun_ajaran::where('status', 'show')->first();
+        $siswas = Profil_siswa::where('id_ta', $ta->id)->where('status', '!=', 'Verifikasi Admin')->get();
+        return view('pengurus.siswabaru-daftar', compact('siswas', 'ta'));
+    }
+    public function verifikasisiswa($id)
+    {
+        $siswa = Profil_siswa::find($id)->update(['status' => 'Verifikasi Admin']);
+        return back()->with('success', 'Berhasil Mengverifikasi Admin');
+    }
 }

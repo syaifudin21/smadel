@@ -105,6 +105,12 @@
                   Siswa Baru <span class="sr-only">(current)</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('pengurus/siswabaru/daftar')}}">
+                  <span data-feather="users"></span>
+                  Siswa Daftar <span class="sr-only">(current)</span>
+                </a>
+              </li>
               @endif
 
               @if(preg_match("/912879/i", Auth::user('pengurus')->status))

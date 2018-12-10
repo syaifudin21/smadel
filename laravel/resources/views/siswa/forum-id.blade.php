@@ -1,37 +1,23 @@
-@extends('siswa.template-siswabaru')
+@extends('siswa.template')
+@section('warna','blue')
+
 @section('css')
-    <link rel="stylesheet" href="{{asset('learn/css/summernote.css')}}">
 @endsection
 @section('content')
-        
-        <div class="media page-heading">
-            <div class="media-body media-middle">
-                <h1 class="h2">{{$forum->forum}}</h1>
+
+<div class="container">
+    <div class="row">
+
+        <br><br>
+                <h4>{{$forum->forum}}</h4>
                 <?php 
                     $pengurus = App\Models\Pengurus::find($forum->id_pengurus);
                 ?>
                 <p class="text-muted small">by <a href="{{url('')}}">{{(!empty($pengurus))? $pengurus->nama: 'NN'}}</a> | {{$forum->updated_at->diffForHumans()}}</p>
-            </div>
-            <div class="media-right">
-                <a href="#" class="btn btn-white btn-circle"><i class="material-icons">comment</i></a>
-            </div>
-        </div>
-
-        @if(Session::has('success'))
-            <div class="alert alert-info alert-dismissable">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{ Session::get('success') }}
-            </div>
-        @endif
-        @if(Session::has('gagal'))
-            <div class="alert alert-danger alert-dismissable">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{ Session::get('gagal') }}
-            </div>
-        @endif
-
+    </div>
+    <div class="row">
         @foreach($chats as $chat)
-        <?php 
+         <?php 
             if ($chat->id_pengurus != null) {
                     $dd = App\Models\Pengurus::find($chat->id_pengurus);
                     $nama = (!empty($dd))? $dd->nama : 'NN';
@@ -50,21 +36,13 @@
             $balaschats = App\Models\ForumChat::where('id_chat', $chat->id)->whereNotNull('id_chat')->get();
 
         ?>
-        <div class="media">
-            <div class="media-left text-center">
-                <img src="{{$foto}}" alt="" class="img" width="40">
-            </div>
-            <div class="media-body">
-                <div class="card card-body">
-                    <p><a href="fixed-student-profile.html">{{$nama}}</a> <small class="text-muted"> ({{$status}}) - {{$chat->waktu->diffForHumans()}}</small></p>
-                    {!!$chat->chat!!}
-                    
-                    <button type="button" class="btn btn-sm btn-white" data-toggle="modal" data-target="#balaschat"
-                        data-id="{{$chat->id}}" 
-                        ><i class="material-icons btn__icon--left">reply</i> Balas</button> 
-                </div>
-
-                @foreach($balaschats as $balaschat)
+        <div class="col s1">
+            <img src="{{$foto}}" alt="" class="img" width="40">
+        </div>
+        <div class="col s11"> <b>{{$nama}}</b> {{$chat->waktu->diffForHumans()}}<br> <small>{{$status}} - {{$chat->waktu->diffForHumans()}}</small>
+            <br>{!!$chat->chat!!}
+            <br><br>
+             @foreach($balaschats as $balaschat)
                 <?php
                     if ($balaschat->id_pengurus != null) {
                             $bb = App\Models\Pengurus::find($balaschat->id_pengurus);
@@ -81,86 +59,59 @@
                         $fotobb = 'NN';
                     }
                 ?>
-                <div class="media">
-                    <div class="media-left text-center">
-                        <img src="{{$fotobb}}" alt="" class="img" width="40">
-                    </div>
-                    <div class="media-body">
-                        <div class="card card-body">
-                            <p><a href="fixed-student-profile.html">{{$namabb}}</a> <small class="text-muted"> ({{$statusbb}}) - {{$balaschat->waktu->diffForHumans()}}</small></p>
-                            {!!$balaschat->chat!!}
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col s1">
+                    <img src="{{$fotobb}}" alt="" class="img" width="40">
                 </div>
-                @endforeach
-
+                <div class="col s10"> <b>{{$namabb}}</b> <br> <small>{{$statusbb}} - {{$balaschat->waktu->diffForHumans()}}</small><br>
+                    {!!$chat->chat!!}
+                </div>
+            </div>
+            @endforeach
+            <div class="row">
+                <form class="col s12" method="POST" action="{{ route('forum.chat') }}">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id_forum" value="{{$forum->id}}">
+                    <input type="hidden" name="id_chat" value="{{$chat->id}}">
+                    <div class="row">
+                         <div class="input-field col s12">
+                          <input id="last_name" type="text" class="validate" name="chat">
+                          <label for="last_name">Balas Komentar</label>
+                        </div>
+                        <div class="col s12" style="text-align: right;">
+                       <button class="btn-flat">Balas <i class="material-icons left">send</i></button>
+                       </div>
+                    </div>
+                </form>
             </div>
         </div>
+
+
         @endforeach
 
-        {{-- <ol class="breadcrumb">
-            <li class="breadcrumb-item">Daftar</li>
-            @if($siswa->status == 'Daftar')
-            <li class="breadcrumb-item active">Verifikasi Data Siswa</li>
-            @elseif($siswa->status == 'Verifikasi Siswa')
-            <li class="breadcrumb-item">Verifikasi Data Siswa</li>
-            <li class="breadcrumb-item active">Verifikasi Sekolah</li>
-            @endif  
-        </ol> --}}
-
-         <div class="card">
+        </div>
             <form action="{{route('forum.chat')}}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="id_forum" value="{{$forum->id}}">
-                <div class="card-header">
-                    <h4 class="card-title">Comment</h4>
+               
+                <div class="card-panel row">
+                <div class="input-field col s12">
+                  <textarea id="textarea1" class="materialize-textarea" name="chat"></textarea>
+                  <label for="textarea1">Komentar</label>
                 </div>
-                <textarea id="summernote" name="chat"></textarea>
-                <div class="card-body text-right">
-                    <button class="btn btn-primary">Add comment</button>
+                <div class="col s12" style="text-align: right;">
+                   <button class="btn blue" >Tambah</button>
                 </div>
+              </div>
             </form>
-        </div>
-
-<div class="modal fade" id="balaschat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Balas Chat</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form method="POST" action="{{ route('forum.chat') }}">
-        {{ csrf_field() }}
-      <input type="hidden" name="id_forum" value="{{$forum->id}}">
-      <input type="hidden" name="id_chat" id="id">
-      <div class="modal-body">
-                <textarea id="summernote" name="chat" class="form-control"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Balas</button>
-      </div>
-      </form>
     </div>
-  </div>
 </div>
+        
+        
+
+
 
 @endsection
 
 @section('script')
-<script type="text/javascript">
-  $('#balaschat').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var id = button.data('id');
-    var modal = $(this);
-    console.log(id);
-    modal.find('#id').val(id)
-  })
-</script>
-
-    <script src="{{asset('learn/vendor/summernote.min.js')}}"></script>
-    <script src="{{asset('learn/js/summernote.js')}}"></script>
-
 @endsection

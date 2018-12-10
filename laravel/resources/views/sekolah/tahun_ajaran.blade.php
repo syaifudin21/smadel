@@ -146,7 +146,7 @@
         <div class="form-group row">
             <label for="jadwal" class="col-sm-4 col-form-label text-md-right">{{ __('Jadwal') }}</label>
             <div class="col-md-6">
-                <input id="jadwal" type="file" class="form-control{{ $errors->has('jadwal') ? ' is-invalid' : '' }}" name="jadwal" value="{{ old('jadwal') }}" required autofocus>
+                <input id="jadwal" type="file" class="form-control{{ $errors->has('jadwal') ? ' is-invalid' : '' }}" name="jadwal" value="{{ old('jadwal') }}" autofocus>
                 @if ($errors->has('jadwal'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('jadwal') }}</strong>
@@ -157,7 +157,7 @@
         <div class="form-group row">
             <label for="brosur" class="col-sm-4 col-form-label text-md-right">{{ __('Brosur') }}</label>
             <div class="col-md-6">
-                <input id="brosur" type="file" class="form-control{{ $errors->has('brosur') ? ' is-invalid' : '' }}" name="brosur" value="{{ old('brosur') }}" required autofocus>
+                <input id="brosur" type="file" class="form-control{{ $errors->has('brosur') ? ' is-invalid' : '' }}" name="brosur" value="{{ old('brosur') }}" autofocus>
                 @if ($errors->has('brosur'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('brosur') }}</strong>

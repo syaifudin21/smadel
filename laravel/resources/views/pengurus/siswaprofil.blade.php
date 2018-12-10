@@ -7,6 +7,9 @@
         <li class="nav-item">
             <a class="nav-link" id="jadwal-tab" href="{{url('pengurus/siswabaru')}}" >Siswa Baru</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" id="jadwal-tab" href="{{url('pengurus/siswabaru/daftar')}}" >Siswa Daftar</a>
+        </li>
     </ul>
 </div>
 

@@ -53,7 +53,7 @@
                 <th>#</th>
                 <th>Kurikulum</th>
                 <th>Jumlah Jurusan</th>
-                <th>Jumlah Kelas</th>
+                <th>Jumlah Tingkat Kelas</th>
                 <th>Action</th>
             </tr>
         </thead>
