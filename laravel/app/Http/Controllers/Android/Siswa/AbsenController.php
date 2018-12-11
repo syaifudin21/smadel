@@ -12,16 +12,23 @@ class AbsenController extends Controller
     {
     	if (!empty($request->id_absen)) {
 	    	$hadir = AbsenSiswa::find($request->id_absen);
-	        $hadir->fill($request->all());
-	    	$hadir->update();
+	    	if (!empty($hadir)) {
+		        $hadir->fill($request->all());
+		    	$hadir->update();
 
-	    	if ($hadir) {
-	    		$data = [
-		    		'id_absen' => $hadir->id,
-		    		'kode' => '00'
-		    	];
+		    	if ($hadir) {
+		    		$data = [
+			    		'id_absen' => $hadir->id,
+			    		'kode' => '00'
+			    	];
+		    	}else{
+		    		$data = [
+			    		'kode' => '01'
+			    	];
+		    	}
 	    	}else{
 	    		$data = [
+		    		'id_absen' => $hadir->id,
 		    		'kode' => '01'
 		    	];
 	    	}

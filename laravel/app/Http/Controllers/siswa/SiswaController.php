@@ -79,7 +79,9 @@ class SiswaController extends Controller
     public function daftar()
     {
         $siswa = Profil_siswa::where('nisn',Auth::user('siswa')->nisn)->first();
-        
+        if ($siswa->status == 'Diterima') {
+            return redirect('siswa');
+        }
         $pengumumans = Pengumuman::where('objek', 'Siswa Baru')->get();
         $prestasis = PrestasiSiswa::where('id_profil_siswa', $siswa->id)->get();
         $ta = Tahun_ajaran::where('status', 'Show')->first();
