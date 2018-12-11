@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Android\Siswa;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Siswa;
 use App\Models\Profil_siswa;
 
