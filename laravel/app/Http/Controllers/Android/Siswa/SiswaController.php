@@ -18,7 +18,7 @@ class SiswaController extends Controller
         ];
 
         if (Auth::guard('siswa')->attempt($credential, false)){
-        	$profil = Profil_siswa::where('nisn', $request->nisn)->first();
+        	$profil = Profil_siswa::where('nisn', $request->nisn)->select('nama_lengkap','nisn','alamat','foto','status')->first();
             $data = [
             	'message' => 'Berhasil login',
             	'siswa' => $profil,
