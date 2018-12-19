@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Android\Siswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AbsenSiswa;
+use App\Models\Profil_siswa;
 
 class AbsenController extends Controller
 {
@@ -54,6 +55,21 @@ class AbsenController extends Controller
     }
     public function download(Request $request)
     {
-    	# code...
+    	$siswa = Profil_siswa::where('nisn',$request->nisn)->first();
+    	if (!empty($siswa)) {
+	    	$absens = AbsenSiswa::where('nisn', $request->nisn)->get();
+    		$data = [
+	    		'nisn' => $request->nisn,
+	    		'data' => $absens,
+	    		'kode' => '00',
+	    		'message' => 'Berhasil Ambil Data'
+	    	];
+	    }else{
+    		$data = [
+	    		'message' => 'Nisn Tidak Diketahui',
+	    		'kode' => '01'
+	    	];
+    	}
+    	return $data;
     }
 }

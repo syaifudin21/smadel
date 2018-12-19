@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Siswa;
 use App\Models\Profil_siswa;
+use App\Models\Artikel;
 
 class SiswaController extends Controller
 {
@@ -30,7 +31,7 @@ class SiswaController extends Controller
             	'kode' => '01'
             ];
         }
-        return $data;
+        return response()->json($data);
     }
 
 }

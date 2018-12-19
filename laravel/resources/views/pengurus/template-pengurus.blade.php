@@ -64,7 +64,6 @@
             <ul class="nav flex-column">
               <li class="nav-item">
                 <div class="media nav-link">
-                  <img class="mr-3" src="{{asset('images/guru/profil/foto.jpg')}}" alt="Generic placeholder image" width="64px">
                   <div class="media-body">
                     <a href="{{url('pengurus/profil')}}"><h5 style="margin-bottom: 2px;">{{auth::user('pengurus')->nama}}</h5></a>
                     

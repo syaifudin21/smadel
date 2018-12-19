@@ -80,6 +80,9 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('v1')
              ->namespace($this->namespace)
              ->group(base_path('routes/v1.php'));
+        Route::prefix('v2')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/v2.php'));
     }
 
     /**

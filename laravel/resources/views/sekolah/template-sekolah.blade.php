@@ -61,9 +61,8 @@
             <ul class="nav flex-column">
               <li class="nav-item">
                 <div class="media nav-link">
-                  <img class="mr-3" src="{{asset('images/guru/profil/foto.jpg')}}" alt="Generic placeholder image" width="64px">
                   <div class="media-body">
-                    <h5 style="margin-bottom: 2px;">Admin</h5>
+                    <h5>Admin</h5>
                     <p>Sekolah</p>
                   </div>
                 </div>
