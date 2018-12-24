@@ -87,6 +87,12 @@
                             Album
                           </label>
                         </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="pendaftaran" value="671898" {{(preg_match("/671898/i", $pengurus->status))?'checked': ''}}>
+                          <label class="form-check-label" for="pendaftaran">
+                            Pendaftaran Siswa
+                          </label>
+                        </div>
                     </div>
                     <div class="col-md-4 col-xs-12">
                         <div class="form-check">
@@ -107,6 +113,12 @@
                             Bantuan
                           </label>
                         </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="pengajar" value="981098" {{(preg_match("/981098/i", $pengurus->status))?'checked': ''}}>
+                          <label class="form-check-label" for="pengajar">
+                            Pengajar / Guru
+                          </label>
+                        </div>
                     </div>
                     <div class="col-md-4 col-xs-12">
                         <div class="form-check">
@@ -125,6 +137,12 @@
                           <input class="form-check-input" type="checkbox" name="status[]" id="forum" value="962879" {{(preg_match("/962879/i", $pengurus->status))?'checked': ''}}>
                           <label class="form-check-label" for="forum">
                             Forum
+                          </label>
+                        </div>
+                         <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="perpustakaan" value="812788" {{(preg_match("/812788/i", $pengurus->status))?'checked': ''}}>
+                          <label class="form-check-label" for="perpustakaan">
+                            Perpustakaan
                           </label>
                         </div>
                     </div>

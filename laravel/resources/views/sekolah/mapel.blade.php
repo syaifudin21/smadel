@@ -73,8 +73,8 @@
                 <td>{{(!empty($jenis_mapel))? $jenis_mapel->jenis_mapel : ''}}</td>
                 <form method="POST" action="{{url('sekolah/mapel/delete/'.$mapel->id)}}">
                 <td>
-                    {{-- <a href="{{url('pengurus/mapel/lihat/'.$mapel->id)}}" class="btn btn-outline-success btn-sm">Lihat</a> --}}
-                      <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModalupdate"
+                    <a href="{{url('sekolah/mapel/'.$tk->id.'/id/'.$mapel->id)}}" class="btn btn-outline-success btn-sm">Lihat</a>
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModalupdate"
                                 data-mapel="{{$mapel->mapel}}" 
                                 data-deskripsi="{{$mapel->deskripsi}}" 
                                 data-id_jenis_mapel="{{$mapel->id_jenis_mapel}}" 

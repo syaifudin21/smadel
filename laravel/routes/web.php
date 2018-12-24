@@ -34,3 +34,7 @@ Route::get('/hasil-seleksi', 'HomeController@carihasil');
 Route::post('/hasil-seleksi', 'HomeController@hasilseleksi')->name('cek.lolos');
 Route::get('/alur-pendaftaran-online', 'HomeController@alur');
 Route::post('/masukkan', 'HomeController@storemasukan')->name('masukkan.baru');
+
+Route::get('/guru', function () {
+    return view('pengajar.pengajar_login');
+});

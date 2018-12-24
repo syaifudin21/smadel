@@ -14,6 +14,6 @@ class PengajarController extends Controller
 
     public function index()
     {
-        return view('pengajar.dasboard');
+        return view('pengajar.pengajar-dasboard');
     }
 }

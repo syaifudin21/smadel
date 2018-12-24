@@ -7,7 +7,7 @@
 <div class="nav-scroller bg-white box-shadow">
    <ul class="nav nav-underline" id="myTab" role="tablist">
         <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mata Pelajaran</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Pengurus</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tambah" role="tab" aria-controls="profile" aria-selected="false">Tambah</a>
@@ -81,6 +81,9 @@
                           elseif ($status[$i] == '912879') {echo "Masukkan ";}
                           elseif ($status[$i] == '915879') {echo "Bantuan ";}
                           elseif ($status[$i] == '962879') {echo "Forum ";}
+                          elseif ($status[$i] == '812788') {echo "Perpustakaan ";}
+                          elseif ($status[$i] == '671898') {echo "Pendaftaran ";}
+                          elseif ($status[$i] == '981098') {echo "Pengajar / Guru ";}
                           else{echo "";}
                       }
                     ?>
@@ -165,6 +168,12 @@
                             Album
                           </label>
                         </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="pendaftaran" value="671898">
+                          <label class="form-check-label" for="pendaftaran">
+                            Pendaftaran Siswa
+                          </label>
+                        </div>
                     </div>
                     <div class="col-md-4 col-xs-12">
                         <div class="form-check">
@@ -185,6 +194,12 @@
                             Bantuan
                           </label>
                         </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="pengajar" value="981098">
+                          <label class="form-check-label" for="pengajar">
+                            Pengajar / Guru
+                          </label>
+                        </div>
                     </div>
                     <div class="col-md-4 col-xs-12">
                         <div class="form-check">
@@ -203,6 +218,12 @@
                           <input class="form-check-input" type="checkbox" name="status[]" id="forum" value="962879">
                           <label class="form-check-label" for="forum">
                             Forum
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="status[]" id="perpustakaan" value="812788">
+                          <label class="form-check-label" for="perpustakaan">
+                            Perpustakaan
                           </label>
                         </div>
                     </div>

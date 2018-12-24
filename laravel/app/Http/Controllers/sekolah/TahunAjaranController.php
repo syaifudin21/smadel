@@ -12,7 +12,7 @@ use App\Models\Tingkat_kelas;
 use App\Models\Mapel;
 use App\Models\Jenis_mapel;
 use App\Models\Profil_siswa;
-
+use App\Models\MapelBab;
 
 class TahunAjaranController extends Controller
 {
@@ -205,10 +205,15 @@ class TahunAjaranController extends Controller
         $mapel->save();
         return back()->with('success', 'Berhasil menambahkan Mata Pelajaran baru');
     }
-    public function mapelid($id)
+    public function mapelid($id_tk, $id)
     {
+        $tk = Tingkat_kelas::where('tingkat_kelas.id', $id_tk)
+                            ->join('jurusans', 'tingkat_kelas.id', '=', 'jurusans.id')
+                            ->select('tingkat_kelas.id as id', 'id_kurikulum', 'id_jurusan')
+                            ->first();
     	$mapel = Mapel::find($id);
-    	return view('sekolah.mapel-id', compact('mapel'));
+        $babs = MapelBab::where('id_mapel', $id)->get();
+    	return view('sekolah.mapel-id', compact('mapel', 'tk', 'babs'));
     }
     public function mapelupdate(Request $request)
     {
@@ -223,6 +228,29 @@ class TahunAjaranController extends Controller
         Mapel::find($id)->delete();
         return back()->with('success','Berhasil Hapus Mata Pelajaran');
     }
+
+    public function babstore(Request $request)
+    {
+        $bab = new MapelBab();
+        $bab->fill($request->all());
+        $bab->save();
+        return back()->with('success', 'Berhasil menambahkan Bab Mapel');
+    }
+    
+    public function babupdate(Request $request)
+    {
+        $bab = MapelBab::find($request->id);
+        $bab->fill($request->all());
+        $bab->update();
+
+        return back()->with('success','Berhasil Update Bab Mapel');
+    }
+    public function babdelete($id)
+    {
+        MapelBab::find($id)->delete();
+        return back()->with('success','Berhasil Hapus Bab Mapel');
+    }
+
     public function jenismapelstore(Request $request)
     {
         $mapel = new Jenis_mapel();

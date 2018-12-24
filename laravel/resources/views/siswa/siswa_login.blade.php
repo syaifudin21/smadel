@@ -1,120 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-
-
-<!-- Mirrored from learnplus.frontendmatter.com/guest-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 04 Jun 2018 08:15:28 GMT -->
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
-    <meta name="robots" content="noindex">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Simplebar -->
-    <link type="text/css" href="{{asset('learn/vendor/simplebar.css')}}" rel="stylesheet">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <!-- Material Design Icons  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <!-- Roboto Web Font -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
-
-    <!-- MDK -->
-    <link type="text/css" href="{{asset('learn/vendor/material-design-kit.css')}}" rel="stylesheet">
-
-    <!-- Sidebar Collapse -->
-    <link type="text/css" href="{{asset('learn/vendor/sidebar-collapse.min.css')}}" rel="stylesheet">
-
-    <!-- App CSS -->
-    <link type="text/css" href="{{asset('learn/css/style.css')}}" rel="stylesheet">
-
-
-
-
-
+    <style>
+        .full-height {
+            height: 100vh;
+        }
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
 
-<body class="login">
-
-
-    <div class="row">
-        <div class="col-sm-8 col-md-4 col-lg-4 mx-auto">
-            <div class="text-center m-2">
-                <div class="icon-block rounded-circle">
-                    <i class="material-icons align-middle md-36 text-muted">lock</i>
-                </div>
+<div class="flex-center full-height">
+    <div class="content">
+        <center>
+        <h2>Login Admin</h2><br>
+        @if(session('success')) 
+            <div class="alert alert-info alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {!! session('success') !!}
             </div>
-      
-            <div class="card bg-transparent">
-                <div class="card-header bg-white text-center">
-                    <h4 class="card-title">Login</h4>
-                    <p class="card-subtitle">Silahkan Login Accunt Anda</p>
-                </div>
+        @endif
+        @if (session('gagal'))
+            <div class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {!!session('gagal')!!}
+            </div>
+        @endif
+        <form method="POST" action="{{ route('siswa.login') }}">
+        {{ csrf_field() }}
         
-                <div class="card-body">
-                    <form  class="form-signin" method="POST" action="{{ route('siswa.login') }}">
-                      {{ csrf_field() }}
-                        <div class="form-group">
-                            <input type="text" class="form-control {{ $errors->has('nisn') ? ' is-invalid' : '' }}" placeholder="NISN" name="nisn">
-                             @if ($errors->has('nisn'))
-                                  <span class="invalid-feedback">
-                                      <strong>{{ $errors->first('nisn') }}</strong>
-                                  </span>
-                              @endif
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Password" name="password">
-                            @if ($errors->has('password'))
-                                  <span class="invalid-feedback">
-                                      <strong>{{ $errors->first('password') }}</strong>
-                                  </span>
-                              @endif
-                        </div>
-                        <div class="form-group ">
-                            <button type="submit" class="btn  btn-primary btn-block">
-                              <span class="btn-block-text">Login</span>
-                            </button>
-                        </div>
-                        <div class="text-center">
-                            <a href="#"><small>Forgot Password?</small></a>
-                        </div>
-                    </form>
-                </div>
-                
+
+        <div class="form-group row">
+            <label for="nisn" class="col-md-4 col-form-label text-md-right">{{ __('Nomor Induk Siswa Nasional') }}</label>
+
+            <div class="col-md-8">
+                <input id="nisn" type="text" class="form-control{{ $errors->has('nisn') ? ' is-invalid' : '' }}" name="nisn" value="{{ old('nisn') }}" required autofocus>
+
+                @if ($errors->has('nisn'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('nisn') }}</strong>
+                    </span>
+                @endif
             </div>
         </div>
+
+        <div class="form-group row">
+            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+            <div class="col-md-8">
+                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                @if ($errors->has('password'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row mb-0 justify-content-center">
+                <button type="submit" class="col-md-8 btn btn-primary ">
+                    {{ __('Login') }}
+                </button>
+        </div>
+    </form>
+        </center>
     </div>
+</div>
 
-
-    <!-- jQuery -->
-    <script src="{{asset('learn/vendor/jquery.min.js')}}"></script>
-
-    <!-- Bootstrap -->
-    <script src="{{asset('learn/vendor/popper.min.js')}}"></script>
-    <script src="{{asset('learn/vendor/bootstrap.min.js')}}"></script>
-
-    <!-- Simplebar -->
-    <!-- Used for adding a custom scrollbar to the drawer -->
-    <script src="{{asset('learn/vendor/simplebar.js')}}"></script>
-
-    <!-- MDK -->
-    <script src="{{asset('learn/vendor/dom-factory.js')}}"></script>
-    <script src="{{asset('learn/vendor/material-design-kit.js')}}"></script>
-
-    <!-- Sidebar Collapse -->
-    <script src="{{asset('learn/vendor/sidebar-collapse.js')}}"></script>
-
-    <!-- App JS -->
-    <script src="{{asset('learn/js/main.js')}}"></script>
-
-
-
-
-
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
-
-
-<!-- Mirrored from learnplus.frontendmatter.com/guest-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 04 Jun 2018 08:15:29 GMT -->
 </html>
+

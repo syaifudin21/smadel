@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Jurusan;
 use App\Models\Tingkat_kelas;
+use App\Models\Mapel;
 
 class DataController extends Controller
 {
@@ -24,5 +25,21 @@ class DataController extends Controller
     		'tks' => $tks
     	];
     	return $data;
+    }
+    public function tampilmapel($id)
+    {
+        $mapels = Mapel::where('id_tingkat_kelas', $id)->select('id','mapel')->get();
+        $data = [
+            'mapels' => $mapels
+        ];
+        return $data;
+    }
+    public function tampilbab($id)
+    {
+        $babs = MapelBab::where('id_mapel', $id)->get();
+        $data = [
+            'babs' => $babs
+        ];
+        return $data;
     }
 }

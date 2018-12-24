@@ -10,8 +10,6 @@
     <div class="container">
      <a href="{{url('siswa')}}" class="breadcrumb">Home</a>
      <a href="#!" class="breadcrumb">Artikel</a>
-
-
     </div>
 
   </div>

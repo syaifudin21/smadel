@@ -25,16 +25,19 @@ class PengajarDaftarController extends Controller
 
     public function daftar()
     {
-        return view('pengajar.pengajar_daftar');
+        return view('pengajar.pengajar-daftar');
     }
 
     public function create(Request $data)
     {
-        Validator::make($data->all(), [
-            'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'ijazah' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'nomor_hp' => 'require|string|max:255|unique:pengajars',
-        ])->validate();
+        $this->validate($data, [
+            'nama_lengkap' => 'required',
+            'tgl' => 'required',
+            'lulusan' => 'required',
+            'nama_ayah' => 'required',
+            'nama_ibu' => 'required',
+            'nomor_hp' => 'required'
+        ]);
 
         $profil = new Profil_pengajar();
         $profil->fill($data->all());
@@ -57,6 +60,8 @@ class PengajarDaftarController extends Controller
         }
 
         $profil->save();
+
+        dd($profil);
 
         return back()->with('success', 'Berhasil Mengajukan Data');
     }

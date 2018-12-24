@@ -44,9 +44,13 @@ Route::put('/jenismapel', 'sekolah\TahunAjaranController@jenismapelupdate')->nam
 
 Route::get('/mapel/{id_tk}', 'sekolah\TahunAjaranController@mapel');
 Route::post('/mapel', 'sekolah\TahunAjaranController@mapelstore')->name('mapel.tambah');
-Route::get('/mapel/{id_tk}/id/{id}', 'sekolah\TahunAjaranController@mapelid');
 Route::put('/mapel', 'sekolah\TahunAjaranController@mapelupdate')->name('mapel.update');
 Route::delete('/mapel/delete/{id}', 'sekolah\TahunAjaranController@mapeldelete');
+
+Route::get('/mapel/{id_tk}/id/{id}', 'sekolah\TahunAjaranController@mapelid');
+Route::post('/mapel/bab', 'sekolah\TahunAjaranController@babstore')->name('bab.tambah');
+Route::put('/mapel/bab', 'sekolah\TahunAjaranController@babupdate')->name('bab.update');
+Route::delete('/mapel/bab/delete/{id}', 'sekolah\TahunAjaranController@babdelete');
 
 Route::get('/profil', 'sekolah\SekolahController@profil');
 Route::put('/profil', 'sekolah\SekolahController@edit')->name('sekolah.edit');

@@ -82,6 +82,20 @@ return [
             'password' => env('FTP_PASSWORD'),
             'root' => 'fasilitas' // for example: /var/www/html/dev/images
         ],
+        'ftp-materi' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'root' => 'materi' // for example: /var/www/html/dev/images
+        ],
+        'ftp-soal' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'root' => 'soal' // for example: /var/www/html/dev/images
+        ],
         'ftp-ekstrakurikuler' => [
             'driver' => 'ftp',
             'host' => env('FTP_HOST'),

@@ -102,3 +102,6 @@ Route::delete('/prestasi/{id}', 'pengurus\PrestasiController@delete');
 
 Route::get('pengurus/agenda', 'layanan\AgendaController@pengurus');
 Route::get('pengurus/agenda/update/{id}', 'layanan\AgendaController@pengurus_update');
+
+Route::get('pengurus/perpustakaan', 'pengurus\PerpustakaanController@index');
+

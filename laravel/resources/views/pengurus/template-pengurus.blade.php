@@ -65,28 +65,8 @@
               <li class="nav-item">
                 <div class="media nav-link">
                   <div class="media-body">
-                    <a href="{{url('pengurus/profil')}}"><h5 style="margin-bottom: 2px;">{{auth::user('pengurus')->nama}}</h5></a>
-                    
-                    <?php 
-                      if (auth::user('pengurus')) {
-                        $pengurus = auth::user('pengurus')->status;
-                        if ($pengurus == 1) {
-                          $auth = 'Nilai , Absensi, Setting';
-                        } elseif ($pengurus == 2) {
-                          $auth = 'Administrasi';
-                        } elseif ($pengurus == 3) {
-                          $auth = 'Perpustakaan';
-                        } elseif ($pengurus == 4) {
-                          $auth = 'Organisasi';
-                        } else {
-                          $auth = 'Kosong';
-                        }
-                      } else {
-                        $auth = 'Layanan';
-                      }
-
-                    ?>
-                    <p><small>{{$auth}}</small></p>
+                    <h5 style="margin-bottom: 2px;">{{auth::user('pengurus')->nama}}</h5>
+                    <p><small>Pengurus</small></p>
                   </div>
                 </div>
               </li>
@@ -97,7 +77,7 @@
                 </a>
               </li>
               
-              @if(preg_match("/827980/i", Auth::user('pengurus')->status))
+              @if(preg_match("/671898/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/siswabaru')}}">
                   <span data-feather="users"></span>
@@ -121,13 +101,16 @@
               </li>
               @endif
               
-              @if(preg_match("/827980/i", Auth::user('pengurus')->status))
+              @if(preg_match("/981098/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/pengajar')}}">
                   <span data-feather="users"></span>
                   Pengajar <span class="sr-only">(current)</span>
                 </a>
               </li>
+              @endif
+              
+              @if(preg_match("/827980/i", Auth::user('pengurus')->status))
               <li class="nav-item">
                 <a class="nav-link" href="{{url('pengurus/mapel')}}">
                   <span data-feather="users"></span>
@@ -201,6 +184,15 @@
                 <a class="nav-link" href="{{url('pengurus/forum')}}">
                   <span data-feather="users"></span>
                   Forum <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              @endif
+
+              @if(preg_match("/812788/i", Auth::user('pengurus')->status))
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('pengurus/perpustakaan')}}">
+                  <span data-feather="users"></span>
+                  Perpustakaan <span class="sr-only">(current)</span>
                 </a>
               </li>
               @endif

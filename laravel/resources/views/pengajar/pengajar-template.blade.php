@@ -32,7 +32,7 @@
         <div class="pattern active" style="background-image: url('{{asset('images/standar/1400x300.png')}}');"></div>
       </div>
       <div class="nav-wrapper container">
-        <a href="{{url('siswa')}}" class="brand-logo"><i class="material-icons">camera</i>{{ config('app.name', 'Laravel') }}</a>
+        <a href="{{url('pengajar')}}" class="brand-logo"><i class="material-icons">camera</i>{{ config('app.name', 'Laravel') }}</a>
         <ul class="right">
           {{-- <li><a class='dropdown-button' href='#' data-activates='feature-notif' data-belowOrigin="true" data-constrainWidth="false"><i class="material-icons">notifications_none</i></a></li> --}}
         </ul>
@@ -40,10 +40,9 @@
 
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <?php $sis = App\Models\Profil_siswa::where('nisn', Auth::user('siswa')->nisn)->select('nama_lengkap', 'status')->first();?>
-          <li class="active"><a href="{{url('/siswa')}}">{{$sis->nama_lengkap}}</a></li>
+          <?php $sis = App\Models\Profil_pengajar::where('id_pengajar', Auth::user('pengajar')->id)->select('nama_lengkap')->first();?>
+          <li class="active"><a href="{{url('/pengajar')}}">{{$sis->nama_lengkap}}</a></li>
           
-          <li><a href="{{($sis->status=='Diterima')? url('siswa/forum') : url('siswa/forum/menu/siswabaru')}}"><i class="material-icons">forum</i></a></li>
           <li><a  class='dropdown-button' href='#' data-activates='feature-pengaturan' data-belowOrigin="true" data-constrainWidth="false"><i class="material-icons">settings</i></a></li>
         </ul>
         <!-- Dropdown Structure -->
@@ -55,11 +54,7 @@
           <li><a><b>Matematika</b><br>Uji Kompetisi 2 hal.30</a></li>
         </ul>
         <ul id='feature-pengaturan' class='dropdown-content' style="    width: 176px;">
-          @if($sis->status=='Diterima')
-          <li><a href="blog.html"><i class="material-icons left">edit</i>Artikel</a></li>
-          <li><a href="docs.html"><i class="material-icons left">school</i>Pencapaian</a></li>
-          <li><a href="no-image.html"><i class="material-icons left">import_export</i>Eksport</a></li>
-          @endif
+          
           <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons left">power_settings_new</i>Logout</a></li>
         </ul>
         
@@ -77,7 +72,7 @@
       <li><a href="no-image.html"><i class="material-icons">power_settings_new</i>Logout</a></li>
     </ul>
 
-    <form id="logout-form" action="{{ route('siswa.logout') }}" method="POST">
+    <form id="logout-form" action="{{ route('pengajar.logout') }}" method="POST">
       {{ csrf_field() }}
     </form>
 

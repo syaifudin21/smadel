@@ -91,7 +91,7 @@
         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('NIM') }}</label>
 
         <div class="col-md-6">
-            <input id="nim" type="number" class="form-control{{ $errors->has('nim') ? ' is-invalid' : '' }}" name="nim" value="{{ $pengajar->nim }}" required autofocus>
+            <input id="nim" type="number" class="form-control{{ $errors->has('nim') ? ' is-invalid' : '' }}" name="nim" value="{{ $pengajar->nim }}" autofocus>
 
             @if ($errors->has('nim'))
                 <span class="invalid-feedback">
@@ -284,8 +284,8 @@
                 {{ __('Update') }}
             </button>
             @if(empty($pengajar->id_pengajar))
-            <button type="submit" formaction="{{route('pengurus.pengajar.terima')}}" class="btn btn-primary">
-                {{ __('Update & Terima') }}
+            <button type="submit" formaction="{{route('pengurus.pengajar.terima')}}" class="btn btn-danger">
+                {{ __('Terima') }}
             </button>
             @endif
         </div>

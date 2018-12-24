@@ -20,7 +20,7 @@ class PengajarLoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('pengajar.pengajar_login');
+        return view('pengajar.pengajar-login');
     }
 
     /**
@@ -32,12 +32,12 @@ class PengajarLoginController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email',
+            'username' => 'required|min:5',
             'password' => 'required|min:6'
         ]);
 
         $credential = [
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => $request->password
         ];
 
@@ -48,7 +48,7 @@ class PengajarLoginController extends Controller
         }
 
         // If Unsuccessful, then redirect back to the login with the form data
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        return redirect()->back()->withInput($request->only('username', 'remember'));
     }
 
     /**
