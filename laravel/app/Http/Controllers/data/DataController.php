@@ -42,4 +42,8 @@ class DataController extends Controller
         ];
         return $data;
     }
+    public function notifikasi()
+    {
+        return 'notifikasi';
+    }
 }

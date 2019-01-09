@@ -59,6 +59,7 @@ class SoalController extends Controller
     {
         $soal = new Soal();
         $soal->fill($request->all());
+        $soal['topik'] = substr($request->topik,0,-78);
         $soal['id_guru'] = Auth::user('pengajar')->id;
         $soal->save();
 
@@ -80,5 +81,46 @@ class SoalController extends Controller
         }
         Alert::success('Soal Anda telah berhasil masuk', 'Berhasil');
         return redirect('pengajar/soal/list/'.$soal->id_list_pelajaran);
+    }
+    public function soalid($id_soal, $id_pel)
+    {
+        $pelajaran = ListPelajaran::where(['list_pelajarans.id'=> $id_pel ,'id_guru'=> Auth::user('pengajar')->id])
+                        ->join('kurikulums', 'list_pelajarans.id_kurikulum', 'kurikulums.id')
+                        ->join('jurusans', 'list_pelajarans.id_jurusan', 'jurusans.id')
+                        ->join('tingkat_kelas', 'list_pelajarans.id_tk', 'tingkat_kelas.id')
+                        ->join('mapels', 'list_pelajarans.id_mapel', 'mapels.id')
+                        ->select('mapel', 'kurikulum', 'tingkat_kelas','jurusan', 'list_pelajarans.*')
+                        ->first();
+        $soal = Soal::FindOrFail($id_soal);
+        return view('pengajar.soal-id', compact('pelajaran', 'soal'));
+    }
+    public function rubah($id_soal, $id_pel)
+    {
+        $pelajaran = ListPelajaran::where(['list_pelajarans.id'=> $id_pel ,'id_guru'=> Auth::user('pengajar')->id])
+                        ->join('kurikulums', 'list_pelajarans.id_kurikulum', 'kurikulums.id')
+                        ->join('jurusans', 'list_pelajarans.id_jurusan', 'jurusans.id')
+                        ->join('tingkat_kelas', 'list_pelajarans.id_tk', 'tingkat_kelas.id')
+                        ->join('mapels', 'list_pelajarans.id_mapel', 'mapels.id')
+                        ->select('mapel', 'kurikulum', 'tingkat_kelas','jurusan', 'list_pelajarans.*')
+                        ->first();
+        $soal = Soal::FindOrFail($id_soal);
+        return view('pengajar.soal-update', compact('pelajaran', 'soal'));
+    }
+    public function delete($id)
+    {
+        $hapus = Soal::find($id);
+
+        if ($hapus) {
+            $hapus->delete();
+            return response()->json([
+                'message' => 'Berhasil Hapus',
+                'kode' => '00'
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Gagal Hapus',
+                'kode' => '01'
+            ]);
+        }
     }
 }

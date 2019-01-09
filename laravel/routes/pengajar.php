@@ -31,4 +31,4 @@ Route::post('/soal', 'pengajar\SoalController@store')->name('soal.tambah');
 Route::put('/soal', 'pengajar\SoalController@update')->name('soal.update');
 Route::delete('/soal/delete/{id}', 'pengajar\SoalController@delete');
 Route::get('/soal/list/{id_pel}', 'pengajar\SoalController@listsoal');
-Route::get('/soal/id/{id_materi}/{id_pel}', 'pengajar\SoalController@soalid');
+Route::get('/soal/id/{id_soal}/{id_pel}', 'pengajar\SoalController@soalid');

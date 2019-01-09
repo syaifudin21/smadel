@@ -37,7 +37,7 @@
             @foreach($babs as $bab)
             <tr>
               <td>{{$n++}}</td>
-              <td colspan="3"><b>{{$bab->bab}}</b> <small>{{$bab->topik}}</small></td>
+              <td colspan="4"><b>{{$bab->bab}}</b><br> <small>{{$bab->topik}}</small></td>
               <td><a href="{{url('pengajar/soal/tambah/idbab/'.$bab->id.'/'.$pelajaran->id)}}" class="btn blue">Tambah</a></td>
             </tr>
               <?php 
@@ -51,7 +51,12 @@
                 <td>{{$s++}}</td>
                 <td>{{$soal->soal}}</td>
                 <td>{{$soal->type}}</td>
-                <td>{{$soal->status}}</td>
+                <td>{!!$soal->topik!!}</td>
+                <td>
+                  <a href="{{url('pengajar/soal/id/'.$soal->id.'/'.$pelajaran->id)}}" class="btn orange"><i class="material-icons">desktop_windows</i></a>
+                  <a href="{{url('pengajar/soal/update/idbab/'.$soal->id.'/'.$pelajaran->id)}}" class="btn"><i class="material-icons">edit</i></a>
+                  <a data-url="{{url('pengajar/soal/delete/'.$soal->id)}}" data-redirect="{{url('pengajar/soal/list/'.$pelajaran->id)}}" class="hapus btn red"><i class="material-icons">delete</i></a>
+                </td>
               </tr>
               @endforeach
               @else
@@ -96,6 +101,7 @@
 @endsection
 
 @section('script')
+<script type="text/javascript" src="{{asset('js/hapus.js')}}"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $('.modal').modal();

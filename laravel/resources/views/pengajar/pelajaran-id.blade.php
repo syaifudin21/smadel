@@ -12,7 +12,6 @@
      <a href="{{url('pengajar/listpelajaran')}}" class="breadcrumb">Pelajaran</a>
      <a href="#!" class="breadcrumb">{{$pelajaran->mapel}}</a>
     </div>
-
   </div>
 </div>
 @endsection
@@ -118,7 +117,6 @@
         });
       });
   });
-
 
   $(document).ready(function() {
     @if(Session::has('berhasil'))

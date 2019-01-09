@@ -29,7 +29,6 @@ class CreateSoalsTable extends Migration
             $table->text('jawaban_5')->nullable();
             $table->enum('benar', ['1','2','3','4','5']);
             $table->text('pembahasan');
-            $table->enum('status',['Tampil','Sembunyi'])->default('Sembunyi');
             $table->timestamps();
         });
     }
