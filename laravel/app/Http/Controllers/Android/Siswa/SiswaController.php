@@ -70,6 +70,7 @@ class SiswaController extends Controller
 
         if (!empty($siswa)) {
             $siswa['id_api_android'] = null;
+            $siswa->save();
             $data = [
             	'message' => 'Berhasil logout',
             	'kode' => '00'
