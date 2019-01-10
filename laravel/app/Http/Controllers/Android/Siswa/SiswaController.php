@@ -47,7 +47,7 @@ class SiswaController extends Controller
                 // kirim broadcash
                 $profil['response_fb'] = $firebase->sendToTopic('global', $data);
                 // kirim perid
-                // $profil['response_fb'] = $firebase->send($profil['api_android'], $data);
+                $profil['response_fb'] = $firebase->send($siswa['id_api_android'], $data);
             }
             
             $data = [
@@ -62,6 +62,26 @@ class SiswaController extends Controller
             ];
         }
         return response()->json($data);
+    }
+
+    public function logout(Request $request)
+    {
+        $siswa = Siswa::where('nisn', $request->nisn)->first();
+
+        if (!empty($siswa)) {
+            $siswa['id_api_android'] = null;
+            $data = [
+            	'message' => 'Berhasil logout',
+            	'kode' => '00'
+            ];
+        }else{
+            $data = [
+            	'message' => 'Gagal logout',
+            	'kode' => '01'
+            ];
+        }
+        return response()->json($data);
+        
     }
 
 }

@@ -1,6 +1,7 @@
 <?php 
 
 Route::post('/login', 'Android\Siswa\SiswaController@login');
+Route::post('/logout', 'Android\Siswa\SiswaController@logout');
 
 //ambil data artikel yang sudah disetujuai pengurus/guru
 Route::post('/artikel', 'Android\Siswa\ArtikelController@artikel');
