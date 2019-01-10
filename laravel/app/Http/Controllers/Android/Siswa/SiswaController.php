@@ -24,11 +24,15 @@ class SiswaController extends Controller
 
             if (!empty($request->api_android)) {
                 $siswa = Siswa::where('nisn', $request->nisn)->first();
-                $siswa['id_api_android'] = $request->api_android;
-                $siswa->update();
+
+                $cariapi = preg_match("/981098/i",$request->api_android);
+                if (empty($cariapi)) {
+                    $siswa['id_api_android'] =$siswa->id_api_android.' , '. $request->api_android;
+                    $siswa->update();
+                }
 
                 //menambahkan nilai api pada profil
-                $profil['api_android'] = $siswa->id_api_android;
+                $profil['api_android'] = $request->api_android;
 
                 //mengirim ke firebase
                 $firebase = new Firebase();
@@ -46,8 +50,9 @@ class SiswaController extends Controller
 
                 // kirim broadcash
                 // $profil['response_fb'] = $firebase->sendToTopic('global', $data);
+
                 // kirim perid
-                $profil['response_fb'] = $firebase->send($siswa['id_api_android'], $data);
+                $profil['response_fb'] = $firebase->send($request->api_android, $data);
             }
             
             $data = [

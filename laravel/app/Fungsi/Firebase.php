@@ -11,7 +11,7 @@ class Firebase extends Model
             'to' => $to,
             'data' => $message,
         );
-        // return $this->sendPushNotification($fields);
+        return $this->sendPushNotification($fields);
     }
 
     // Sending message to a topic by topic name
