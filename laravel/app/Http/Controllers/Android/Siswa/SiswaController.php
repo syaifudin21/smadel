@@ -45,7 +45,7 @@ class SiswaController extends Controller
                 ];
 
                 // kirim broadcash
-                $profil['response_fb'] = $firebase->sendToTopic('global', $data);
+                // $profil['response_fb'] = $firebase->sendToTopic('global', $data);
                 // kirim perid
                 $profil['response_fb'] = $firebase->send($siswa['id_api_android'], $data);
             }

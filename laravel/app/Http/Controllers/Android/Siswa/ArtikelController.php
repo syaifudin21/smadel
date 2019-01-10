@@ -18,9 +18,16 @@ class ArtikelController extends Controller
     }
     public function artikelid(Request $request)
     {
-    	$artikel = Artikel::find($request->id_artikel);
+        // $artikel = Artikel::find($request->id_artikel);
+        $url = 'v1/artikel/'.$request->id_artikel;
     	return response()->json([
-        	'artikel' => $artikel,
+        	'url' => $request
         ]);
     }
+    public function artikelview($id)
+    {
+    	$artikel = Artikel::find($id);
+        return view('android.artikel-id', compact('artikel'));
+    }
+
 }

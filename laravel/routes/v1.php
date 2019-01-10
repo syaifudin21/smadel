@@ -7,6 +7,8 @@ Route::post('/logout', 'Android\Siswa\SiswaController@logout');
 Route::post('/artikel', 'Android\Siswa\ArtikelController@artikel');
 Route::post('/artikel/id', 'Android\Siswa\ArtikelController@artikelid');
 
+Route::get('/artikel/id/{id}', 'Android\Siswa\ArtikelController@artikelview');
+
 // dari mesin aplikasi lokal
 Route::post('/absen/upload', 'Android\Siswa\AbsenController@upload');
 //android akses
