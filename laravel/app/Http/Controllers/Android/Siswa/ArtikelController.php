@@ -18,11 +18,20 @@ class ArtikelController extends Controller
     }
     public function artikelid(Request $request)
     {
-        // $artikel = Artikel::find($request->id_artikel);
-        $url = 'v1/artikel/'.$request->id_artikel;
-    	return response()->json([
-        	'url' => $request
-        ]);
+        $artikel = Artikel::find($request->id_artikel);
+        if (!empty($artikel)) {
+            $data = [
+                'url' => env('APP_URL', 'localhost').'/v1/artikel/'.$request->id_artikel,
+                'message' => 'Berhasil Memuat Artikel',
+                'kode' => '00'
+            ];
+        }else{
+            $data = [
+                'message'=> 'Gagal Memmuat Artikel',
+                'kokde'=> '01'
+            ];
+        }
+    	return response()->json($data);
     }
     public function artikelview($id)
     {

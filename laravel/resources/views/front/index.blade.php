@@ -43,57 +43,7 @@
 @endsection
 
 @section('content')
-  <div class="container">
-    <div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="medium material-icons">flash_on</i></h2>
-            <h5 class="center">Speeds up development</h5>
-
-            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="medium material-icons">group</i></h2>
-            <h5 class="center">User Experience Focused</h5>
-
-            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="medium material-icons">settings</i></h2>
-            <h5 class="center">Easy to work with</h5>
-
-            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <br><br>
-  </div>
-
-  <div class="parallax-container valign-wrapper" style="height: 200px;">
-      <div class="container">
-        <div class="row center">
-          <h4>Visi</h4>
-          <p style="font-size: 20px;">
-            @if(!empty($visi))
-              {!!$visi->deskripsi!!}
-            @endif
-          </p>
-        </div>
-      </div>
-    <div class="parallax"><img src="{{asset('images/standar/background1.png')}}" alt="Unsplashed background img 2"></div>
-  </div>
-  
+ 
 <div id="portfolio" class="section gray">
   <div class="container">
     <div class="row">
@@ -148,18 +98,6 @@
   </div>
 </div>
 
-  <div class="parallax-container valign-wrapper" style="height: 300px;">
-      <div class="container">
-        <div class="row center">
-          <h4>Misi</h4>
-        </div>
-        @if(!empty($misi))
-        {!!$misi->deskripsi!!}
-        @endif
-      </div>
-    <div class="parallax"><img src="{{asset('images/standar/background1.png')}}" alt="Unsplashed background img 2"></div>
-  </div>
-
 <div id="portfolio" class="section ">
   <div class="container">
   <div class="row">
@@ -206,6 +144,33 @@
 </div>
 <br><br>
 </div>
+
+<div id="portfolio" class="section " style="background-color: white">
+    <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <center>
+            {!!$visi->deskripsi!!}
+          </center>
+          </div>
+        </div>
+        <div class="col s12 m8">
+          <div class="icon-block">
+            <h5 class="center">Misi</h5>
+            {!!$misi->deskripsi!!}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <br><br>
+  </div>
+</div>  
 
 @if(!empty($maps))
  <div class="video-container">

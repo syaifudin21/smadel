@@ -15,7 +15,7 @@ class Siswa extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nisn', 'password', 'id_api_android'
+        'nomor_user','nisn', 'password', 'id_api_android'
     ];
 
     /**

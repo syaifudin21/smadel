@@ -87,7 +87,40 @@ class SiswaController extends Controller
             ];
         }
         return response()->json($data);
-        
+    }
+    public function user(Request $request)
+    {
+        $user =  Siswa::where('nomor_user', $request->nomor_user)->first();
+        if (!empty($user)) {
+            $data = [
+                'data' => $user,
+            	'message' => 'Berhasil Ambil Data User Login',
+            	'kode' => '00'
+            ];
+        }else{
+            $data = [
+            	'message' => 'Gagal, Nomor User Salah',
+            	'kode' => '01'
+            ];
+        }
+        return response()->json($data);
+    }
+    public function profil(Request $request)
+    {
+        $user =  Profil_siswa::where('nomor_user', $request->nomor_user)->first();
+        if (!empty($user)) {
+            $data = [
+                'data' => $user,
+            	'message' => 'Berhasil Ambil Data Profil',
+            	'kode' => '00'
+            ];
+        }else{
+            $data = [
+            	'message' => 'Gagal, Nomor User Salah',
+            	'kode' => '01'
+            ];
+        }
+        return response()->json($data);
     }
 
 }

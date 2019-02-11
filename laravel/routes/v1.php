@@ -5,7 +5,7 @@ Route::post('/logout', 'Android\Siswa\SiswaController@logout');
 
 //ambil data artikel yang sudah disetujuai pengurus/guru
 Route::post('/artikel', 'Android\Siswa\ArtikelController@artikel');
-Route::post('/artikel/id', 'Android\Siswa\ArtikelController@artikelid');
+Route::post('/artikel/detail', 'Android\Siswa\ArtikelController@artikelid');
 
 Route::get('/artikel/id/{id}', 'Android\Siswa\ArtikelController@artikelview');
 
