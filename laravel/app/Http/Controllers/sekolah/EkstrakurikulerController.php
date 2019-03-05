@@ -52,13 +52,14 @@ class EkstrakurikulerController extends Controller
     public function update(Request $request)
     {
         $ekstrakurikuler = Ekstrakurikuler::find($request->id);
+        $ekstrakurikulerd = Ekstrakurikuler::find($request->id);
         $ekstrakurikuler->fill($request->all());
         if ($request->hasFile('foto')){
             $filenamewithextension = $request->file('foto')->getClientOriginalName();
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('foto')->getClientOriginalExtension();
             $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            Storage::disk('ftp-ekstrakurikuler')->delete($fasilitasd->foto);
+            Storage::disk('ftp-ekstrakurikuler')->delete($ekstrakurikulerd->foto);
             Storage::disk('ftp-ekstrakurikuler')->put($filenametostorefoto, fopen($request->file('foto'), 'r+'));
             $ekstrakurikuler['foto'] = $filenametostorefoto;
         }
