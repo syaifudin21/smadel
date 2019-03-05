@@ -4,6 +4,7 @@ namespace App\Http\Controllers\sekolah;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ekstrakurikuler;
 use App\Models\Pengajar;
@@ -31,7 +32,7 @@ class EkstrakurikulerController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('foto')->getClientOriginalExtension();
             $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            $request->file('foto')->move('images/ekstrakurikuler',$filenametostorefoto);
+            Storage::disk('ftp-ekstrakurikuler')->put($filenametostorefoto, fopen($request->file('foto'), 'r+'));
             $ekstrakurikuler['foto'] = $filenametostorefoto;
         }
         $ekstrakurikuler->save();
@@ -57,8 +58,8 @@ class EkstrakurikulerController extends Controller
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->file('foto')->getClientOriginalExtension();
             $filenametostorefoto = $filename.'_'.uniqid().'.'.$extension;
-            File::delete('images/ekstrakurikuler/'.$ekstrakurikuler->foto);
-            $request->file('foto')->move('images/ekstrakurikuler',$filenametostorefoto);
+            Storage::disk('ftp-ekstrakurikuler')->delete($fasilitasd->foto);
+            Storage::disk('ftp-ekstrakurikuler')->put($filenametostorefoto, fopen($request->file('foto'), 'r+'));
             $ekstrakurikuler['foto'] = $filenametostorefoto;
         }
         $ekstrakurikuler->update();
@@ -67,7 +68,7 @@ class EkstrakurikulerController extends Controller
     public function delete($id)
     {
         $ekstrakurikuler = Ekstrakurikuler::find($id);
-        File::delete('images/ekstrakurikuler/'.$ekstrakurikuler->foto);
+        Storage::disk('ftp-ekstrakurikuler')->delete($ekstrakurikuler->foto);
         $ekstrakurikuler->delete();
         return back()->with('success',' Mata Pelajaran Berhasil Dihapus');
     }
