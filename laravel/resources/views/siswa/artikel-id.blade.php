@@ -38,7 +38,7 @@
             }
         ?>
             <center>
-            <img src="{{url(env('FTP_BASE').'/artikel/'.$artikel->lampiran)}}" width="100%" style="margin: 6px auto;">
+            <img src="{{env('FTP_BASE').'/artikel/'.$artikel->lampiran}}" width="100%" style="margin: 6px auto;">
             <h5>{{$artikel->judul}} {!!($artikel->status == 'Tampil')? '<span class="chip blue white-text" data-badge-caption="">'.$artikel->status.'</span>': '<span class="chip red white-text" data-badge-caption="">'.$artikel->status.'</span>' !!}</h5> 
             <span>{{hari_tanggal_indo_waktu(date('Y-m-d-G-i-s', strtotime($artikel->updated_at)), true)}} - Author : {{$nama}}</span>
             </center>

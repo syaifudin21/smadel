@@ -53,7 +53,7 @@
         </table>
         </div>
     </div>
-    <a href="{{url(env('FTP_BASE').'/bantuan/'.$bantuan->lampiran)}}"><img src="{{url(env('FTP_BASE').'/bantuan/'.$bantuan->lampiran)}}" width="30%"></a>
+    <a href="{{env('FTP_BASE').'/bantuan/'.$bantuan->lampiran}}"><img src="{{env('FTP_BASE').'/bantuan/'.$bantuan->lampiran}}" width="30%"></a>
 </div>
 @endsection
 

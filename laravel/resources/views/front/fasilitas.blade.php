@@ -40,7 +40,7 @@
           <div class="gallery-curve-wrapper">
             @if(!empty($fasilitas->foto))
             <a class="gallery-cover gray">
-              <img class="responsive-img" src="{{url(env('FTP_BASE').'/fasilitas/'.$fasilitas->foto)}}" alt="placeholder">
+              <img class="responsive-img" src="{{env('FTP_BASE').'/fasilitas/'.$fasilitas->foto}}" alt="placeholder">
             </a>
             @endif
             <div class="gallery-header">

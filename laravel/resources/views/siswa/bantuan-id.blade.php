@@ -26,7 +26,7 @@
                     {!!$bantuan->isi!!}
                 </div>
                 @if(!empty($bantuan->lampiran))
-                      <a href="{{url(env('FTP_BASE').'/bantuan/'.$bantuan->lampiran)}}"><img src="{{url(env('FTP_BASE').'/bantuan/'.$bantuan->lampiran)}}" class="img-thumbnails"></a>
+                      <a href="{{env('FTP_BASE').'/bantuan/'.$bantuan->lampiran}}"><img src="{{env('FTP_BASE').'/bantuan/'.$bantuan->lampiran}}" class="img-thumbnails"></a>
                 @endif
         </div>
 

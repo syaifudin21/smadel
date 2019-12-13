@@ -56,7 +56,7 @@
       <div class="col l4 m6 s12 gallery-filter">
         <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="{{url(env('FTP_BASE').'/album/'.$foto->foto)}}">
+      <img class="activator" src="{{env('FTP_BASE').'/album/'.$foto->foto}}">
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">{{$galeri->nama}}<i class="material-icons right">more_vert</i></span>

@@ -114,7 +114,7 @@
             <label for="foto" class="col-sm-4 col-form-label text-md-right">{{ __('Jadwal') }}</label>
             <div class="col-md-6">
                 @if(!empty($ta->jadwal))
-                  <a href="{{url(env('FTP_BASE').'/standar/'.$ta->jadwal)}}"><img class="card-img" src="{{url(env('FTP_BASE').'/standar/'.$ta->jadwal)}}" alt="Card image"></a>
+                  <a href="{{env('FTP_BASE').'/standar/'.$ta->jadwal}}"><img class="card-img" src="{{env('FTP_BASE').'/standar/'.$ta->jadwal}}" alt="Card image"></a>
                 <hr>
                 @endif
                 <input id="jadwal" type="file" class="form-control{{ $errors->has('jadwal') ? ' is-invalid' : '' }}" name="jadwal" value="{{ old('jadwal') }}" autofocus>
@@ -129,7 +129,7 @@
             <label for="foto" class="col-sm-4 col-form-label text-md-right">{{ __('Brosur') }}</label>
             <div class="col-md-6">
                 @if(!empty($ta->brosur))
-                  <a href="{{url(env('FTP_BASE').'/standar/'.$ta->brosur)}}"><img class="card-img" src="{{url(env('FTP_BASE').'/standar/'.$ta->brosur)}}" alt="Card image"></a>
+                  <a href="{{env('FTP_BASE').'/standar/'.$ta->brosur}}"><img class="card-img" src="{{env('FTP_BASE').'/standar/'.$ta->brosur}}" alt="Card image"></a>
                 <hr>
                 @endif
                 <input id="brosur" type="file" class="form-control{{ $errors->has('brosur') ? ' is-invalid' : '' }}" name="brosur" value="{{ old('brosur') }}" autofocus>

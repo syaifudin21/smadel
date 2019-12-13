@@ -43,7 +43,7 @@
         }
       ;?>
       <h4>{{$artikel->judul}}</h4>
-      <img src="{{url(env('FTP_BASE').'/artikel/'.$artikel->lampiran)}}" width="100%" style="margin: 6px auto;">
+      <img src="{{env('FTP_BASE').'/artikel/'.$artikel->lampiran}}" width="100%" style="margin: 6px auto;">
 
       <span>Tag: <b>{{$artikel->tag}}</b> - Author: <b>{{$nama}}</b></span><br><span>{{$artikel->updated_at->diffForHumans()}}</span>
     </center>

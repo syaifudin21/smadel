@@ -54,7 +54,7 @@
         </table>
         </div>
     </div>
-    <img src="{{url(env('FTP_BASE').'/prestasi/'.$prestasi->foto)}}" width="100%">
+    <img src="{{env('FTP_BASE').'/prestasi/'.$prestasi->foto}}" width="100%">
 </div>
 @endsection
 
