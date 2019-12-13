@@ -248,7 +248,7 @@
               <div class="form-group row">
                   <label for="course_title" class="col-sm-3 col-form-label">Foto</label>
                   <div class="col-sm-9 col-md-4">
-                      <p><img src="{{url('http://file.smawahasmodel.sch.id/siswa/'.$siswa->foto)}}" id="foto" alt="" width="150" class="rounded"></p>
+                      <p><img src="{{url(env('FTP_HOST').'/siswa/'.$siswa->foto)}}" id="foto" alt="" width="150" class="rounded"></p>
                       <label class="custom-file">
                         <input type="file" id="file" name="foto"  onchange="fotoURl(this)">
                         <span class="custom-file-control"></span>
@@ -258,7 +258,7 @@
               <div class="form-group row">
                   <label for="course_title" class="col-sm-3 col-form-label">Ijazah</label>
                   <div class="col-sm-9 col-md-4">
-                      <p><img src="{{url('http://file.smawahasmodel.sch.id/siswa/'.$siswa->ijazah)}}" id="ijazah" alt="" width="150" class="rounded"></p>
+                      <p><img src="{{url(env('FTP_HOST').'/siswa/'.$siswa->ijazah)}}" id="ijazah" alt="" width="150" class="rounded"></p>
                       <label class="custom-file">
                         <input type="file" id="file" name="ijazah"  onchange="fileijazah(this)">
                         <span class="custom-file-control"></span>

@@ -25,7 +25,7 @@
         <div class="col s12 m4">
           <div class="card">
             <div class="card-image">
-              <img src="{{url('http://file.smawahasmodel.sch.id/prestasi/'.$prestasi->lampiran)}}">
+              <img src="{{url(env('FTP_HOST').'/prestasi/'.$prestasi->lampiran)}}">
               @if(!empty($prestasi->nama))<span class="card-title">Card Title</span>@endif
             </div>
              @if(!empty($prestasi->nama))

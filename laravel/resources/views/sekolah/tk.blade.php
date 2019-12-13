@@ -43,7 +43,7 @@
 </nav>
 
 <div class="media">
-  <a href="{{url('http://file.smawahasmodel.sch.id/standar/'.$jurusan->foto)}}"><img class="mr-3" src="{{url('http://file.smawahasmodel.sch.id/standar/'.$jurusan->foto)}}" alt="{{$jurusan->jurusan}}" width="128px"></a>
+  <a href="{{url(env('FTP_HOST').'/standar/'.$jurusan->foto)}}"><img class="mr-3" src="{{url(env('FTP_HOST').'/standar/'.$jurusan->foto)}}" alt="{{$jurusan->jurusan}}" width="128px"></a>
   <div class="media-body">
     <h5 class="mt-0">{{$jurusan->jurusan}}</h5>
     {!!$jurusan->deskripsi!!}

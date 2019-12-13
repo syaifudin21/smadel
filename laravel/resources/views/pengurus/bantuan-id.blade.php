@@ -53,7 +53,7 @@
         </table>
         </div>
     </div>
-    <a href="{{url('http://file.smawahasmodel.sch.id/bantuan/'.$bantuan->lampiran)}}"><img src="{{url('http://file.smawahasmodel.sch.id/bantuan/'.$bantuan->lampiran)}}" width="30%"></a>
+    <a href="{{url(env('FTP_HOST').'/bantuan/'.$bantuan->lampiran)}}"><img src="{{url(env('FTP_HOST').'/bantuan/'.$bantuan->lampiran)}}" width="30%"></a>
 </div>
 @endsection
 

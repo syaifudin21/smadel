@@ -57,7 +57,7 @@
             
             <span class="white-text">" {{$pengumuman->isi}} "
               @if(!empty($pengumuman->lampiran))
-                <br><br><b> <a class="white-text" href="{{url('http://file.smawahasmodel.sch.id/pengumuman/'.$pengumuman->lampiran)}}">Unduh Lampiran</a></b>
+                <br><br><b> <a class="white-text" href="{{url(env('FTP_HOST').'/pengumuman/'.$pengumuman->lampiran)}}">Unduh Lampiran</a></b>
               @endif
              <br> <small>{{$pengumuman->updated_at->diffForHumans()}} - {{$nama}}</small></span>
               

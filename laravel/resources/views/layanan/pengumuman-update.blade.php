@@ -100,7 +100,7 @@
             <label for="lampiran" class="col-sm-4 col-form-label text-md-right">Lampiran</label>
             <div class="col-md-6">
                 @if(!empty($pengumuman->lampiran))
-                  <a class="white-text" href="{{url('http://file.smawahasmodel.sch.id/pengumuman/'.$pengumuman->lampiran)}}">{{$pengumuman->lampiran}}</a></b>
+                  <a class="white-text" href="{{url(env('FTP_HOST').'/pengumuman/'.$pengumuman->lampiran)}}">{{$pengumuman->lampiran}}</a></b>
                 @endif
                 <input id="lampiran" type="file" class="form-control{{ $errors->has('lampiran') ? ' is-invalid' : '' }}" name="lampiran" value="{{ old('lampiran') }}" autofocus>
                 @if ($errors->has('lampiran'))

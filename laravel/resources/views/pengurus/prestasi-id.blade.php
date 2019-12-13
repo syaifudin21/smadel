@@ -54,7 +54,7 @@
         </table>
         </div>
     </div>
-    <img src="{{url('http://file.smawahasmodel.sch.id/prestasi/'.$prestasi->foto)}}" width="100%">
+    <img src="{{url(env('FTP_HOST').'/prestasi/'.$prestasi->foto)}}" width="100%">
 </div>
 @endsection
 

@@ -89,13 +89,13 @@
       <tr><th>Kelas Pertama</th><td>{{$siswa->diterima_kelas}}</td></tr>
       <tr><th>Nomor Induk</th><td>{{$siswa->no_induk}}</td></tr>
       <tr><th>Lampiran Foto</th>
-        <td>@if(!empty($siswa->foto))<a href="{{url('http://file.smawahasmodel.sch.id/siswa/'.$siswa->foto)}}">Lampiran Foto</a>@endif</td></tr>
+        <td>@if(!empty($siswa->foto))<a href="{{url(env('FTP_HOST').'/siswa/'.$siswa->foto)}}">Lampiran Foto</a>@endif</td></tr>
       <tr><th>Lampiran Akte</th>
-        <td>@if(!empty($siswa->akte))<a href="{{url('http://file.smawahasmodel.sch.id/siswa/'.$siswa->akte)}}">Lampiran Akte</a>@endif</td></tr>
+        <td>@if(!empty($siswa->akte))<a href="{{url(env('FTP_HOST').'/siswa/'.$siswa->akte)}}">Lampiran Akte</a>@endif</td></tr>
       <tr><th>Lampiran KPS</th>
-        <td>@if(!empty($siswa->kps))<a href="{{url('http://file.smawahasmodel.sch.id/siswa/'.$siswa->kps)}}">Lampiran Kps</a>@endif</td></tr>
+        <td>@if(!empty($siswa->kps))<a href="{{url(env('FTP_HOST').'/siswa/'.$siswa->kps)}}">Lampiran Kps</a>@endif</td></tr>
       <tr><th>Lampiran Ijazah</th>
-        <td>@if(!empty($siswa->ijazah))<a href="{{url('http://file.smawahasmodel.sch.id/siswa/'.$siswa->ijazah)}}">Lampiran Ijazah</a>@endif</td></tr>
+        <td>@if(!empty($siswa->ijazah))<a href="{{url(env('FTP_HOST').'/siswa/'.$siswa->ijazah)}}">Lampiran Ijazah</a>@endif</td></tr>
   </table>
 
 </div>

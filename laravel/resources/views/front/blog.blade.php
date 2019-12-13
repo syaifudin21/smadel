@@ -40,7 +40,7 @@
         <div class="col s12 m6">
           <div class="row">
           <div class="col s3">
-            <img src="{{url('http://file.smawahasmodel.sch.id/artikel/'.$artikel->lampiran)}}" width="100%" style="margin: 6px auto;">
+            <img src="{{url(env('FTP_HOST').'/artikel/'.$artikel->lampiran)}}" width="100%" style="margin: 6px auto;">
           </div>
           <div class="col s9">
             <a href="{{url('artikel/'.$artikel->id.'/'.$artikel->slug_judul)}}" style="color: black"><h5>{{$artikel->judul}}</h5></a>

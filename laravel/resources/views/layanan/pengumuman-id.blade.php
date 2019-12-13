@@ -60,7 +60,7 @@
         </div>
         @if(!empty($pengumuman->lampiran))
         <div class="col-md-3 col-xs-12">
-              <img src="{{asset('http://file.smawahasmodel.sch.id/pengumuman/'.$pengumuman->lampiran)}}" width="100%">
+              <img src="{{asset(env('FTP_HOST').'/pengumuman/'.$pengumuman->lampiran)}}" width="100%">
         </div>
         @endif
       </div>

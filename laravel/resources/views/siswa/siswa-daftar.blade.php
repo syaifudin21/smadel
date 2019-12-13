@@ -137,7 +137,7 @@
         <div class="col s12 m4">
           <div class="card">
             <div class="card-image">
-              <img src="{{url('http://file.smawahasmodel.sch.id/prestasi/'.$prestasi->lampiran)}}">
+              <img src="{{url(env('FTP_HOST').'/prestasi/'.$prestasi->lampiran)}}">
               @if(!empty($prestasi->nama))<span class="card-title">Card Title</span>@endif
             </div>
              @if(!empty($prestasi->nama))
@@ -355,7 +355,7 @@
         </div>
         <div class="row">
           <div class="col m2 s12 valign-wrapper">
-            <img class="materialboxed" src="{{url('http://file.smawahasmodel.sch.id/siswa/'.$siswa->foto)}}" width="100%" id="foto">
+            <img class="materialboxed" src="{{url(env('FTP_HOST').'/siswa/'.$siswa->foto)}}" width="100%" id="foto">
           </div>
           <div class="col m4 s12">
              <div class="file-field input-field">
@@ -369,7 +369,7 @@
               </div>
           </div>
           <div class="col m2 s12 valign-wrapper">
-            <img class="materialboxed" src="{{url('http://file.smawahasmodel.sch.id/siswa/'.$siswa->ijazah)}}" width="100%" id="ijazah">
+            <img class="materialboxed" src="{{url(env('FTP_HOST').'/siswa/'.$siswa->ijazah)}}" width="100%" id="ijazah">
           </div>
           <div class="col m4 s12">
             <div class="file-field input-field">

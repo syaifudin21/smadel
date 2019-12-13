@@ -26,7 +26,7 @@
                     {!!$bantuan->isi!!}
                 </div>
                 @if(!empty($bantuan->lampiran))
-                      <a href="{{url('http://file.smawahasmodel.sch.id/bantuan/'.$bantuan->lampiran)}}"><img src="{{url('http://file.smawahasmodel.sch.id/bantuan/'.$bantuan->lampiran)}}" class="img-thumbnails"></a>
+                      <a href="{{url(env('FTP_HOST').'/bantuan/'.$bantuan->lampiran)}}"><img src="{{url(env('FTP_HOST').'/bantuan/'.$bantuan->lampiran)}}" class="img-thumbnails"></a>
                 @endif
         </div>
 
