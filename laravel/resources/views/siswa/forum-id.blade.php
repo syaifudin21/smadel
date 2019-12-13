@@ -22,12 +22,12 @@
                     $dd = App\Models\Pengurus::find($chat->id_pengurus);
                     $nama = (!empty($dd))? $dd->nama : 'NN';
                     $status = 'Pengurus';
-                    $foto = env('FTP_HOST').'/user.png';
+                    $foto = env('FTP_BASE').'/user.png';
             }elseif ($chat->id_siswa != null) {
                     $dd = App\Models\Profil_siswa::where('nisn',$chat->id_siswa)->select('nama_lengkap','foto')->first();
                     $nama = (!empty($dd))? $dd->nama_lengkap : 'NNs';
                     $status = 'Siswa';
-                    $foto = (!empty($dd))? env('FTP_HOST').'/siswa/'.$dd->foto : 'NNs';
+                    $foto = (!empty($dd))? env('FTP_BASE').'/siswa/'.$dd->foto : 'NNs';
             }else{
                 $nama = 'NN';
                 $foto = 'NN';
@@ -48,12 +48,12 @@
                             $bb = App\Models\Pengurus::find($balaschat->id_pengurus);
                             $namabb = (!empty($bb))? $bb->nama : 'NN';
                             $statusbb = 'Pengurus';
-                            $fotobb = env('FTP_HOST').'/user.png';
+                            $fotobb = env('FTP_BASE').'/user.png';
                     }elseif ($balaschat->id_siswa != null) {
                             $bb = App\Models\Profil_siswa::where('nisn',$balaschat->id_siswa)->select('nama_lengkap','foto')->first();
                             $namabb = (!empty($bb))? $bb->nama_lengkap : 'NNs';
                             $statusbb = 'Siswa';
-                            $fotobb = (!empty($bb))? env('FTP_HOST').'/siswa/'.$bb->foto : 'NNs';
+                            $fotobb = (!empty($bb))? env('FTP_BASE').'/siswa/'.$bb->foto : 'NNs';
                     }else{
                         $namabb = 'NN';
                         $fotobb = 'NN';

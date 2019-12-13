@@ -42,7 +42,7 @@
             @foreach($fotos as $foto)
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{url(env('FTP_HOST').'/album/'.$foto->foto)}}" alt="Card image cap">
+                <img class="card-img-top" src="{{url(env('FTP_BASE').'/album/'.$foto->foto)}}" alt="Card image cap">
                 <div class="card-body">
                   <p class="card-text">{{$foto->caption}}</p>
                   <div class="d-flex justify-content-between align-items-center">

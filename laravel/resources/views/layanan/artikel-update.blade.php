@@ -77,7 +77,7 @@
                 <div class="form-group row">
                     @if(!empty($artikel->lampiran))
                     <div class="col-md-12">
-                        <img src="{{url(env('FTP_HOST').'/artikel/'.$artikel->lampiran)}}" width="100%">
+                        <img src="{{url(env('FTP_BASE').'/artikel/'.$artikel->lampiran)}}" width="100%">
                     </div>
                     @endif
                     <div class="col-md-12">

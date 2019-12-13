@@ -77,7 +77,7 @@
         <div class="form-group row">
             <label class="col-sm-4 col-form-label text-md-right">Lampiran (foto)</label>
             <div class="col-md-6">
-                <img src="{{url(env('FTP_HOST').'/bantuan/'.$bantuan->lampiran)}}" width="30%" class="img img-thumbnail" id="foto"><br>
+                <img src="{{url(env('FTP_BASE').'/bantuan/'.$bantuan->lampiran)}}" width="30%" class="img img-thumbnail" id="foto"><br>
                 <input id="lampiran" type="file" class="form-control{{ $errors->has('lampiran') ? ' is-invalid' : '' }}" name="lampiran" value="{{ old('lampiran') }}" autofocus  onchange="fotoURl(this)">
 
                 @if ($errors->has('lampiran'))

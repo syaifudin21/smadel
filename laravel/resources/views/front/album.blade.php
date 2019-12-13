@@ -53,7 +53,7 @@
     <div class="row">
         @foreach($fotos as $foto)
           <div class="gallery-curve-wrapper">
-            <img class="materialboxed col l4 m6 s12" data-caption="{{$foto->caption}}" src="{{url(env('FTP_HOST').'/album/'.$foto->foto)}}" style="padding-bottom: 20px">
+            <img class="materialboxed col l4 m6 s12" data-caption="{{$foto->caption}}" src="{{url(env('FTP_BASE').'/album/'.$foto->foto)}}" style="padding-bottom: 20px">
           </div>
         @endforeach
     </div>

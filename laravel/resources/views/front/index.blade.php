@@ -53,7 +53,7 @@
         @foreach($artikels as $artikel)
           <div class="row">
           <div class="col s3">
-            <img src="{{url(env('FTP_HOST').'/artikel/'.$artikel->lampiran)}}" width="100%" style="margin: 6px auto;">
+            <img src="{{env('FTP_BASE').'/artikel/'.$artikel->lampiran}}" width="100%" style="margin: 6px auto;">
           </div>
           <div class="col s9">
             <a href="{{url('artikel/'.$artikel->id.'/'.$artikel->slug_judul)}}" style="color: black"><h5>{{$artikel->judul}}</h5></a>
