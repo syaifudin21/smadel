@@ -57,7 +57,7 @@
           </div>
           <div class="col s9">
             <a href="{{url('artikel/'.$artikel->id.'/'.$artikel->slug_judul)}}" style="color: black"><h5>{{$artikel->judul}}</h5></a>
-            <span>Author : Syaifudin - {{$artikel->updated_at->diffForHumans()}}</span>
+            <span>Author : Admin - {{$artikel->updated_at->diffForHumans()}}</span>
             <p>{{$artikel->text_pembuka}} .... <a href="{{url('artikel/'.$artikel->id.'/'.$artikel->slug_judul)}}">Lihat Selengkapnya</a> </p>
           </div>
         </div>
