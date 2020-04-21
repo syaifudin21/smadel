@@ -58,9 +58,14 @@
       <div class="nav-background carousel carousel-slider hide-on-small-only">
         {{-- <img class="pattern active" src="{{asset('images/standar/banner1.jpg')}}" style="width: 100%"> --}}
         {{-- background-repeat: no-repeat; background-size: 100% --}}
-        <img class="carousel-item pattern active" style="background-image: url('{{asset('images/standar/scsc.jpg')}}');">
-        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/ssss.jpg')}}'); "></div>
-        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/s.jpg')}}');"></div>
+        <img class="carousel-item pattern active" style="background-image: url('{{asset('images/standar/202000.jpg')}}');">
+        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/202001.jpg')}}'); "></div>
+        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/202002.jpg')}}'); "></div>
+        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/202003.jpg')}}'); "></div>
+        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/202004.jpg')}}'); "></div>
+        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/202005.jpg')}}'); "></div>
+        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/202006.jpg')}}'); "></div>
+        <div class="carousel-item pattern" style="background-image: url('{{asset('images/standar/202007.jpg')}}'); "></div>
       </div>
       <div class="nav-wrapper container">
         <a href="{{url('')}}" class="brand-logo"><img src="{{asset('images/standar/logo-text.png')}}" style="width: 180px; margin-top: 10px" ></a>
